@@ -6,3 +6,10 @@ struct BackgroundImage: Property, DeclarationChild {
     self.URL = URL
   }
 }
+
+struct Width: Property, DeclarationChild {
+  let value: String
+  init(_ value: String) {
+    self.value = value
+  }
+}
