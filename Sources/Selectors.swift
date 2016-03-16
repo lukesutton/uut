@@ -1,5 +1,5 @@
 protocol SelectorPartial {
-
+  func toString() -> String
 }
 
 protocol SelectorConvertible {
@@ -21,14 +21,26 @@ struct Selector: SelectorConvertible {
   func toSelector() -> Selector {
     return self
   }
+
+  func toString() -> String {
+    return partials.map {$0.toString()}.joinWithSeparator(" ")
+  }
 }
 
-struct SiblingOperator: SelectorPartial {}
+struct SiblingOperator: SelectorPartial {
+  func toString() -> String {
+    return "+"
+  }
+}
 
 struct ClassName: SelectorPartial, SelectorConvertible {
   let label: String
   init(_ label: String) {
     self.label = label
+  }
+
+  func toString() -> String {
+    return ".\(self.label)"
   }
 }
 
@@ -36,6 +48,10 @@ struct ID: SelectorPartial, SelectorConvertible {
   let label: String
   init(_ label: String) {
     self.label = label
+  }
+
+  func toString() -> String {
+    return "#\(self.label)"
   }
 }
 
