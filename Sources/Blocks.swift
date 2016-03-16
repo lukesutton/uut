@@ -20,6 +20,15 @@ struct BaseDeclaration: Declaration {
       children: self.children
     )
   }
+
+  // This could be extended to optionally take an argument that determines
+  // which versions of properties should be produced e.g. browser specific
+  func toString() -> String {
+    let selectorString = self.selector.toString()
+    let propertyStrings = self.properties.map {$0.toString()}.joinWithSeparator(" ")
+
+    return [selectorString, "{", propertyStrings, "}"].joinWithSeparator(" ")
+  }
 }
 
 struct ChildDeclaration: Declaration, DeclarationChild {
