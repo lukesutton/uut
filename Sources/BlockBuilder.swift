@@ -24,7 +24,8 @@ internal class BlockBuilder {
     return BaseDeclaration(
       selector: self.selector,
       properties: self.storedProperties,
-      children: self.storedChildren
+      children: self.storedChildren,
+      extensions: []
     )
   }
 }

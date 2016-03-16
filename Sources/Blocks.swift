@@ -11,6 +11,7 @@ struct BaseDeclaration: Declaration {
   let selector: Selector
   let properties: [Property]
   let children: [ChildDeclaration]
+  let extensions: [Extension]
 
   internal func toChild() -> ChildDeclaration {
     return ChildDeclaration(
@@ -31,4 +32,8 @@ struct Modifier: Declaration, DeclarationChild {
   let selector: Selector
   let properties: [Property]
   let children: [ChildDeclaration]
+}
+
+struct Extension: DeclarationChild {
+  let declaration: BaseDeclaration
 }
