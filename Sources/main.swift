@@ -3,15 +3,14 @@ func widthMixin() -> Mixin {
   return mixin(Width("10em"))
 }
 
-
 // Construct styles in a way analagous to LESS, SASS etc.
 let header = style(
-  Selector(),
+  ID("what") / ClassName("Heck") + ClassName("noway"),
   BackgroundImage("derp"),
   widthMixin(),
 
   child(
-    Selector(),
+    ClassName("fred"),
     BackgroundImage("what")
   )
 )
@@ -19,7 +18,7 @@ let header = style(
 print(header)
 
 // Builder style syntax
-let derp = builder(Selector()) { s in
+let derp = builder(ClassName("ok")) { s in
   s.properties(
     BackgroundImage("What")
   )

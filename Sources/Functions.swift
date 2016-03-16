@@ -1,18 +1,18 @@
-func style(selector: Selector, _ inputs: DeclarationChild...) -> BaseDeclaration {
+func style(selector: SelectorConvertible, _ inputs: DeclarationChild...) -> BaseDeclaration {
   let extracted = extractInputs(inputs)
 
   return BaseDeclaration(
-    selector: selector,
+    selector: selector.toSelector(),
     properties: extracted.properties,
     children: extracted.children
   )
 }
 
-func child(selector: Selector, _ inputs: DeclarationChild...) -> ChildDeclaration {
+func child(selector: SelectorConvertible, _ inputs: DeclarationChild...) -> ChildDeclaration {
   let extracted = extractInputs(inputs)
 
   return ChildDeclaration(
-    selector: selector,
+    selector: selector.toSelector(),
     properties: extracted.properties,
     children: extracted.children
   )
@@ -28,8 +28,8 @@ func mixin(inputs: [DeclarationChild]) -> Mixin {
   return Mixin(properties: extracted.properties, children: extracted.children)
 }
 
-func builder(selector: Selector, config: (BlockBuilder -> Void)) -> BaseDeclaration {
-  let blockBuilder = BlockBuilder(selector: selector)
+func builder(selector: SelectorConvertible, config: (BlockBuilder -> Void)) -> BaseDeclaration {
+  let blockBuilder = BlockBuilder(selector: selector.toSelector())
   config(blockBuilder)
   return blockBuilder.toDeclaration()
 }
