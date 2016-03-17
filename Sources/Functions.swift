@@ -10,6 +10,17 @@ func style(selector: SelectorStatementConvertible, _ inputs: BlockComponent...) 
   )
 }
 
+func component(name: String, _ inputs: BlockComponent...) -> Component {
+  let extracted = extractInputs(inputs)
+
+  return Component(
+    name: name,
+    properties: extracted.properties,
+    children: extracted.children,
+    extensions: extracted.extensions
+  )
+}
+
 func mixin(inputs: BlockComponent...) -> Mixin {
   let extracted = extractInputs(inputs)
   return Mixin(properties: extracted.properties, children: extracted.children)

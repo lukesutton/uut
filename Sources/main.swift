@@ -19,8 +19,13 @@ let header = style(
   )
 )
 
+let cp = component("derp",
+  BackgroundImage("what")
+)
+
 var package = StylePackage("public")
 
 package.add(header, placeholder)
+package.add(cp)
 
 print(package.toString())
