@@ -1,8 +1,7 @@
 internal class BlockBuilder {
   private var selector: Selector
   private var storedProperties: [Property] = []
-  private var storedChildren: [ChildDeclaration] = []
-  private var storedModifiers: [Modifier] = []
+  private var storedChildren: [Block] = []
 
   init(selector: Selector) {
     self.selector = selector
@@ -12,16 +11,13 @@ internal class BlockBuilder {
     self.storedProperties = input
   }
 
-  func child(input: BaseDeclaration) {
-    self.storedChildren.append(input.toChild())
+  func child(input: Block) {
+    self.storedChildren.append(input)
   }
 
-  func modifier(input: Modifier) {
-    self.storedModifiers.append(input)
-  }
-
-  func toDeclaration() -> BaseDeclaration {
-    return BaseDeclaration(
+  func toDeclaration() -> Block {
+    return Block(
+      mode: .Style,
       selector: self.selector,
       properties: self.storedProperties,
       children: self.storedChildren,

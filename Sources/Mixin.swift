@@ -1,4 +1,4 @@
-struct Mixin: DeclarationChild {
+struct Mixin: BlockComponent {
   let properties: [Property]
-  let children: [ChildDeclaration]
+  let children: [Block]
 }

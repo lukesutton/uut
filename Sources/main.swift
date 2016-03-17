@@ -13,7 +13,7 @@ let header = style(
   widthMixin(),
   extends(placeholder),
 
-  child(
+  style(
     ClassName("fred"),
     BackgroundImage("what")
   )

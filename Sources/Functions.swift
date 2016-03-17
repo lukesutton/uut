@@ -1,7 +1,8 @@
-func style(selector: SelectorConvertible, _ inputs: DeclarationChild...) -> BaseDeclaration {
+func style(selector: SelectorConvertible, _ inputs: BlockComponent...) -> Block {
   let extracted = extractInputs(inputs)
 
-  return BaseDeclaration(
+  return Block(
+    mode: .Style,
     selector: selector.toSelector(),
     properties: extracted.properties,
     children: extracted.children,
@@ -9,41 +10,31 @@ func style(selector: SelectorConvertible, _ inputs: DeclarationChild...) -> Base
   )
 }
 
-func child(selector: SelectorConvertible, _ inputs: DeclarationChild...) -> ChildDeclaration {
-  let extracted = extractInputs(inputs)
-
-  return ChildDeclaration(
-    selector: selector.toSelector(),
-    properties: extracted.properties,
-    children: extracted.children
-  )
-}
-
-func mixin(inputs: DeclarationChild...) -> Mixin {
+func mixin(inputs: BlockComponent...) -> Mixin {
   let extracted = extractInputs(inputs)
   return Mixin(properties: extracted.properties, children: extracted.children)
 }
 
-func mixin(inputs: [DeclarationChild]) -> Mixin {
+func mixin(inputs: [BlockComponent]) -> Mixin {
   let extracted = extractInputs(inputs)
   return Mixin(properties: extracted.properties, children: extracted.children)
 }
 
-func extends(declaration: BaseDeclaration) -> Extension {
-  return Extension(declaration: declaration)
+func extends(block: Block) -> Extension {
+  return Extension(block: block)
 }
 
-func builder(selector: SelectorConvertible, config: (BlockBuilder -> Void)) -> BaseDeclaration {
+func builder(selector: SelectorConvertible, config: (BlockBuilder -> Void)) -> Block {
   let blockBuilder = BlockBuilder(selector: selector.toSelector())
   config(blockBuilder)
   return blockBuilder.toDeclaration()
 }
 
-private func extractInputs(inputs: [DeclarationChild]) -> (properties: [Property], children: [ChildDeclaration], extensions: [Extension]) {
+private func extractInputs(inputs: [BlockComponent]) -> (properties: [Property], children: [Block], extensions: [Extension]) {
   // This should actually be done differently, since they should be processed
   // in order.
   let properties = inputs.filter {$0 is Property}.map {$0 as! Property}
-  let children = inputs.filter {$0 is ChildDeclaration}.map {$0 as! ChildDeclaration}
+  let children = inputs.filter {$0 is Block}.map {$0 as! Block}
   let extensions = inputs.filter {$0 is Extension}.map {$0 as! Extension}
   let mixins = inputs.filter {$0 is Mixin}.map {$0 as! Mixin}
 
