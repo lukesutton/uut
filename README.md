@@ -4,7 +4,7 @@ Can you write CSS using pure Swift? Maybe? Let's find out!
 
 ## Selectors
 
-Selectors can be constructed in a way that's -- mostly -- type-safe. Also, because the selectors are Swift values, they can be passed around as arguments to functions, stored and composed together .
+Selectors can be constructed in a way that's — mostly — type-safe. Also, because the selectors are Swift values, they can be passed around as arguments to functions, stored and composed together .
 
 ```swift
 let s = id("header") | classname("nav-entry")
@@ -59,12 +59,12 @@ print(bar.toString())
 // .herp + .derp { background-color: red }
 ```
 
-Mixins are just values, but if you needed to do parameterize them for some reason, you can wrap them in a function. Here is the same result as above, but using a function to provide the `background-color`.
+Mixins are just values, but if you needed to parameterize them for some reason, you can wrap them in a function. Here is the same result as above, but using a function to provide the `background-color`.
 
 
 ```swift
 func foo(color: String) -> Mixin {
-  return mixin(BackgroundColor("color"))
+  return mixin(BackgroundColor(color))
 }
 
 let bar = style(classname("herp") |+ classname("derp"),
