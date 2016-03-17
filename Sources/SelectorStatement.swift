@@ -5,6 +5,10 @@ struct SelectorStatement {
     return SelectorStatement(selectors: self.selectors + selectors)
   }
 
+  func concat(statement: SelectorStatement) -> SelectorStatement {
+    return SelectorStatement(selectors: self.selectors + statement.selectors)
+  }
+
   func toString() -> String {
     let mapped = selectors.map {$0.toString()}
     return mapped.joinWithSeparator(" ")
