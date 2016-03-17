@@ -6,7 +6,7 @@ func id(label: String, _ associated: Selector...) -> Selector {
   return Selector.ID(label, associated)
 }
 
-func el(tag: String, _ associated: Selector...) -> Selector {
+func el(tag: ElementTag, _ associated: Selector...) -> Selector {
   return Selector.Element(tag, associated)
 }
 

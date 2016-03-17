@@ -21,7 +21,7 @@ extension Selector: SelectorStatementComponent {
       case let ID(label, selectors):
         return toStringWithAssociated("#\(label)", selectors: selectors)
       case let Element(tag, selectors):
-        return toStringWithAssociated(tag, selectors: selectors)
+        return toStringWithAssociated(tag.toString(), selectors: selectors)
       case let FirstChild(selectors):
         return toStringWithAssociated(":first-child", selectors: selectors)
       case let LastChild(selectors):

@@ -3,7 +3,7 @@ enum Selector {
 
   case Class(String, AssociatedSelectors)
   case ID(String, AssociatedSelectors)
-  case Element(String, AssociatedSelectors)
+  case Element(ElementTag, AssociatedSelectors)
   case FirstChild(AssociatedSelectors)
   case LastChild(AssociatedSelectors)
   case Link(AssociatedSelectors)
