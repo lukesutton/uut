@@ -21,12 +21,3 @@ let header = style(
 
 print(header)
 print(header.toString())
-
-// Builder style syntax
-let derp = builder(ClassName("ok")) { s in
-  s.properties(
-    BackgroundImage("What")
-  )
-}
-
-print(derp)

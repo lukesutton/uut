@@ -24,12 +24,6 @@ func extends(block: Block) -> Extension {
   return Extension(block: block)
 }
 
-func builder(selector: SelectorConvertible, config: (BlockBuilder -> Void)) -> Block {
-  let blockBuilder = BlockBuilder(selector: selector.toSelector())
-  config(blockBuilder)
-  return blockBuilder.toDeclaration()
-}
-
 private func extractInputs(inputs: [BlockComponent]) -> (properties: [Property], children: [Block], extensions: [Extension]) {
   // This should actually be done differently, since they should be processed
   // in order.
