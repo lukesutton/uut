@@ -86,6 +86,32 @@ struct AndOperator: SelectorPartial {
   }
 }
 
+struct Element: SelectorPartial, SelectorConvertible, SelectorWithModifiers {
+  enum Tag: String {
+    case H1 = "h1"
+    case H2 = "h2"
+    case Div = "div"
+    case P = "p"
+  }
+
+  let tag: String
+  let modifiers: [SelectorModifier]
+
+  init(_ tag: Tag, _ modifiers: SelectorModifier...) {
+    self.tag = tag.rawValue
+    self.modifiers = modifiers
+  }
+
+  init(_ tag: String, _ modifiers: SelectorModifier...) {
+    self.tag = tag
+    self.modifiers = modifiers
+  }
+
+  func toString() -> String {
+    return "\(self.tag)\(self.modifiersToString(modifiers))"
+  }
+}
+
 struct ClassName: SelectorPartial, SelectorConvertible, SelectorWithModifiers {
   let label: String
   let modifiers: [SelectorModifier]
