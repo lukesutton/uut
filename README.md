@@ -2,6 +2,13 @@
 
 Can you write CSS using pure Swift? Maybe? Let's find out!
 
+## Please Note
+
+* I don't know what I'm doing
+* This isn't useful for real work yet
+* It's not even a library!
+* I would be happy to hear any suggestions, so feel free to open a ticket with comments or issues
+
 ## Selectors
 
 Selectors can be constructed in a way that's — mostly — type-safe. Also, because the selectors are Swift values, they can be passed around as arguments to functions, stored and composed together .
