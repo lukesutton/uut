@@ -19,5 +19,8 @@ let header = style(
   )
 )
 
-print(header)
-print(header.toString())
+var package = StylePackage("public")
+
+package.add(header, placeholder)
+
+print(package.toString())
