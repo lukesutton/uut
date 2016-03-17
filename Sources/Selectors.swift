@@ -50,9 +50,27 @@ struct Selector: SelectorConvertible {
   }
 }
 
-struct SiblingOperator: SelectorPartial {
+struct FollowingSiblingOperator: SelectorPartial {
   func toString() -> String {
     return "+"
+  }
+}
+
+struct PrecedingSiblingOperator: SelectorPartial {
+  func toString() -> String {
+    return "~"
+  }
+}
+
+struct ChildOperator: SelectorPartial {
+  func toString() -> String {
+    return ">"
+  }
+}
+
+struct AndOperator: SelectorPartial {
+  func toString() -> String {
+    return ","
   }
 }
 
@@ -80,18 +98,8 @@ struct ID: SelectorPartial, SelectorConvertible {
   }
 }
 
-func /(lhs: SelectorPartial, rhs: SelectorPartial) -> Selector {
-  return Selector([lhs, rhs])
-}
-
-func /(lhs: Selector, rhs: SelectorPartial) -> Selector {
-  return Selector(lhs.partials + [rhs])
-}
-
-func +(lhs: SelectorPartial, rhs: SelectorPartial) -> Selector {
-  return Selector([lhs, SiblingOperator(), rhs])
-}
-
-func +(lhs: Selector, rhs: SelectorPartial) -> Selector {
-  return Selector(lhs.partials + [SiblingOperator(), rhs])
+struct All: SelectorPartial, SelectorConvertible {
+  func toString() -> String {
+    return "*"
+  }
 }
