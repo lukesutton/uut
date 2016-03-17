@@ -8,7 +8,7 @@ struct Block: BlockComponent {
   }
 
   let mode: Mode
-  let selector: Selector
+  let selector: SelectorStatement
   let properties: [Property]
   let children: [Block]
   let extensions: [Extension]

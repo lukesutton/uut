@@ -3,18 +3,18 @@ func widthMixin() -> Mixin {
   return mixin(Width("10em"))
 }
 
-let placeholder = style(ClassName("what"), Width("200px"))
+let placeholder = style(classname("what"), Width("200px"))
 
 // Construct styles in a way analagous to LESS, SASS etc.
 let header = style(
-  ID("what") | ClassName("Heck") |+ ClassName("noway", .FirstChild, .Hover),
+  id("what") | classname("Heck") |+ classname("nope", firstChild()),
 
   BackgroundImage("derp"),
   widthMixin(),
   extends(placeholder),
 
   style(
-    ClassName("fred"),
+    classname("fred"),
     BackgroundImage("what")
   )
 )

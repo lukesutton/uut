@@ -1,9 +1,9 @@
-func style(selector: SelectorConvertible, _ inputs: BlockComponent...) -> Block {
+func style(selector: SelectorStatementConvertible, _ inputs: BlockComponent...) -> Block {
   let extracted = extractInputs(inputs)
 
   return Block(
     mode: .Style,
-    selector: selector.toSelector(),
+    selector: selector.toSelectorStatement(),
     properties: extracted.properties,
     children: extracted.children,
     extensions: extracted.extensions
