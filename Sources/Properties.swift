@@ -19,6 +19,17 @@ struct BackgroundImage: Property, BlockComponent {
   }
 }
 
+struct BackgroundColor: Property, BlockComponent {
+  let color: String
+  init(_ color: String) {
+    self.color = color
+  }
+
+  func toString() -> String {
+    return propertyString("background-color", value: color)
+  }
+}
+
 struct Width: Property, BlockComponent {
   let value: String
   init(_ value: String) {

@@ -7,7 +7,7 @@ let placeholder = style(ClassName("what"), Width("200px"))
 
 // Construct styles in a way analagous to LESS, SASS etc.
 let header = style(
-  ID("what") / ClassName("Heck") + ClassName("noway"),
+  ID("what") / ClassName("Heck") + ClassName("noway", .FirstChild, .Hover),
 
   BackgroundImage("derp"),
   widthMixin(),

@@ -12,6 +12,29 @@ extension SelectorConvertible where Self: SelectorPartial {
   }
 }
 
+// Psuedo-selectors, attribute selectors etc.
+enum SelectorModifier {
+  case FirstChild
+  case LastChild
+  case Hover
+
+  func toString() -> String {
+    switch self {
+      case FirstChild: return ":first-child"
+      case LastChild: return ":last-child"
+      case Hover: return ":hover"
+    }
+  }
+}
+
+protocol SelectorWithModifiers {}
+
+extension SelectorWithModifiers {
+  func modifiersToString(selectors: [SelectorModifier]) -> String {
+    return selectors.map {$0.toString()}.joinWithSeparator("")
+  }
+}
+
 struct Selector: SelectorConvertible {
   let partials: [SelectorPartial]
   init(_ partials: [SelectorPartial]) {
@@ -33,14 +56,16 @@ struct SiblingOperator: SelectorPartial {
   }
 }
 
-struct ClassName: SelectorPartial, SelectorConvertible {
+struct ClassName: SelectorPartial, SelectorConvertible, SelectorWithModifiers {
   let label: String
-  init(_ label: String) {
+  let modifiers: [SelectorModifier]
+  init(_ label: String, _ modifiers: SelectorModifier...) {
     self.label = label
+    self.modifiers = modifiers
   }
 
   func toString() -> String {
-    return ".\(self.label)"
+    return ".\(self.label)\(self.modifiersToString(modifiers))"
   }
 }
 
