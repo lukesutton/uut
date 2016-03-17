@@ -16,13 +16,25 @@ extension SelectorConvertible where Self: SelectorPartial {
 enum SelectorModifier {
   case FirstChild
   case LastChild
+  case Link
+  case Visited
+  case Active
   case Hover
+  case Focus
+  case AttrEquals(String, String)
+  case AttrContains(String, String)
 
   func toString() -> String {
     switch self {
-      case FirstChild: return ":first-child"
-      case LastChild: return ":last-child"
-      case Hover: return ":hover"
+      case .FirstChild: return ":first-child"
+      case .LastChild: return ":last-child"
+      case .Link: return ":link"
+      case .Visited: return ":visited"
+      case .Active: return ":active"
+      case .Hover: return ":hover"
+      case .Focus: return ":focus"
+      case let .AttrEquals(attr, value): return "[\(attr)=\"\(value)\"]"
+      case let .AttrContains(attr, value): return "[\(attr)~=\"\(value)\"]"
     }
   }
 }
