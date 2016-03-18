@@ -1,21 +1,21 @@
-infix operator | {associativity left precedence 100}
+infix operator |- {associativity left precedence 100}
 
-func |(lhs: Selector, rhs: Selector) -> SelectorStatement {
+func |-(lhs: Selector, rhs: Selector) -> SelectorStatement {
   return SelectorStatement(selectors: [lhs, rhs])
 }
 
-func |(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
+func |-(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
   return lhs.append(rhs)
 }
 
-func |(lhs: SelectorStatement, rhs: SelectorStatement) -> SelectorStatement {
+func |-(lhs: SelectorStatement, rhs: SelectorStatement) -> SelectorStatement {
   return lhs.concat(rhs)
 }
 
 infix operator |+ {associativity left precedence 99}
 
 func |+(lhs: Selector, rhs: Selector) -> SelectorStatement {
-  return SelectorStatement(selectors: [rhs, SelectorOperator.PrecedingSibling, lhs])
+  return SelectorStatement(selectors: [lhs, SelectorOperator.PrecedingSibling, rhs])
 }
 
 func |+(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
