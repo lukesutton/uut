@@ -1,4 +1,4 @@
-struct SelectorStatement {
+public struct SelectorStatement {
   let selectors: [SelectorStatementComponent]
 
   func append(selectors: SelectorStatementComponent...) -> SelectorStatement {

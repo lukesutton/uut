@@ -8,7 +8,7 @@ extension Property {
   }
 }
 
-struct BackgroundImage: Property, BlockComponent {
+public struct BackgroundImage: Property, BlockComponent {
   let URL: String
   init(_ URL: String) {
     self.URL = URL
@@ -19,7 +19,7 @@ struct BackgroundImage: Property, BlockComponent {
   }
 }
 
-struct BackgroundColor: Property, BlockComponent {
+public struct BackgroundColor: Property, BlockComponent {
   let color: String
   init(_ color: String) {
     self.color = color
@@ -30,7 +30,7 @@ struct BackgroundColor: Property, BlockComponent {
   }
 }
 
-struct Width: Property, BlockComponent {
+public struct Width: Property, BlockComponent {
   let value: String
   init(_ value: String) {
     self.value = value

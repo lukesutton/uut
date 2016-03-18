@@ -1,4 +1,4 @@
-func style(selector: SelectorStatementConvertible, _ inputs: BlockComponent...) -> Block {
+public func style(selector: SelectorStatementConvertible, _ inputs: BlockComponent...) -> Block {
   let extracted = extractInputs(inputs)
 
   return Block(
@@ -10,7 +10,7 @@ func style(selector: SelectorStatementConvertible, _ inputs: BlockComponent...) 
   )
 }
 
-func component(name: String, _ inputs: BlockComponent...) -> Component {
+public func component(name: String, _ inputs: BlockComponent...) -> Component {
   let extracted = extractInputs(inputs)
 
   return Component(
@@ -21,17 +21,17 @@ func component(name: String, _ inputs: BlockComponent...) -> Component {
   )
 }
 
-func mixin(inputs: BlockComponent...) -> Mixin {
+public func mixin(inputs: BlockComponent...) -> Mixin {
   let extracted = extractInputs(inputs)
   return Mixin(properties: extracted.properties, children: extracted.children)
 }
 
-func mixin(inputs: [BlockComponent]) -> Mixin {
+public func mixin(inputs: [BlockComponent]) -> Mixin {
   let extracted = extractInputs(inputs)
   return Mixin(properties: extracted.properties, children: extracted.children)
 }
 
-func extends(block: Block) -> Extension {
+public func extends(block: Block) -> Extension {
   return Extension(block: block)
 }
 

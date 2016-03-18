@@ -1,51 +1,51 @@
-func classname(label: String, _ associated: Selector...) -> Selector {
+public func classname(label: String, _ associated: Selector...) -> Selector {
   return Selector.Class(label, associated)
 }
 
-func id(label: String, _ associated: Selector...) -> Selector {
+public func id(label: String, _ associated: Selector...) -> Selector {
   return Selector.ID(label, associated)
 }
 
-func el(tag: ElementTag, _ associated: Selector...) -> Selector {
+public func el(tag: ElementTag, _ associated: Selector...) -> Selector {
   return Selector.Element(tag, associated)
 }
 
-func firstChild(associated: Selector...) -> Selector {
+public func firstChild(associated: Selector...) -> Selector {
   return Selector.FirstChild(associated)
 }
 
-func lastChild(associated: Selector...) -> Selector {
+public func lastChild(associated: Selector...) -> Selector {
   return Selector.LastChild(associated)
 }
 
-func link(associated: Selector...) -> Selector {
+public func link(associated: Selector...) -> Selector {
   return Selector.Link(associated)
 }
 
-func visited(associated: Selector...) -> Selector {
+public func visited(associated: Selector...) -> Selector {
   return Selector.Visited(associated)
 }
 
-func active(associated: Selector...) -> Selector {
+public func active(associated: Selector...) -> Selector {
   return Selector.Active(associated)
 }
 
-func hover(associated: Selector...) -> Selector {
+public func hover(associated: Selector...) -> Selector {
   return Selector.Hover(associated)
 }
 
-func focus(associated: Selector...) -> Selector {
+public func focus(associated: Selector...) -> Selector {
   return Selector.Focus(associated)
 }
 
-func attrEquals(label: String, _ value: String, associated: Selector...) -> Selector {
+public func attrEquals(label: String, _ value: String, associated: Selector...) -> Selector {
   return Selector.AttrEquals(label, value, associated)
 }
 
-func attrContains(label: String, _ value: String, associated: Selector...) -> Selector {
+public func attrContains(label: String, _ value: String, associated: Selector...) -> Selector {
   return Selector.AttrContains(label, value, associated)
 }
 
-func all() -> Selector {
+public func all() -> Selector {
   return Selector.All
 }

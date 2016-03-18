@@ -1,4 +1,4 @@
-struct Component {
+public struct Component {
   let block: Block
 
   init(name: String, properties: [Property], children: [Block], extensions: [Extension]) {

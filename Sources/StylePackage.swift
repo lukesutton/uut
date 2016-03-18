@@ -1,4 +1,4 @@
-struct StylePackage {
+public struct StylePackage {
   let name: String
   var styles: [Block] = []
   var components: [Component] = []

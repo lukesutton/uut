@@ -1,7 +1,7 @@
-protocol BlockComponent {
+public protocol BlockComponent {
 
 }
-struct Block: BlockComponent {
+public struct Block: BlockComponent {
   enum Mode {
     case Style
     case Modifier
@@ -23,6 +23,6 @@ struct Block: BlockComponent {
   }
 }
 
-struct Extension: BlockComponent {
+public struct Extension: BlockComponent {
   let block: Block
 }

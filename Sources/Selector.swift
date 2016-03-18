@@ -1,5 +1,5 @@
-enum Selector {
-  typealias AssociatedSelectors = [Selector]
+public enum Selector {
+  public typealias AssociatedSelectors = [Selector]
 
   case Class(String, AssociatedSelectors)
   case ID(String, AssociatedSelectors)
