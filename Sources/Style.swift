@@ -37,18 +37,25 @@ public struct Style: StyleComponent {
   }
 }
 
-private func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property]) {
-    // This should actually be done differently, since they should be processed
-  // in order.
-  let properties = components.filter {$0 is Property}.map {$0 as! Property}
-  let children = components.filter {$0 is Style}.map {$0 as! Style}
+internal func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property]) {
+  var properties = [Property]()
+  var children = [Style]()
 
-  // if !mixins.isEmpty {
-  //   let moreprops = mixins.reduce(properties) {$0 + $1.properties}
-  //   let morechildren = mixins.reduce(children) {$0 + $1.children}
-  //   return (properties: moreprops, children: morechildren, extensions: extensions)
-  // }
-  // else {
-    return (properties: properties, children: children)
-  // }
+  for component in components {
+    switch component {
+      case let property as Property:
+        properties.append(property)
+      case let style as Style:
+        children.append(style)
+      case let mixin as Mixin:
+        children.appendContentsOf(mixin.children)
+        properties.appendContentsOf(mixin.properties)
+      default:
+        // A no-op, since cases must be exhaustive, but we only handle the three
+        // known conforming types.
+        false
+    }
+  }
+
+  return (properties: properties, children: children)
 }
