@@ -5,7 +5,7 @@ public protocol SimpleProperty {
 }
 
 extension SimpleProperty {
-  var stringValue: String {
-    return "\(self.label): \(self.value)"
+  public var stringValue: String {
+    return "\(self.label): \(self.value);"
   }
 }

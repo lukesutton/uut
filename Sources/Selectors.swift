@@ -1,7 +1,7 @@
 public struct Selectors {
   private init() {}
 
-  public struct Class: Selector {
+  public struct Class: Selector, SelectorStatementConvertible {
     let value: String
     let associated: [Selector]
 
@@ -15,7 +15,7 @@ public struct Selectors {
     }
   }
 
-  public struct ID: Selector {
+  public struct ID: Selector, SelectorStatementConvertible {
     let value: String
     let associated: [Selector]
 
@@ -29,7 +29,7 @@ public struct Selectors {
     }
   }
 
-  public struct AttrContains: Selector {
+  public struct AttrContains: Selector, SelectorStatementConvertible {
     let label: String
     let value: String
     let associated: [Selector]
@@ -55,7 +55,7 @@ public struct Selectors {
 
   public struct FirstChild {
     public let stringValue = ":first-child"
-    
+
     public init() {}
   }
 }

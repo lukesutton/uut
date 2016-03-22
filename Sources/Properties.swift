@@ -1,11 +1,11 @@
 public struct Properties {
   private init() {}
 
-  struct BackgroundImage: Property, SimpleProperty {
-    let label = "background-image"
-    let value: String
+  public struct BackgroundImage: Property, SimpleProperty, StyleComponent {
+    public let label = "background-image"
+    public let value: String
 
-    init(_ value: String) {
+    public init(_ value: String) {
       self.value = value
     }
   }
