@@ -1,53 +1,44 @@
-@testable import Uut
+import Uut
 import XCTest
 
 class SelectorTests: XCTestCase {
-  func widthMixin() -> Mixin {
-    return mixin(Width("10em"))
-  }
-
   func testDecendent() {
-    let selector = id("what") |- classname("ok")
-    XCTAssertEqual(selector.toString(), "#what .ok")
+    let selector = Selectors.ID("what") |- Selectors.Class("ok")
+    XCTAssertEqual(selector.stringValue, "#what .ok")
   }
 
   func testPreceding() {
-    let selector = id("what") |+ classname("ok")
-    XCTAssertEqual(selector.toString(), "#what + .ok")
+    let selector = Selectors.ID("what") |+ Selectors.Class("ok")
+    XCTAssertEqual(selector.stringValue, "#what + .ok")
   }
 
   func testFollowing() {
-    let selector = id("what") |~ classname("ok")
-    XCTAssertEqual(selector.toString(), "#what ~ .ok")
+    let selector = Selectors.ID("what") |~ Selectors.Class("ok")
+    XCTAssertEqual(selector.stringValue, "#what ~ .ok")
   }
 
   func testChild() {
-    let selector = id("what") |> classname("ok")
-    XCTAssertEqual(selector.toString(), "#what > .ok")
+    let selector = Selectors.ID("what") |> Selectors.Class("ok")
+    XCTAssertEqual(selector.stringValue, "#what > .ok")
   }
 
-  func testClassname() {
-    let selector = classname("ok")
-    XCTAssertEqual(selector.toString(), ".ok")
+  func testSelectorsClass () {
+    let selector = Selectors.Class("ok")
+    XCTAssertEqual(selector.stringValue, ".ok")
   }
 
-  func testID() {
-    let selector = id("ok")
-    XCTAssertEqual(selector.toString(), "#ok")
+  func testSelectorsID () {
+    let selector = Selectors.ID("ok")
+    XCTAssertEqual(selector.stringValue, "#ok")
   }
 
   func testElement() {
-    let selector = el(.H1)
-    XCTAssertEqual(selector.toString(), "h1")
-  }
-
-  func testCustomElement() {
-    let selector = el(.Custom("derp"))
-    XCTAssertEqual(selector.toString(), "derp")
+    let selector = Selectors.El("h1")
+    XCTAssertEqual(selector.stringValue, "h1")
   }
 
   func testFirstChild() {
-    let selector = firstChild()
-    XCTAssertEqual(selector.toString(), ":first-child")
+    let selector = Selectors.FirstChild()
+    XCTAssertEqual(selector.stringValue, ":first-child")
   }
 }

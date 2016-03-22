@@ -1,15 +1,15 @@
-public protocol SelectorStatementConvertible {
-  func toSelectorStatement() -> SelectorStatement
+protocol SelectorStatementConvertible {
+  var selectorStatement: SelectorStatement { get }
 }
 
 extension SelectorStatement: SelectorStatementConvertible {
-  public func toSelectorStatement() -> SelectorStatement {
+  var selectorStatement: SelectorStatement {
     return self
   }
 }
 
-extension Selector: SelectorStatementConvertible {
-  public func toSelectorStatement() -> SelectorStatement {
-    return SelectorStatement(selectors: [self])
+extension SelectorStatementConvertible where Self: Selector {
+  var selectorStatement: SelectorStatement {
+    return SelectorStatement([SelectorStatementComponent.Sel(self)])
   }
 }
