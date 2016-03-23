@@ -4,11 +4,11 @@ import XCTest
 class StylePackageTests: XCTestCase {
   func testBasic() {
     let header = Style(Selectors.Class("header"),
-      Properties.BackgroundImage("red")
+      Properties.BackgroundImage(.URL("red"))
     )
 
-    let nav = Style(Selectors.Class("header"),
-      Properties.BackgroundImage("blue")
+    let nav = Style(Selectors.Class("nav"),
+      Properties.BackgroundImage(.URL("blue"))
     )
 
     let package = StylePackage(selector: Selectors.ID("admin"),
@@ -16,8 +16,8 @@ class StylePackageTests: XCTestCase {
       nav
     )
 
-    let result = "#admin .header { background-image: red; } #admin .nav { background-image: red; }"
+    let result = "#admin .header { background-image: url(\"red\"); } #admin .nav { background-image: url(\"blue\"); }"
 
-    XCTAssertEqual(package.compile(), result)
+    XCTAssertEqual(package.render(), result)
   }
 }

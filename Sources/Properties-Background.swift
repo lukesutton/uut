@@ -4,16 +4,14 @@ extension Properties {
       case Scroll = "scroll"
       case Fixed = "fixed"
       case Local = "local"
+      case Initial = "initial"
+      case Inherit = "inherit"
     }
 
     public let label = "background-attachment"
     public let value: String
 
     public init(_ value: Attachment) {
-      self.value = value.rawValue
-    }
-
-    public init(_ value: Values.Reset) {
       self.value = value.rawValue
     }
   }
@@ -30,6 +28,8 @@ extension Properties {
       case Saturation = "saturation"
       case Color = "color"
       case Luminosity = "luminosity"
+      case Initial = "initial"
+      case Inherit = "inherit"
     }
 
     public let label = "background-blend-mode"
@@ -44,12 +44,8 @@ extension Properties {
     public let label = "background-color"
     public let value: String
 
-    public init(_ value: Values.Color) {
+    public init(_ value: PropertyValues.Color) {
       self.value = value.stringValue
-    }
-
-    public init(_ value: Values.Reset) {
-      self.value = value.rawValue
     }
   }
 
@@ -57,11 +53,13 @@ extension Properties {
     public enum Background {
       case URL(String)
       case None
+      case Initial
+      case Inherit
 
       var stringValue: String {
         switch self {
           case let URL(value): return "url(\"\(value)\")"
-          case None: return "none"
+          default: return String(self).lowercaseString
         }
       }
     }
@@ -71,10 +69,6 @@ extension Properties {
 
     public init(_ value: Background) {
       self.value = value.stringValue
-    }
-
-    public init(_ value: Values.Reset) {
-      self.value = value.rawValue
     }
   }
 
@@ -91,6 +85,8 @@ extension Properties {
       case CenterBottom
       case Percentage(Double, Double)
       case Exact(String, String)
+      case Initial
+      case Inherit
 
       var stringValue: String {
         switch self {
@@ -105,6 +101,8 @@ extension Properties {
           case CenterBottom: return "center bottom"
           case let Percentage(x, y): return "\(x)% \(y)%"
           case let Exact(x, y): return "\(x) \(y)"
+          case Initial: return "initial"
+          case Inherit: return "inherit"
         }
       }
     }
@@ -115,10 +113,6 @@ extension Properties {
     public init(_ value: Position) {
       self.value = value.stringValue
     }
-
-    public init(_ value: Values.Reset) {
-      self.value = value.rawValue
-    }
   }
 
   public struct BackgroundRepeat: Property, SimpleProperty, StyleComponent {
@@ -127,6 +121,8 @@ extension Properties {
       case RepeatX = "repeat-x"
       case RepeatY = "repeat-y"
       case NoRepeat = "no-repeat"
+      case Initial = "initial"
+      case Inherit = "inherit"
     }
 
     public let label = "background-repeat"
@@ -135,21 +131,13 @@ extension Properties {
     public init(_ value: Repeat) {
       self.value = value.rawValue
     }
-
-    public init(_ value: Values.Reset) {
-      self.value = value.rawValue
-    }
   }
 
   public struct BackgroundClip: Property, SimpleProperty, StyleComponent {
     public let label = "background-clip"
     public let value: String
 
-    public init(_ value: Values.Box) {
-      self.value = value.rawValue
-    }
-
-    public init(_ value: Values.Reset) {
+    public init(_ value: PropertyValues.Box) {
       self.value = value.rawValue
     }
   }
@@ -158,11 +146,11 @@ extension Properties {
     public let label = "background-origin"
     public let value: String
 
-    public init(_ value: Values.Box) {
+    public init(_ value: PropertyValues.Box) {
       self.value = value.rawValue
     }
 
-    public init(_ value: Values.Reset) {
+    public init(_ value: PropertyValues.Reset) {
       self.value = value.rawValue
     }
   }
@@ -174,6 +162,8 @@ extension Properties {
       case Percentage(Double, Double)
       case Cover
       case Contain
+      case Initial
+      case Inherit
 
       var stringValue: String {
         switch self {
@@ -189,10 +179,6 @@ extension Properties {
 
     public init(_ value: Size) {
       self.value = value.stringValue
-    }
-
-    public init(_ value: Values.Reset) {
-      self.value = value.rawValue
     }
   }
 }
