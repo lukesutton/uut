@@ -33,6 +33,32 @@ public struct Values {
     }
   }
 
+  public enum ColorProperty {
+    case Color(Values.Color)
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let Color(x): return x.stringValue
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
+  public enum UnitProperty {
+    case Unit(Values.Unit)
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let Unit(x): return x.stringValue
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
   public enum Reset: String {
     case Initial = "initial"
     case Inherit = "inherit"
@@ -46,6 +72,8 @@ public struct Values {
     case BorderBox = "border-box"
     case PaddingBox = "padding-box"
     case ContentBox = "content-box"
+    case Initial = "initial"
+    case Inherit = "inherit"
 
     var stringValue: String {
       return rawValue
@@ -56,11 +84,13 @@ public struct Values {
     case Medium
     case Thin
     case Thick
-    case Width(String)
+    case Width(Unit)
+    case Initial
+    case Inherit
 
     var stringValue: String {
       switch self {
-        case let Width(value): return value
+        case let Width(value): return value.stringValue
         default: return String(self).lowercaseString
       }
     }
@@ -77,6 +107,8 @@ public struct Values {
     case Ridge = "ridge"
     case Inset = "inset"
     case Outset = "outset"
+    case Initial = "initial"
+    case Inherit = "inherit"
 
     var stringValue: String {
       return rawValue
