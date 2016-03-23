@@ -230,8 +230,4 @@ extension Properties {
       self.value = unit.stringValue
     }
   }
-
-  // Border Image
-
-  // Box Shadow
 }
