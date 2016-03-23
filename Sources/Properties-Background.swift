@@ -120,4 +120,79 @@ extension Properties {
       self.value = value.rawValue
     }
   }
+
+  public struct BackgroundRepeat: Property, SimpleProperty, StyleComponent {
+    public enum Repeat: String {
+      case Repeat = "repeat"
+      case RepeatX = "repeat-x"
+      case RepeatY = "repeat-y"
+      case NoRepeat = "no-repeat"
+    }
+
+    public let label = "background-repeat"
+    public let value: String
+
+    public init(_ value: Repeat) {
+      self.value = value.rawValue
+    }
+
+    public init(_ value: Values.Reset) {
+      self.value = value.rawValue
+    }
+  }
+
+  public struct BackgroundClip: Property, SimpleProperty, StyleComponent {
+    public let label = "background-clip"
+    public let value: String
+
+    public init(_ value: Values.Box) {
+      self.value = value.rawValue
+    }
+
+    public init(_ value: Values.Reset) {
+      self.value = value.rawValue
+    }
+  }
+
+  public struct BackgroundOrigin: Property, SimpleProperty, StyleComponent {
+    public let label = "background-origin"
+    public let value: String
+
+    public init(_ value: Values.Box) {
+      self.value = value.rawValue
+    }
+
+    public init(_ value: Values.Reset) {
+      self.value = value.rawValue
+    }
+  }
+
+  public struct BackgroundSize: Property, SimpleProperty, StyleComponent {
+    public enum Size {
+      case Auto
+      case Length(String, String)
+      case Percentage(Double, Double)
+      case Cover
+      case Contain
+
+      var stringValue: String {
+        switch self {
+          case let Length(x, y): return "\(x) \(y))"
+          case let Percentage(x, y): return "\(x)% \(y)%)"
+          default: return String(self).lowercaseString
+        }
+      }
+    }
+
+    public let label = "background-size"
+    public let value: String
+
+    public init(_ value: Size) {
+      self.value = value.stringValue
+    }
+
+    public init(_ value: Values.Reset) {
+      self.value = value.rawValue
+    }
+  }
 }
