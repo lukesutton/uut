@@ -12,8 +12,12 @@ extension Properties {
     public let label = "opacity"
     public let value: String
 
-    public init(_ value: String) {
-      self.value = value
+    public init(_ value: Double) {
+      self.value = String(value)
+    }
+
+    public init(_ value: PropertyValues.Reset) {
+      self.value = value.stringValue
     }
   }
 }
