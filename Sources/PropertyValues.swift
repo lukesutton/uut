@@ -82,4 +82,29 @@ public struct PropertyValues {
       return rawValue
     }
   }
+
+  public enum Shadow {
+    case None
+    case Initial
+    case Inherit
+    case Inset
+    case Shadow(Values.Unit, Values.Unit, Double?, Double?, Values.Color?)
+
+    public var stringValue: String {
+      switch self {
+        case let .Shadow(h, v, blur, spread, color):
+          let output = [
+            h.stringValue,
+            v.stringValue,
+            blur != nil ? String(blur) : "",
+            spread != nil ? String(spread) : "",
+            color != nil ? color!.stringValue : ""
+          ].filter {!$0.isEmpty}
+
+          return output.joinWithSeparator(" ")
+        default:
+          return String(self).lowercaseString
+      }
+    }
+  }
 }
