@@ -13,11 +13,15 @@ public struct Compiler {
     self.post = post
   }
 
+  public func compile(package: StylePackage) -> String {
+    return compile(package.styles)
+  }
+
   public func compile(styles: [Style]) -> String {
     let initialStyles = self.initial.reduce(styles) {$1($0)}
     let simpleStyles = flatten(initialStyles)
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
-    
+
     let buffer: [String] = intermediateSyles.reduce([]) {memo, style in
       let props: [String] = style.properties.reduce([]) {memo, prop in
         let pairs = prop.allValues.map { (label, value) in
