@@ -22,9 +22,4 @@ public struct StylePackage {
     self.selector = nil
     self.styles = styles
   }
-
-  public func render() -> String {
-    let output = styles.map {$0.stringValue}
-    return output.joinWithSeparator(" ")
-  }
 }
