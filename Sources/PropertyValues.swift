@@ -83,6 +83,19 @@ public struct PropertyValues {
     }
   }
 
+  public enum Opacity {
+    case Amount(Double)
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let .Amount(value): return String(value)
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
   public enum Shadow {
     case None
     case Initial

@@ -1,43 +1,51 @@
 extension Properties {
   // Position
 
-  public struct Bottom: Property, SimpleProperty, StyleComponent {
+  public struct Bottom: Property, StyleComponent {
     public let label = "bottom"
-    public let value: String
+    public let value: PropertyValues.Unit
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Unit) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct Top: Property, SimpleProperty, StyleComponent {
+  public struct Top: Property, StyleComponent {
     public let label = "top"
-    public let value: String
+    public let value: PropertyValues.Unit
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Unit) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct Left: Property, SimpleProperty, StyleComponent {
+  public struct Left: Property, StyleComponent {
     public let label = "bottom"
-    public let value: String
+    public let value: PropertyValues.Unit
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Unit) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct Right: Property, SimpleProperty, StyleComponent {
+  public struct Right: Property, StyleComponent {
     public let label = "top"
-    public let value: String
+    public let value: PropertyValues.Unit
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Unit) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct Position: Property, SimpleProperty, StyleComponent {
+  public struct Position: Property, StyleComponent {
     public enum PositionValue {
       case Static
       case Absolute
@@ -52,16 +60,18 @@ extension Properties {
     }
 
     public let label = "top"
-    public let value: String
+    public let value: PositionValue
+    public let stringValue: String
 
     public init(_ value: PositionValue) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
   // Other
 
-  public struct Clear: Property, SimpleProperty, StyleComponent {
+  public struct Clear: Property, StyleComponent {
     public enum ClearValue {
       case None
       case Left
@@ -76,15 +86,17 @@ extension Properties {
     }
 
     public let label = "clear"
-    public let value: String
+    public let value: ClearValue
+    public let stringValue: String
 
     public init(_ value: ClearValue) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct Clip: Property, SimpleProperty, StyleComponent {
-    public enum ClearValue {
+  public struct Clip: Property, StyleComponent {
+    public enum ClipValue {
       case None
       case Left
       case Right
@@ -98,10 +110,12 @@ extension Properties {
     }
 
     public let label = "clear"
-    public let value: String
+    public let value: ClipValue
+    public let stringValue: String
 
-    public init(_ value: ClearValue) {
-      self.value = value.stringValue
+    public init(_ value: ClipValue) {
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 }

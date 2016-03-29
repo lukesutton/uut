@@ -1,23 +1,23 @@
 extension Properties {
-  public struct Color: Property, SimpleProperty, StyleComponent {
+  public struct Color: Property, StyleComponent {
     public let label = "color"
-    public let value: String
+    public let value: PropertyValues.Color
+    public let stringValue: String
 
-    public init(_ value: Color) {
-      self.value = value.stringValue
+    public init(_ value: PropertyValues.Color) {
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct Opacity: Property, SimpleProperty, StyleComponent {
+  public struct Opacity: Property, StyleComponent {
     public let label = "opacity"
-    public let value: String
+    public let value: PropertyValues.Opacity
+    public let stringValue: String
 
-    public init(_ value: Double) {
-      self.value = String(value)
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.value = value.stringValue
+    public init(_ value: PropertyValues.Opacity) {
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 }
