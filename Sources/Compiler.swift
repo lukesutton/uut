@@ -17,10 +17,10 @@ public struct Compiler {
     let initialStyles = self.initial.reduce(styles) {$1($0)}
     let simpleStyles = flatten(initialStyles)
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
-
+    
     let buffer: [String] = intermediateSyles.reduce([]) {memo, style in
       let props: [String] = style.properties.reduce([]) {memo, prop in
-        let pairs = prop.values.map { (label, value) in
+        let pairs = prop.allValues.map { (label, value) in
           return "  \(label): \(value);"
         }
         return memo + pairs
@@ -37,7 +37,7 @@ public struct Compiler {
   private func flatten(styles: [Style], output: [IntermediateStyle] = []) -> [IntermediateStyle] {
     return styles.reduce(output) {memo, style in
       let props = style.properties.map { prop in
-        return IntermediateProperty(original: prop, values: [(prop.label, prop.value)])
+        return IntermediateProperty(original: prop)
       }
       let simple = IntermediateStyle(selector: style.selector, properties: props)
       return [simple] + flatten(style.children, output: memo)
