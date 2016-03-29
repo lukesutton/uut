@@ -9,7 +9,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -69,7 +69,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -129,7 +129,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -189,7 +189,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -249,7 +249,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
