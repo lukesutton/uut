@@ -13,6 +13,10 @@ public struct Compiler {
     self.post = post
   }
 
+  func compile(style: Style) -> String {
+    return compile([style])
+  }
+
   public func compile(package: StylePackage) -> String {
     return compile(package.styles)
   }
