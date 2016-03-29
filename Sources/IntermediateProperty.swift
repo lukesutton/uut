@@ -21,7 +21,7 @@ public struct IntermediateProperty {
   }
 
   public var originalValue: (String, String) {
-    return (self.original.label, self.original.value)
+    return (self.original.label, self.original.stringValue)
   }
 
   var allValues: [(String, String)] {

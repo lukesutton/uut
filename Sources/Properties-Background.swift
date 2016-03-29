@@ -1,5 +1,5 @@
 extension Properties {
-  public struct BackgroundAttachment: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundAttachment: Property, StyleComponent {
     public enum Attachment: String {
       case Scroll = "scroll"
       case Fixed = "fixed"
@@ -9,14 +9,16 @@ extension Properties {
     }
 
     public let label = "background-attachment"
-    public let value: String
+    public let value: Attachment
+    public let stringValue: String
 
     public init(_ value: Attachment) {
-      self.value = value.rawValue
+      self.value = value
+      self.stringValue = value.rawValue
     }
   }
 
-  public struct BackgroundBlendMode: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundBlendMode: Property, StyleComponent {
     public enum Mode: String {
       case Normal = "normal"
       case Multiply = "multiply"
@@ -33,23 +35,27 @@ extension Properties {
     }
 
     public let label = "background-blend-mode"
-    public let value: String
+    public let value: Mode
+    public let stringValue: String
 
     public init(_ value: Mode) {
-      self.value = value.rawValue
+      self.value = value
+      self.stringValue = value.rawValue
     }
   }
 
-  public struct BackgroundColor: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundColor: Property, StyleComponent {
     public let label = "background-color"
-    public let value: String
+    public let value: PropertyValues.Color
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Color) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct BackgroundImage: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundImage: Property, StyleComponent {
     public enum Background {
       case URL(String)
       case None
@@ -65,14 +71,16 @@ extension Properties {
     }
 
     public let label = "background-image"
-    public let value: String
+    public let value: Background
+    public let stringValue: String
 
     public init(_ value: Background) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct BackgroundPosition: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundPosition: Property, StyleComponent {
     public enum Position {
       case LeftTop
       case LeftCenter
@@ -108,14 +116,16 @@ extension Properties {
     }
 
     public let label = "background-position"
-    public let value: String
+    public let value: Position
+    public let stringValue: String
 
     public init(_ value: Position) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct BackgroundRepeat: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundRepeat: Property, StyleComponent {
     public enum Repeat: String {
       case Repeat = "repeat"
       case RepeatX = "repeat-x"
@@ -126,36 +136,38 @@ extension Properties {
     }
 
     public let label = "background-repeat"
-    public let value: String
+    public let value: Repeat
+    public let stringValue: String
 
     public init(_ value: Repeat) {
-      self.value = value.rawValue
+      self.value = value
+      self.stringValue = value.rawValue
     }
   }
 
-  public struct BackgroundClip: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundClip: Property, StyleComponent {
     public let label = "background-clip"
-    public let value: String
+    public let value: PropertyValues.Box
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Box) {
-      self.value = value.rawValue
+      self.value = value
+      self.stringValue = value.rawValue
     }
   }
 
-  public struct BackgroundOrigin: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundOrigin: Property, StyleComponent {
     public let label = "background-origin"
-    public let value: String
+    public let value: PropertyValues.Box
+    public let stringValue: String
 
     public init(_ value: PropertyValues.Box) {
-      self.value = value.rawValue
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.value = value.rawValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 
-  public struct BackgroundSize: Property, SimpleProperty, StyleComponent {
+  public struct BackgroundSize: Property, StyleComponent {
     public enum Size {
       case Auto
       case Length(String, String)
@@ -175,10 +187,12 @@ extension Properties {
     }
 
     public let label = "background-size"
-    public let value: String
+    public let value: Size
+    public let stringValue: String
 
     public init(_ value: Size) {
-      self.value = value.stringValue
+      self.value = value
+      self.stringValue = value.stringValue
     }
   }
 }
