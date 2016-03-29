@@ -18,3 +18,7 @@ public struct SelectorStatement {
     return mapped.joinWithSeparator(" ")
   }
 }
+
+func ==(lhs: SelectorStatement, rhs: SelectorStatement) -> Bool {
+  return lhs.selectors == rhs.selectors
+}
