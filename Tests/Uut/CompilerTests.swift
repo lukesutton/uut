@@ -6,7 +6,7 @@ class CompilerTests: XCTestCase {
     func double(styles: [IntermediateStyle]) -> [IntermediateStyle] {
       return styles.map {style in
         style.addPropertyValue(Properties.BackgroundColor.self) { prop in
-          return prop.values.first
+          return prop.originalValue
         }
       }
     }

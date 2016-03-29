@@ -1,26 +1,30 @@
 public struct IntermediateProperty {
   public let original: Property
-  public let values: [(String, String)]
+  public let additionalValues: [(String, String)]
 
   public init(original: Property) {
     self.original = original
-    self.values = []
+    self.additionalValues = []
   }
 
-  public init(original: Property, values: [(String, String)]) {
+  public init(original: Property, additionalValues: [(String, String)]) {
     self.original = original
-    self.values = values
+    self.additionalValues = additionalValues
   }
 
   public func add(label: String, withValue value: String) -> IntermediateProperty {
-    return IntermediateProperty(original: self.original, values: self.values + [(label, value)])
+    return IntermediateProperty(original: self.original, additionalValues: self.additionalValues + [(label, value)])
   }
 
   public func add(labelAndValue: (String, String)) -> IntermediateProperty {
-    return IntermediateProperty(original: self.original, values: self.values + [labelAndValue])
+    return IntermediateProperty(original: self.original, additionalValues: self.additionalValues + [labelAndValue])
+  }
+
+  public var originalValue: (String, String) {
+    return (self.original.label, self.original.value)
   }
 
   var allValues: [(String, String)] {
-    return [(self.original.label, self.original.value)] + self.values
+    return [self.originalValue] + self.additionalValues
   }
 }
