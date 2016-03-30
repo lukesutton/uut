@@ -23,7 +23,7 @@ public func |+(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
 }
 
 public func |+(lhs: SelectorStatement, rhs: SelectorStatement) -> SelectorStatement {
-  return lhs.concat(rhs)
+  return lhs.append([component(SelectorOperators.PrecedingSibling())] + rhs.selectors)
 }
 
 infix operator |~ {associativity left precedence 98}
@@ -37,7 +37,7 @@ public func |~(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
 }
 
 public func |~(lhs: SelectorStatement, rhs: SelectorStatement) -> SelectorStatement {
-  return lhs.concat(rhs)
+  return lhs.append([component(SelectorOperators.FollowingSibling())] + rhs.selectors)
 }
 
 infix operator |> {associativity left precedence 97}
@@ -51,7 +51,7 @@ public func |>(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
 }
 
 public func |>(lhs: SelectorStatement, rhs: SelectorStatement) -> SelectorStatement {
-  return lhs.concat(rhs)
+  return lhs.append([component(SelectorOperators.Child())] + rhs.selectors)
 }
 
 infix operator |& {associativity left precedence 96}
@@ -65,7 +65,7 @@ public func |&(lhs: SelectorStatement, rhs: Selector) -> SelectorStatement {
 }
 
 public func |&(lhs: SelectorStatement, rhs: SelectorStatement) -> SelectorStatement {
-  return lhs.concat(rhs)
+  return lhs.append([component(SelectorOperators.And())] + rhs.selectors)
 }
 
 private func component(value: Selector) -> SelectorStatementComponent {

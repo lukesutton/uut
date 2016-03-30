@@ -9,6 +9,10 @@ public struct SelectorStatement {
     return SelectorStatement(self.selectors + selectors)
   }
 
+  func append(selectors: [SelectorStatementComponent]) -> SelectorStatement {
+    return SelectorStatement(self.selectors + selectors)
+  }
+
   func concat(statement: SelectorStatement) -> SelectorStatement {
     return SelectorStatement(self.selectors + statement.selectors)
   }

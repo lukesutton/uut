@@ -11,13 +11,36 @@ class CompilerTests: XCTestCase {
       }
     }
 
-    let styles = [
-      Style(Selectors.Class("articles"),
-        Properties.BackgroundColor(.Color(.Black)),
+    let ext = StyleExtension(
+      properties: [
+        Properties.Bottom(.Unit(.Em(0)))
+      ]
+    )
 
-        Style(Selectors.Class("article"),
-          Properties.BackgroundColor(.Color(.White))
-        )
+    let styles = [
+      Style(
+        Selectors.Class("what"),
+        extensions: [
+          ext
+        ]
+      ),
+      
+      Style(
+        Selectors.Class("articles"),
+        extensions: [
+          ext
+        ],
+        properties: [
+          Properties.BackgroundColor(.Color(.Black))
+        ],
+        children: [
+          Style(
+            Selectors.Class("article"),
+            properties: [
+              Properties.BorderStyle(.Solid)
+            ]
+          )
+        ]
       )
     ]
 

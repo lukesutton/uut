@@ -1,3 +1,5 @@
+import Foundation
+
 public struct Compiler {
   public typealias InitialFunc = ([Style] -> [Style])
   public typealias IntermediateFunc = ([IntermediateStyle] -> [IntermediateStyle])
@@ -23,7 +25,9 @@ public struct Compiler {
 
   public func compile(styles: [Style]) -> String {
     let initialStyles = self.initial.reduce(styles) {$1($0)}
-    let simpleStyles = flatten(initialStyles)
+    let extensionStyles = self.extractExtensions(initialStyles)
+
+    let simpleStyles = flatten(initialStyles + extensionStyles)
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
 
     let buffer: [String] = intermediateSyles.reduce([]) {memo, style in
@@ -42,13 +46,53 @@ public struct Compiler {
     return postStyles
   }
 
+  private func extractExtensions(styles: [Style]) -> [Style] {
+    let extensions = styles.flatMap { style in
+      return style.extensions.map {($0, style)}
+    }
+
+    let grouped: [StyleExtension: [Style]] = extensions.reduce([:]) { memo, pair in
+      let entry = memo[pair.0]
+      let update = (entry ?? []) + [pair.1]
+      return memo.merge([pair.0: update])
+    }
+
+    return grouped.map {ext, styles in
+      let selector = styles.reduce(SelectorStatement([])) { memo, style in
+        if memo.selectors.isEmpty {
+          return style.selector
+        }
+        else {
+          return memo |& style.selector
+        }
+      }
+
+      return Style(
+        selector,
+        properties: ext.properties,
+        children: ext.children
+      )
+    }
+  }
+
   private func flatten(styles: [Style], output: [IntermediateStyle] = []) -> [IntermediateStyle] {
     return styles.reduce(output) {memo, style in
-      let props = style.properties.map { prop in
-        return IntermediateProperty(original: prop)
-      }
+      let sourceProps = style.mixins.flatMap {$0.properties} + style.properties
+      let props = sourceProps.map {IntermediateProperty(original: $0)}
       let simple = IntermediateStyle(selector: style.selector, properties: props)
-      return [simple] + flatten(style.children, output: memo)
+      let children = (style.mixins.flatMap {$0.children} + style.children).map {$0.prependSelector(style.selector)}
+      return [simple] + flatten(children, output: memo)
     }
+  }
+}
+
+extension Dictionary {
+  func merge(dictionary: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
+    var output = self
+    for (key, value) in dictionary {
+      output[key] = value
+    }
+
+    return output
   }
 }
