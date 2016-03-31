@@ -1,9 +1,13 @@
 import Foundation
 
-struct FileWriter {
+public struct FileWriter {
   let compiler: Compiler
 
-  func write(packages: [StylePackage], to outputPath: String) throws {
+  public init(compiler: Compiler) {
+    self.compiler = compiler
+  }
+
+  public func write(packages: [StylePackage], to outputPath: String) throws {
     for package in packages {
       let output = compiler.compile(package)
       let fullPath = "\(outputPath)/\(package.name).css"
