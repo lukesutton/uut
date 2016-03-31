@@ -12,35 +12,23 @@ class CompilerTests: XCTestCase {
     }
 
     let ext = StyleExtension(
-      properties: [
-        Properties.Bottom(.Unit(.Em(0)))
-      ]
+      Properties.Bottom(.Unit(.Em(0)))
     )
 
     let styles = [
       Style(
         Selectors.Class("what"),
-        extensions: [
-          ext
-        ]
+        extensions: [ext]
       ),
-      
+
       Style(
         Selectors.Class("articles"),
-        extensions: [
-          ext
-        ],
-        properties: [
-          Properties.BackgroundColor(.Color(.Black))
-        ],
-        children: [
-          Style(
-            Selectors.Class("article"),
-            properties: [
-              Properties.BorderStyle(.Solid)
-            ]
-          )
-        ]
+        extensions: [ext],
+        Properties.BackgroundColor(.Color(.Black)),
+        Style(
+          Selectors.Class("article"),
+          Properties.BorderStyle(.Solid)
+        )
       )
     ]
 
