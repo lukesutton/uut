@@ -77,8 +77,7 @@ public struct Compiler {
 
   private func flatten(styles: [Style], output: [IntermediateStyle] = []) -> [IntermediateStyle] {
     return styles.reduce(output) {memo, style in
-      let sourceProps = style.mixins.flatMap {$0.properties} + style.properties
-      let props = sourceProps.map {IntermediateProperty(original: $0)}
+      let props = style.mixins.flatMap {$0.properties} + style.properties
       let simple = IntermediateStyle(selector: style.selector, properties: props)
       let children = (style.mixins.flatMap {$0.children} + style.children).map {$0.prependSelector(style.selector)}
       return [simple] + flatten(children, output: memo)

@@ -5,6 +5,11 @@ public struct IntermediateStyle {
   public let selector: SelectorStatement
   public let properties: [IntermediateProperty]
 
+  public init(selector: SelectorStatement, properties: [Property]) {
+    self.selector = selector
+    self.properties = properties.map {IntermediateProperty(original: $0)}
+  }
+
   public init(selector: SelectorStatement, properties: [IntermediateProperty]) {
     self.selector = selector
     self.properties = properties

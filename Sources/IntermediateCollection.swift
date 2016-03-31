@@ -8,6 +8,25 @@ public struct IntermediateCollection {
     self.styles = styles
   }
 
+  public func addStyle(style: Style, after query: StylesQuery? = nil) -> IntermediateCollection {
+    let intermediate = IntermediateStyle(selector: style.selector, properties: style.properties)
+    if let query = query {
+      let updates: [IntermediateStyle] = self.styles.reduce([]) { memo, style in
+        if matches(style, withQuery: query) {
+          return memo + [style, intermediate]
+        }
+        else {
+          return memo + [style]
+        }
+      }
+
+      return IntermediateCollection(updates)
+    }
+    else {
+      return IntermediateCollection(self.styles + [intermediate])
+    }
+  }
+
   public func transformMatches(query: StylesQuery, update: StyleUpdate) -> IntermediateCollection {
     let updates: [IntermediateStyle] = self.styles.map { style in
       if self.matches(style, withQuery: query) {
@@ -27,7 +46,7 @@ public struct IntermediateCollection {
         let newStyle = update(style)
         return IntermediateStyle(
           selector: newStyle.selector,
-          properties: newStyle.properties.map {IntermediateProperty(original: $0)}
+          properties: newStyle.properties
         )
       }
       else {
