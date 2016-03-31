@@ -6,11 +6,20 @@ class CompilerTests: XCTestCase {
     func double(styles: IntermediateCollection) -> IntermediateCollection {
       let query = StylesQuery.hasProperty(Properties.BackgroundColor.self)
 
-      return styles.forMatch(query) { style in
+      return styles.transformMatches(query) { style in
         return style.addValueForProperty(Properties.BackgroundColor.self) { prop in
           return prop.canonicalPair
         }
       }
+    }
+
+    func removeProperty(property: Property.Type) -> (IntermediateCollection -> IntermediateCollection) {
+      func remove(styles: IntermediateCollection) -> IntermediateCollection {
+        let query = StylesQuery.hasProperty(property)
+        return styles.transformMatches(query) { $0.removeProperty(property)}
+      }
+
+      return remove
     }
 
     let ext = StyleExtension(

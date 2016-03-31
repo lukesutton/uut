@@ -8,7 +8,7 @@ public struct IntermediateCollection {
     self.styles = styles
   }
 
-  public func forMatch(query: StylesQuery, update: StyleUpdate) -> IntermediateCollection {
+  public func transformMatches(query: StylesQuery, update: StyleUpdate) -> IntermediateCollection {
     let updates: [IntermediateStyle] = self.styles.map { style in
       if self.matches(style, withQuery: query) {
         return update(style)
@@ -21,7 +21,40 @@ public struct IntermediateCollection {
     return IntermediateCollection(updates)
   }
 
-  public func matches(style: IntermediateStyle, withQuery query: StylesQuery) -> Bool {
+  public func replaceMatches(query: StylesQuery, update: (IntermediateStyle -> Style)) -> IntermediateCollection {
+    let updates: [IntermediateStyle] = self.styles.map { style in
+      if self.matches(style, withQuery: query) {
+        let newStyle = update(style)
+        return IntermediateStyle(
+          selector: newStyle.selector,
+          properties: newStyle.properties.map {IntermediateProperty(original: $0)}
+        )
+      }
+      else {
+        return style
+      }
+    }
+
+    return IntermediateCollection(updates)
+  }
+
+  public func removeMatches(query: StylesQuery) -> IntermediateCollection {
+    let updates: [IntermediateStyle] = self.styles.filter { style in
+      return !matches(style, withQuery: query)
+    }
+
+    return IntermediateCollection(updates)
+  }
+
+  public func keepMatches(query: StylesQuery) -> IntermediateCollection {
+    let updates: [IntermediateStyle] = self.styles.filter { style in
+      return matches(style, withQuery: query)
+    }
+
+    return IntermediateCollection(updates)
+  }
+
+  private func matches(style: IntermediateStyle, withQuery query: StylesQuery) -> Bool {
     switch query.mode {
       case .All:
         return true
