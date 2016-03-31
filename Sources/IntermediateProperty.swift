@@ -20,11 +20,11 @@ public struct IntermediateProperty {
     return IntermediateProperty(original: self.original, additionalValues: self.additionalValues + [labelAndValue])
   }
 
-  public var originalValue: (String, String) {
+  public var canonicalPair: (String, String) {
     return (self.original.label, self.original.stringValue)
   }
 
   var allValues: [(String, String)] {
-    return [self.originalValue] + self.additionalValues
+    return [self.canonicalPair] + self.additionalValues
   }
 }

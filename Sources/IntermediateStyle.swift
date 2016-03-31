@@ -10,9 +10,7 @@ public struct IntermediateStyle {
     self.properties = properties
   }
 
-  // Initial dumb version. It will do a bunch of redundant work for each
-  // style, but it's at least simple.
-  public func addPropertyValue(property: Property.Type, _ f: PropertyUpdate) -> IntermediateStyle {
+  public func addValueForProperty(property: Property.Type, _ f: PropertyUpdate) -> IntermediateStyle {
     let updates: [IntermediateProperty] = self.properties.map { prop in
       if prop.original.dynamicType == property {
         if let update = f(prop) {

@@ -2,7 +2,7 @@ import Foundation
 
 public struct Compiler {
   public typealias InitialFunc = ([Style] -> [Style])
-  public typealias IntermediateFunc = ([IntermediateStyle] -> [IntermediateStyle])
+  public typealias IntermediateFunc = (IntermediateCollection -> IntermediateCollection)
   public typealias PostFunc = (String -> String)
 
   let initial: [InitialFunc]
@@ -27,10 +27,10 @@ public struct Compiler {
     let initialStyles = self.initial.reduce(styles) {$1($0)}
     let extensionStyles = self.extractExtensions(initialStyles)
 
-    let simpleStyles = flatten(initialStyles + extensionStyles)
+    let simpleStyles = IntermediateCollection(flatten(initialStyles + extensionStyles))
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
 
-    let buffer: [String] = intermediateSyles.reduce([]) {memo, style in
+    let buffer: [String] = intermediateSyles.styles.reduce([]) {memo, style in
       let props: [String] = style.properties.reduce([]) {memo, prop in
         let pairs = prop.allValues.map { (label, value) in
           return "  \(label): \(value);"

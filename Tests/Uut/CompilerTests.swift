@@ -3,10 +3,12 @@ import XCTest
 
 class CompilerTests: XCTestCase {
   func testProperties() {
-    func double(styles: [IntermediateStyle]) -> [IntermediateStyle] {
-      return styles.map {style in
-        style.addPropertyValue(Properties.BackgroundColor.self) { prop in
-          return prop.originalValue
+    func double(styles: IntermediateCollection) -> IntermediateCollection {
+      let query = StylesQuery.hasProperty(Properties.BackgroundColor.self)
+
+      return styles.forMatch(query) { style in
+        return style.addValueForProperty(Properties.BackgroundColor.self) { prop in
+          return prop.canonicalPair
         }
       }
     }
@@ -25,9 +27,11 @@ class CompilerTests: XCTestCase {
         Selectors.Class("articles"),
         extensions: [ext],
         Properties.BackgroundColor(.Color(.Black)),
+
         Style(
           Selectors.Class("article"),
-          Properties.BorderStyle(.Solid)
+          Properties.BorderStyle(.Solid),
+          Properties.BackgroundColor(.Color(.Black))
         )
       )
     ]
