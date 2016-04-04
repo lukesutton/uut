@@ -80,10 +80,10 @@ This table keeps track of which properties Uut currently supports.
 * [x] `overflow`
 * [x] `overflow-x`
 * [x] `overflow-y`
-* [ ] `padding`
-* [ ] `padding-bottom`
-* [ ] `padding-left`
-* [ ] `padding-right`
-* [ ] `padding-top`
+* [x] `padding`
+* [x] `padding-bottom`
+* [x] `padding-left`
+* [x] `padding-right`
+* [x] `padding-top`
 * [ ] `vertical-align`
 * [ ] `z-index`

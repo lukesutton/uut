@@ -283,4 +283,59 @@ extension Properties {
       self.stringValue = value.stringValue
     }
   }
+
+  public struct Padding: Property, StyleComponent {
+    public let label = "padding"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct PaddingBottom: Property, StyleComponent {
+    public let label = "padding-bottom"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct PaddingLeft: Property, StyleComponent {
+    public let label = "padding-left"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct PaddingRight: Property, StyleComponent {
+    public let label = "padding-right"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct PaddingTop: Property, StyleComponent {
+    public let label = "padding-top"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
 }
