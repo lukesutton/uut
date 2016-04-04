@@ -24,7 +24,7 @@ extension Properties {
   }
 
   public struct Left: Property, StyleComponent {
-    public let label = "bottom"
+    public let label = "left"
     public let value: PropertyValues.Unit
     public let stringValue: String
 
@@ -35,7 +35,7 @@ extension Properties {
   }
 
   public struct Right: Property, StyleComponent {
-    public let label = "top"
+    public let label = "right"
     public let value: PropertyValues.Unit
     public let stringValue: String
 
@@ -59,7 +59,7 @@ extension Properties {
       }
     }
 
-    public let label = "top"
+    public let label = "position"
     public let value: PositionValue
     public let stringValue: String
 
