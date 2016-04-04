@@ -250,4 +250,37 @@ extension Properties {
       self.stringValue = value.stringValue
     }
   }
+
+  public struct Overflow: Property, StyleComponent {
+    public let label = "overflow"
+    public let value: PropertyValues.Overflow
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.Overflow) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct OverflowX: Property, StyleComponent {
+    public let label = "overflow-x"
+    public let value: PropertyValues.Overflow
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.Overflow) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct OverflowY: Property, StyleComponent {
+    public let label = "overflow-y"
+    public let value: PropertyValues.Overflow
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.Overflow) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
 }

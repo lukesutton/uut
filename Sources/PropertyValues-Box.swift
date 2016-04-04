@@ -50,4 +50,17 @@ extension PropertyValues {
       }
     }
   }
+
+  public enum Overflow: String, PropertyValue {
+    case Visible = "visible"
+    case Hidden = "hidden"
+    case Scroll = "scroll"
+    case Auto = "auto"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
 }

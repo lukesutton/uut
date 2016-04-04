@@ -77,9 +77,9 @@ This table keeps track of which properties Uut currently supports.
 * [x] `max-height`
 * [x] `min-width`
 * [x] `min-height`
-* [ ] `overflow`
-* [ ] `overflow-x`
-* [ ] `overflow-y`
+* [x] `overflow`
+* [x] `overflow-x`
+* [x] `overflow-y`
 * [ ] `padding`
 * [ ] `padding-bottom`
 * [ ] `padding-left`
