@@ -63,4 +63,40 @@ extension PropertyValues {
       return rawValue
     }
   }
+
+  public enum Visibility: String, PropertyValue {
+    case Visible = "visible"
+    case Hidden = "hidden"
+    case Collapse = "collapse"
+    case Auto = "auto"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
+
+  public enum VerticalAlign: PropertyValue {
+    case Baseline
+    case Unit(Values.Unit)
+    case Sub
+    case Super
+    case Top
+    case TextTop
+    case Middle
+    case Bottom
+    case TextBottom
+    case Initial
+    case Inherit
+
+    public var stringValue: String {
+      switch self {
+        case let Unit(n): return n.stringValue
+        case TextTop: return "text-top"
+        case TextBottom: return "text-bottom"
+        default: return String(self).lowercaseString
+      }
+    }
+  }
 }

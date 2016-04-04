@@ -338,4 +338,37 @@ extension Properties {
       self.stringValue = value.stringValue
     }
   }
+
+  public struct Visibility: Property, StyleComponent {
+    public let label = "padding-top"
+    public let value: PropertyValues.Visibility
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.Visibility) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct VerticalAlign: Property, StyleComponent {
+    public let label = "vertical-align"
+    public let value: PropertyValues.VerticalAlign
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.VerticalAlign) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct ZIndex: Property, StyleComponent {
+    public let label = "z-index"
+    public let value: PropertyValues.NumberWithAuto
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.NumberWithAuto) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
 }

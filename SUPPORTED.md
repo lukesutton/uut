@@ -85,5 +85,6 @@ This table keeps track of which properties Uut currently supports.
 * [x] `padding-left`
 * [x] `padding-right`
 * [x] `padding-top`
-* [ ] `vertical-align`
-* [ ] `z-index`
+* [x] `visibility`
+* [x] `vertical-align`
+* [x] `z-index`
