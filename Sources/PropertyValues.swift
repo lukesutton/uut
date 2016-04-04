@@ -120,4 +120,31 @@ public struct PropertyValues {
       }
     }
   }
+
+  public enum Number {
+    case Number(Int)
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let .Number(x): return String(x)
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
+  public enum NumberWithAuto {
+    case Number(Int)
+    case Auto
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let .Number(x): return String(x)
+        default: return String(self).lowercaseString
+      }
+    }
+  }
 }
