@@ -3,10 +3,10 @@ extension Properties {
 
   public struct Bottom: Property, StyleComponent {
     public let label = "bottom"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.BoxMeasurement
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.BoxMeasurement) {
       self.value = value
       self.stringValue = value.stringValue
     }
@@ -14,10 +14,10 @@ extension Properties {
 
   public struct Top: Property, StyleComponent {
     public let label = "top"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.BoxMeasurement
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.BoxMeasurement) {
       self.value = value
       self.stringValue = value.stringValue
     }
@@ -25,10 +25,10 @@ extension Properties {
 
   public struct Left: Property, StyleComponent {
     public let label = "left"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.BoxMeasurement
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.BoxMeasurement) {
       self.value = value
       self.stringValue = value.stringValue
     }
@@ -36,10 +36,10 @@ extension Properties {
 
   public struct Right: Property, StyleComponent {
     public let label = "right"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.BoxMeasurement
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.BoxMeasurement) {
       self.value = value
       self.stringValue = value.stringValue
     }
@@ -114,6 +114,138 @@ extension Properties {
     public let stringValue: String
 
     public init(_ value: ClipValue) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct Display: Property, StyleComponent {
+    public let label = "display"
+    public let value: PropertyValues.Display
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.Display) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct Float: Property, StyleComponent {
+    public let label = "float"
+    public let value: PropertyValues.Float
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.Float) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct Height: Property, StyleComponent {
+    public let label = "Height"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct Margin: Property, StyleComponent {
+    public let label = "margin"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MarginBottom: Property, StyleComponent {
+    public let label = "margin-bottom"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MarginLeft: Property, StyleComponent {
+    public let label = "margin-left"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MarginRight: Property, StyleComponent {
+    public let label = "margin-right"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MarginTop: Property, StyleComponent {
+    public let label = "margin-top"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MaxHeight: Property, StyleComponent {
+    public let label = "max-height"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MaxWidth: Property, StyleComponent {
+    public let label = "max-width"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MinHeight: Property, StyleComponent {
+    public let label = "min-height"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct MinWidth: Property, StyleComponent {
+    public let label = "min-width"
+    public let value: PropertyValues.BoxMeasurement
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.BoxMeasurement) {
       self.value = value
       self.stringValue = value.stringValue
     }

@@ -64,19 +64,19 @@ This table keeps track of which properties Uut currently supports.
 * [x] `position`
 * [x] `clear`
 * [x] `clip`
-* [ ] `display`
-* [ ] `float`
-* [ ] `height`
-* [ ] `width`
-* [ ] `margin`
-* [ ] `margin-bottom`
-* [ ] `margin-left`
-* [ ] `margin-right`
-* [ ] `margin-top`
-* [ ] `max-width`
-* [ ] `max-height`
-* [ ] `min-width`
-* [ ] `min-height`
+* [x] `display`
+* [x] `float`
+* [x] `height`
+* [x] `width`
+* [x] `margin`
+* [x] `margin-bottom`
+* [x] `margin-left`
+* [x] `margin-right`
+* [x] `margin-top`
+* [x] `max-width`
+* [x] `max-height`
+* [x] `min-width`
+* [x] `min-height`
 * [ ] `overflow`
 * [ ] `overflow-x`
 * [ ] `overflow-y`
