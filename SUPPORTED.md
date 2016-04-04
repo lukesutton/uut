@@ -113,13 +113,14 @@ This table keeps track of which properties Uut currently supports.
 * [x] `line-height`
 * [ ] `overflow-wrap`
 * [ ] `tab-size`
-* [ ] `text-align`
+* [x] `text-align`
 * [ ] `text-align-last`
 * [ ] `text-combine-upright`
-* [ ] `text-indent`
-* [ ] `text-transform`
-* [ ] `whitespace`
-* [ ] `word-break`
+* [ ] `text-justify`
+* [x] `text-indent`
+* [x] `text-transform`
+* [x] `white-space`
+* [x] `word-break`
 * [ ] `word-spacing`
 * [ ] `word-wrap`
 * [ ] `text-decoration`
