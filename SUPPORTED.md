@@ -88,3 +88,52 @@ This table keeps track of which properties Uut currently supports.
 * [x] `visibility`
 * [x] `vertical-align`
 * [x] `z-index`
+
+## Flex Box
+
+* [x] `align-content`
+* [x] `align-items`
+* [x] `align-self`
+* [x] `flex`
+* [x] `flex-basis`
+* [x] `flex-direction`
+* [x] `flex-flow`
+* [x] `flex-grow`
+* [x] `flex-shrink`
+* [x] `flex-wrap`
+* [x] `justify-content`
+* [x] `order`
+
+## Text
+
+* [x] `hanging-punctuation`
+* [ ] `hyphens`
+* [x] `letter-spacing`
+* [ ] `hyphens`
+* [x] `line-height`
+* [ ] `overflow-wrap`
+* [ ] `tab-size`
+* [ ] `text-align`
+* [ ] `text-align-last`
+* [ ] `text-combine-upright`
+* [ ] `text-indent`
+* [ ] `text-transform`
+* [ ] `whitespace`
+* [ ] `word-break`
+* [ ] `word-spacing`
+* [ ] `word-wrap`
+* [ ] `text-decoration`
+* [ ] `text-decoration-color`
+* [ ] `text-decoration-line`
+* [ ] `text-decoration-style`
+* [ ] `text-shadow`
+* [ ] `text-underline-position`
+
+## Lists
+
+* [ ] `counter-increment`
+* [ ] `counter-reset`
+* [ ] `list-style`
+* [ ] `list-style-image`
+* [ ] `list-style-position`
+* [ ] `list-style-type`
