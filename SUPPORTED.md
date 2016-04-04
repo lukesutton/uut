@@ -121,13 +121,13 @@ This table keeps track of which properties Uut currently supports.
 * [x] `text-transform`
 * [x] `white-space`
 * [x] `word-break`
-* [ ] `word-spacing`
-* [ ] `word-wrap`
-* [ ] `text-decoration`
+* [x] `word-spacing`
+* [x] `word-wrap`
+* [x] `text-decoration`
 * [ ] `text-decoration-color`
 * [ ] `text-decoration-line`
 * [ ] `text-decoration-style`
-* [ ] `text-shadow`
+* [x] `text-shadow`
 * [ ] `text-underline-position`
 
 ## Lists

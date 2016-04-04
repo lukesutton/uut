@@ -94,4 +94,28 @@ extension PropertyValues {
       return rawValue
     }
   }
+
+  public enum WordWrap: String, PropertyValue {
+    case Normal = "normal"
+    case BreakWord = "break-word"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
+
+  public enum TextDecoration: String, PropertyValue {
+    case None = "none"
+    case Underline = "underline"
+    case Overline = "overline"
+    case LineThrough = "line-through"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
 }

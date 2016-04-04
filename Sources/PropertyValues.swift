@@ -27,6 +27,20 @@ public struct PropertyValues {
     }
   }
 
+  public enum UnitWithNormal {
+    case Unit(Values.Unit)
+    case Normal
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let Unit(x): return x.stringValue
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
   public enum Reset: String {
     case Initial = "initial"
     case Inherit = "inherit"

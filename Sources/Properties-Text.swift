@@ -86,4 +86,48 @@ extension Properties {
       self.stringValue = value.stringValue
     }
   }
+
+  public struct WordSpacing: Property, StyleComponent {
+    public let label = "word-spacing"
+    public let value: PropertyValues.UnitWithNormal
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.UnitWithNormal) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct WordWrap: Property, StyleComponent {
+    public let label = "word-wrap"
+    public let value: PropertyValues.WordWrap
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.WordWrap) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct TextDecoration: Property, StyleComponent {
+    public let label = "text-decoration"
+    public let value: PropertyValues.TextDecoration
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.TextDecoration) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+  }
+
+  public struct TextShadow: Property, StyleComponent {
+    public let label = "text-shadow"
+    public let values: [PropertyValues.Shadow]
+    public let stringValue: String
+
+    public init(_ values: PropertyValues.Shadow...) {
+      self.values = values
+      self.stringValue = values.map {$0.stringValue}.joinWithSeparator(", ")
+    }
+  }
 }
