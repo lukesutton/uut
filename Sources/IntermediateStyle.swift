@@ -4,23 +4,26 @@ public struct IntermediateStyle {
 
   public let selector: SelectorStatement
   public let properties: [IntermediateProperty]
+  public let queries: [MediaQueryStatement]
 
-  public init(selector: SelectorStatement, properties: [Property]) {
+  public init(selector: SelectorStatement, properties: [Property], queries: [MediaQueryStatement] = []) {
     self.selector = selector
     self.properties = properties.map {IntermediateProperty(original: $0)}
+    self.queries = queries
   }
 
-  public init(selector: SelectorStatement, properties: [IntermediateProperty]) {
+  public init(selector: SelectorStatement, properties: [IntermediateProperty], queries: [MediaQueryStatement] = []) {
     self.selector = selector
     self.properties = properties
+    self.queries = queries
   }
 
   public func prefixSelector(selector: SelectorStatementConvertible) -> IntermediateStyle {
-    return IntermediateStyle(selector: selector.selectorStatement.concat(self.selector), properties: self.properties)
+    return IntermediateStyle(selector: selector.selectorStatement.concat(self.selector), properties: self.properties, queries: self.queries)
   }
 
   public func suffixSelector(selector: SelectorStatementConvertible) -> IntermediateStyle {
-    return IntermediateStyle(selector: self.selector.concat(selector.selectorStatement), properties: self.properties)
+    return IntermediateStyle(selector: self.selector.concat(selector.selectorStatement), properties: self.properties, queries: self.queries)
   }
 
   public func replaceSelector(selector: SelectorStatementConvertible) -> IntermediateStyle {
@@ -29,7 +32,7 @@ public struct IntermediateStyle {
 
   public func removeProperty(property: Property.Type) -> IntermediateStyle {
     let updates = self.properties.filter {$0.original.dynamicType != property}
-    return IntermediateStyle(selector: self.selector, properties: updates)
+    return IntermediateStyle(selector: self.selector, properties: updates, queries: self.queries)
   }
 
   public func replaceProperty(property: Property.Type, with replacement: Property) -> IntermediateStyle {
@@ -41,7 +44,7 @@ public struct IntermediateStyle {
         return prop
       }
     }
-    return IntermediateStyle(selector: self.selector, properties: updates)
+    return IntermediateStyle(selector: self.selector, properties: updates, queries: self.queries)
   }
 
   public func addValueForProperty(property: Property.Type, _ f: PropertyUpdate) -> IntermediateStyle {
@@ -59,6 +62,6 @@ public struct IntermediateStyle {
       }
     }
 
-    return IntermediateStyle(selector: self.selector, properties: updates)
+    return IntermediateStyle(selector: self.selector, properties: updates, queries: self.queries)
   }
 }

@@ -30,7 +30,22 @@ public struct Compiler {
     let simpleStyles = IntermediateCollection(flatten(initialStyles + extensionStyles))
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
 
-    let buffer: [String] = intermediateSyles.styles.reduce([]) {memo, style in
+    let noMediaQueries = intermediateSyles.styles.filter {$0.queries.isEmpty}
+    let mediaQueries = intermediateSyles.styles.filter {!$0.queries.isEmpty}
+
+    // Split styles into those with and without media queries
+    // Group them together
+    // Wrap output by appending
+
+    let buffer = compileStyles(intermediateSyles.styles)
+    let output = buffer.joinWithSeparator("\r\n")
+    let postStyles = self.post.reduce(output) {$1($0)}
+
+    return postStyles
+  }
+
+  private func compileStyles(styles: [IntermediateStyle]) -> [String] {
+    let buffer: [String] = styles.reduce([]) {memo, style in
       let props: [String] = style.properties.reduce([]) {memo, prop in
         let pairs = prop.allValues.map { (label, value) in
           return "  \(label): \(value);"
@@ -40,10 +55,14 @@ public struct Compiler {
       return memo + ["\(style.selector.stringValue) {"] + props + ["}"]
     }
 
-    let output = buffer.joinWithSeparator("\r\n")
-    let postStyles = self.post.reduce(output) {$1($0)}
+    return buffer
+  }
 
-    return postStyles
+  private func splitStyles(styles: [Style]) -> (standard: [Style], queries: [MediaQueryStatement]) {
+    let noMediaQueries = styles.filter {$0.queries.isEmpty}
+    let mediaQueries = styles.filter {!$0.queries.isEmpty}
+
+    return (standard: noMediaQueries, queries: [])
   }
 
   private func extractExtensions(styles: [Style]) -> [Style] {
@@ -78,11 +97,31 @@ public struct Compiler {
   private func flatten(styles: [Style], output: [IntermediateStyle] = []) -> [IntermediateStyle] {
     return styles.reduce(output) {memo, style in
       let props = style.mixins.flatMap {$0.properties} + style.properties
-      let simple = IntermediateStyle(selector: style.selector, properties: props)
+      let simple = IntermediateStyle(selector: style.selector, properties: props, queries: style.queries)
       let children = (style.mixins.flatMap {$0.children} + style.children).map {$0.prependSelector(style.selector)}
       return [simple] + flatten(children, output: memo)
     }
   }
+}
+
+extension Array {
+    func groupBy<G: Hashable>(gourpClosure: (Element) -> G) -> [G: [Element]] {
+        var dictionary = [G: [Element]]()
+
+        for element in self {
+            let key = gourpClosure(element)
+            var array: [Element]? = dictionary[key]
+
+            if (array == nil) {
+                array = [Element]()
+            }
+
+            array!.append(element)
+            dictionary[key] = array!
+        }
+
+        return dictionary
+    }
 }
 
 extension Dictionary {
