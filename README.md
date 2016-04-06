@@ -4,7 +4,7 @@ Can you write CSS using pure Swift? Maybe? Let's find out!
 
 ## A Bit of a Taste
 
-````swift
+```swift
 // Extensions ala SASS
 let ext = StyleExtension(
   Properties.Bottom(.Unit(.Em(0)))
