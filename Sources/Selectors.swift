@@ -2,60 +2,61 @@ public struct Selectors {
   private init() {}
 
   public struct Class: Selector, SelectorStatementConvertible {
-    let value: String
-    let associated: [Selector]
+    public let value: String
+    public let prefixStringValue: String
+    public let associated: [Selector]
 
-    public init(_ value: String, _ associated: [Selector] = []) {
+    public init(_ value: String, _ associated: Selector...) {
       self.value = value
       self.associated = associated
-    }
-
-    public var stringValue: String {
-      return ".\(self.value)"
+      self.prefixStringValue = ".\(value)"
     }
   }
 
   public struct ID: Selector, SelectorStatementConvertible {
-    let value: String
-    let associated: [Selector]
+    public let value: String
+    public let prefixStringValue: String
+    public let associated: [Selector]
 
-    public init(_ value: String, _ associated: [Selector] = []) {
+    public init(_ value: String, _ associated: Selector...) {
       self.value = value
       self.associated = associated
-    }
-
-    public var stringValue: String {
-      return "#\(self.value)"
+      self.prefixStringValue = "#\(value)"
     }
   }
 
   public struct AttrContains: Selector, SelectorStatementConvertible {
-    let label: String
-    let value: String
-    let associated: [Selector]
+    public let label: String
+    public let value: String
+    public let prefixStringValue: String
+    public let associated: [Selector]
 
-    public init(_ label: String, _ value: String, _ associated: [Selector] = []) {
+    public init(_ label: String, _ value: String, _ associated: Selector...) {
       self.label = label
       self.value = value
       self.associated = associated
-    }
-
-    public var stringValue: String {
-      return "[\(self.label)~=\"\(self.value)\"]"
+      self.prefixStringValue = "[\(self.label)~=\"\(self.value)\"]"
     }
   }
 
-  public struct El {
-    public let stringValue: String
+  public struct El: Selector, SelectorStatementConvertible {
+    public let value: String
+    public let prefixStringValue: String
+    public let associated: [Selector]
 
-    public init(_ value: String) {
-      self.stringValue = value
+    public init(_ value: String, _ associated: Selector...) {
+      self.value = value
+      self.associated = associated
+      self.prefixStringValue = value
     }
   }
 
-  public struct FirstChild {
-    public let stringValue = ":first-child"
+  public struct FirstChild: Selector, SelectorStatementConvertible {
+    public let prefixStringValue = ":first-child"
+    public let associated: [Selector]
 
-    public init() {}
+    public init(associated: Selector...) {
+      self.associated = associated
+    }
   }
 }

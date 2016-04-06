@@ -41,4 +41,12 @@ class SelectorTests: XCTestCase {
     let selector = Selectors.FirstChild()
     XCTAssertEqual(selector.stringValue, ":first-child")
   }
+
+  func testCompoundSelectors() {
+    let first = Selectors.El("div", Selectors.FirstChild())
+    XCTAssertEqual(first.stringValue, "div:first-child")
+
+    let second = Selectors.El("div", Selectors.AttrContains("data-id", "what"))
+    XCTAssertEqual(second.stringValue, "div[data-equals~=\"what\"]")
+  }
 }
