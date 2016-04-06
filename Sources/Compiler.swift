@@ -36,7 +36,7 @@ public struct Compiler {
     let split = splitStyles(intermediateSyles.styles)
     let standardCompile = compileStyles(split.standard)
     let queryCompile = split.queries.reduce([]) { memo, kv in
-      return memo + ["@media \(kv.0.stringValue) {"] + compileStyles(kv.1) + ["}"]
+      return memo + ["@media \(kv.0.stringValue) {"] + compileStyles(kv.1, indentLevel: 1) + ["}"]
     }
 
     // Join the resulting arrays into one big string, then pass to the post
@@ -47,15 +47,17 @@ public struct Compiler {
     return postStyles
   }
 
-  private func compileStyles(styles: [IntermediateStyle]) -> [String] {
+  private func compileStyles(styles: [IntermediateStyle], indentLevel: Int = 0) -> [String] {
+    let indent = String(count: indentLevel * 2, repeatedValue: Character(" "))
+
     let buffer: [String] = styles.reduce([]) {memo, style in
       let props: [String] = style.properties.reduce([]) {memo, prop in
         let pairs = prop.allValues.map { (label, value) in
-          return "  \(label): \(value);"
+          return indent + "  \(label): \(value);"
         }
         return memo + pairs
       }
-      return memo + ["\(style.selector.stringValue) {"] + props + ["}"]
+      return memo + [indent + "\(style.selector.stringValue) {"] + props + [indent + "}"]
     }
 
     return buffer
@@ -114,23 +116,23 @@ public struct Compiler {
 }
 
 extension Array {
-    func groupBy<G: Hashable>(gourpClosure: (Element) -> G) -> [G: [Element]] {
-        var dictionary = [G: [Element]]()
+  func groupBy<G: Hashable>(predicate: (Element) -> G) -> [G: [Element]] {
+    var dictionary = [G: [Element]]()
 
-        for element in self {
-            let key = gourpClosure(element)
-            var array: [Element]? = dictionary[key]
+    for element in self {
+      let key = predicate(element)
+      var array: [Element]? = dictionary[key]
 
-            if (array == nil) {
-                array = [Element]()
-            }
+      if (array == nil) {
+        array = [Element]()
+      }
 
-            array!.append(element)
-            dictionary[key] = array!
-        }
-
-        return dictionary
+      array!.append(element)
+      dictionary[key] = array!
     }
+
+    return dictionary
+  }
 }
 
 extension Dictionary {
