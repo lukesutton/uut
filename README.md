@@ -2,12 +2,85 @@
 
 Can you write CSS using pure Swift? Maybe? Let's find out!
 
+## A Bit of a Taste
+
+````swift
+// Extensions ala SASS
+let ext = StyleExtension(
+  Properties.Bottom(.Unit(.Em(0)))
+)
+
+// Media queries, which are then attached to styles
+let query = MediaQueries.MaxWidth(.Px(600))
+
+let styles = [
+  // A basic style, but this one has a media query attached to it. It will be
+  // grouped with other styles that attach the same query.
+  Style(
+    Selectors.Class("what"),
+    query: query,
+    Properties.Float(.Left)
+  ),
+
+  // A simple style that just uses an extension. It's selector will be hoisted
+  // up and rendered out with the extension properties.
+  Style(
+    Selectors.Class("what"),
+    extensions: [ext]
+  ),
+
+  // A more complete example.
+  // - Use an extension
+  // - A child style; which will have the selector .articles .article
+  Style(
+    Selectors.Class("articles"),
+    extensions: [ext],
+    Properties.BackgroundColor(.Color(.Black)),
+
+    Style(
+      Selectors.Class("article"),
+      Properties.BorderStyle(.Solid),
+      Properties.BackgroundColor(.Color(.Black))
+    )
+  )
+]
+
+// A compiler is initialized and can optionally have middleware functions
+// configured which are used to pre/post-process styles.
+let compiler = Compiler()
+let result = compiler.compile(styles)
+```
+
 ## Please Note
 
 * I don't know what I'm doing
 * This isn't useful for real work yet
 * It's untested as a library; I've just been noodling about
 * I would be happy to hear any suggestions, so feel free to open a ticket with comments or issues
+
+## Aims for 1.0
+
+For the initial release of this library, the aim is to have to following features:
+
+* [ ] CSS1, CSS2 and the most common CSS3 properties
+* [ ] Widely supported selectors
+* [ ] Widely supported media queries
+* [ ] Basic tooling for compiling, with pre/post-prosessing and writing to disk
+* [ ] A complete test suite
+* [ ] API documentation
+* [ ] Guides on getting started and advanced usage, including example projects
+
+Beyond this initial release, future plans include:
+
+* More complete coverage of selectors and properties
+* Compiler middleware
+    * Inject vendor-specific property names/values
+    * Polyfills for patchy support or upcoming CSS features
+* Utility functions
+    * Color manipulation
+    * Unit manipulation
+* Namespacing styles e.g. components
+* Helpers for constructing flex-box layouts; flex-box is often confusing
 
 ## Selectors
 
@@ -112,15 +185,3 @@ func foo(name: String, width: Values.Unit) -> Block {
   )
 }
 ```
-
-## To Dos
-
-This project is still at the prototype stage, but there are some obvious features to add.
-
-* [ ] Compiling a set of styles and write CSS to disk
-* [ ] More properties
-* [ ] Encode more property values as enums etc
-* [x] Allow the definition of style packages e.g. group a collection of styles and output them together
-* [ ] Functions for manipulating colour values
-* [ ] Output of browser-specific properties
-* [ ] Extensions ala SASS or at least similar functionality
