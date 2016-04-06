@@ -294,48 +294,70 @@ public struct Selectors {
     }
   }
 
+  public enum NthValue {
+    case Odd
+    case Even
+    case Inc(Int, Int)
+    case Dec(Int, Int)
+    case First(Int)
+    case Every(Int)
+    case Only(Int)
+
+    var stringValue: String {
+      switch self {
+        case let .Inc(x, y): return "\(x)n+\(y)"
+        case let .Dec(x, y): return "\(x)n-\(y)"
+        case let .First(x): return "-n+\(x)"
+        case let .Every(x): return "\(x)n"
+        case let .Only(x): return String(x)
+        case .Odd: return "odd"
+        case .Even: return "even"
+      }
+    }
+  }
+
   public struct NthChild: Selector, SelectorStatementConvertible {
-    public let value: String
+    public let value: NthValue
     public let prefixStringValue: String
     public let associated: [Selector]
 
-    public init(value: String, associated: Selector...) {
+    public init(value: NthValue, associated: Selector...) {
       self.value = value
       self.associated = associated
-      self.prefixStringValue = ":nth-child(\(value)"
+      self.prefixStringValue = ":nth-child(\(value.stringValue)"
     }
   }
   public struct NthLastChild: Selector, SelectorStatementConvertible {
-    public let value: String
+    public let value: NthValue
     public let prefixStringValue: String
     public let associated: [Selector]
 
-    public init(value: String, associated: Selector...) {
+    public init(value: NthValue, associated: Selector...) {
       self.value = value
       self.associated = associated
-      self.prefixStringValue = ":nth-last-child(\(value)"
+      self.prefixStringValue = ":nth-last-child(\(value.stringValue)"
     }
   }
   public struct NthLastOfType: Selector, SelectorStatementConvertible {
-    public let value: String
+    public let value: NthValue
     public let prefixStringValue: String
     public let associated: [Selector]
 
-    public init(value: String, associated: Selector...) {
+    public init(value: NthValue, associated: Selector...) {
       self.value = value
       self.associated = associated
-      self.prefixStringValue = ":nth-last-of-type(\(value)"
+      self.prefixStringValue = ":nth-last-of-type(\(value.stringValue)"
     }
   }
   public struct NthOfType: Selector, SelectorStatementConvertible {
-    public let value: String
+    public let value: NthValue
     public let prefixStringValue: String
     public let associated: [Selector]
 
-    public init(value: String, associated: Selector...) {
+    public init(value: NthValue, associated: Selector...) {
       self.value = value
       self.associated = associated
-      self.prefixStringValue = ":nth-of-type(\(value)"
+      self.prefixStringValue = ":nth-of-type(\(value.stringValue)"
     }
   }
 
