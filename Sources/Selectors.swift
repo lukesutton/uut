@@ -72,7 +72,21 @@ public struct Selectors {
       self.label = label
       self.value = value
       self.associated = associated
-      self.prefixStringValue = "[\(label)~=\"\(value)\"]"
+      self.prefixStringValue = "[\(label)*=\"\(value)\"]"
+    }
+  }
+
+  public struct AttrListContains: Selector, SelectorStatementConvertible {
+    public let label: String
+    public let value: String
+    public let prefixStringValue: String
+    public let associated: [Selector]
+
+    public init(_ label: String, _ value: String, _ associated: Selector...) {
+      self.label = label
+      self.value = value
+      self.associated = associated
+      self.prefixStringValue = "[\(label)*=\"\(value)\"]"
     }
   }
 
@@ -87,6 +101,20 @@ public struct Selectors {
       self.value = value
       self.associated = associated
       self.prefixStringValue = "[\(label)^=\"\(value)\"]"
+    }
+  }
+
+  public struct AttrHyphenatedValueContains: Selector, SelectorStatementConvertible {
+    public let label: String
+    public let value: String
+    public let prefixStringValue: String
+    public let associated: [Selector]
+
+    public init(_ label: String, _ value: String, _ associated: Selector...) {
+      self.label = label
+      self.value = value
+      self.associated = associated
+      self.prefixStringValue = "[\(label)|=\"\(value)\"]"
     }
   }
 
