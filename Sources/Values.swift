@@ -24,6 +24,7 @@ public struct Values {
   }
 
   public enum Unit {
+    case Number(Double)
     case Px(Int)
     case Percent(Double)
     case Em(Double)
@@ -31,6 +32,7 @@ public struct Values {
 
     var stringValue: String {
       switch self {
+        case let Number(x): return String(x)
         case let Px(x): return "\(x)px"
         case let Percent(x): return "\(x)%"
         case let Em(x): return "\(x)em"

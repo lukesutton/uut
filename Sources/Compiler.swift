@@ -24,21 +24,24 @@ public struct Compiler {
   }
 
   public func compile(styles: [Style]) -> String {
+    // Process initial, unflattened styles
     let initialStyles = self.initial.reduce(styles) {$1($0)}
     let extensionStyles = self.extractExtensions(initialStyles)
 
+    // Generate intermediate styles, then pass them through middleware
     let simpleStyles = IntermediateCollection(flatten(initialStyles + extensionStyles))
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
 
-    let noMediaQueries = intermediateSyles.styles.filter {$0.queries.isEmpty}
-    let mediaQueries = intermediateSyles.styles.filter {!$0.queries.isEmpty}
+    // Split results into styles with and without media queries, then compile them
+    let split = splitStyles(intermediateSyles.styles)
+    let standardCompile = compileStyles(split.standard)
+    let queryCompile = split.queries.reduce([]) { memo, kv in
+      return memo + ["@media \(kv.0.stringValue) {"] + compileStyles(kv.1) + ["}"]
+    }
 
-    // Split styles into those with and without media queries
-    // Group them together
-    // Wrap output by appending
-
-    let buffer = compileStyles(intermediateSyles.styles)
-    let output = buffer.joinWithSeparator("\r\n")
+    // Join the resulting arrays into one big string, then pass to the post
+    // middleware
+    let output = (standardCompile + queryCompile).joinWithSeparator("\r\n")
     let postStyles = self.post.reduce(output) {$1($0)}
 
     return postStyles
@@ -58,11 +61,17 @@ public struct Compiler {
     return buffer
   }
 
-  private func splitStyles(styles: [Style]) -> (standard: [Style], queries: [MediaQueryStatement]) {
-    let noMediaQueries = styles.filter {$0.queries.isEmpty}
-    let mediaQueries = styles.filter {!$0.queries.isEmpty}
+  private func splitStyles(styles: [IntermediateStyle]) -> (standard: [IntermediateStyle], queries: [MediaQueryStatement: [IntermediateStyle]]) {
+    let noMediaQueries = styles.filter {$0.query == nil}
+    let hasMediaQueries = styles.filter {$0.query != nil}
+    let mediaQueries: [MediaQueryStatement: [IntermediateStyle]] = hasMediaQueries.reduce([:]) { memo, style in
+      guard let query = style.query else { return memo }
+      let entry = memo[query]
+      let update = (entry ?? []) + [style]
+      return memo.merge([query: update])
+    }
 
-    return (standard: noMediaQueries, queries: [])
+    return (standard: noMediaQueries, queries: mediaQueries)
   }
 
   private func extractExtensions(styles: [Style]) -> [Style] {
@@ -97,7 +106,7 @@ public struct Compiler {
   private func flatten(styles: [Style], output: [IntermediateStyle] = []) -> [IntermediateStyle] {
     return styles.reduce(output) {memo, style in
       let props = style.mixins.flatMap {$0.properties} + style.properties
-      let simple = IntermediateStyle(selector: style.selector, properties: props, queries: style.queries)
+      let simple = IntermediateStyle(selector: style.selector, properties: props, query: style.query)
       let children = (style.mixins.flatMap {$0.children} + style.children).map {$0.prependSelector(style.selector)}
       return [simple] + flatten(children, output: memo)
     }

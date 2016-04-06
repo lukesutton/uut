@@ -26,7 +26,15 @@ class CompilerTests: XCTestCase {
       Properties.Bottom(.Unit(.Em(0)))
     )
 
+    let query = MediaQueries.Width(.Px(600))
+
     let styles = [
+      Style(
+        Selectors.Class("what"),
+        query: query,
+        Properties.Float(.Left)
+      ),
+
       Style(
         Selectors.Class("what"),
         extensions: [ext]

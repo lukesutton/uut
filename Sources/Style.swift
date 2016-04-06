@@ -1,23 +1,23 @@
 public struct Style: StyleComponent {
-  let queries: [MediaQueryStatement]
+  let query: MediaQueryStatement?
   let selector: SelectorStatement
   let properties: [Property]
   let children: [Style]
   let mixins: [Mixin]
   let extensions: [StyleExtension]
 
-  public init(_ selector: SelectorStatementConvertible, queries: [MediaQueryStatement] = [], mixins: [Mixin] = [], extensions: [StyleExtension] =  [], _ components: StyleComponent...) {
+  public init(_ selector: SelectorStatementConvertible, query: MediaQueryStatementConvertible? = nil, mixins: [Mixin] = [], extensions: [StyleExtension] =  [], _ components: StyleComponent...) {
     let components = extractComponents(components)
-    self.init(selector, queries: queries, mixins: mixins, extensions: extensions, properties: components.properties, children: components.children)
+    self.init(selector, query: query, mixins: mixins, extensions: extensions, properties: components.properties, children: components.children)
   }
 
   public init(_ selector: SelectorStatementConvertible, properties: [Property], children: [Style]) {
-    self.init(selector, queries: [], mixins: [], extensions: [], properties: properties, children: children)
+    self.init(selector, query: nil, mixins: [], extensions: [], properties: properties, children: children)
   }
 
-  public init(_ selector: SelectorStatementConvertible, queries: [MediaQueryStatement], mixins: [Mixin], extensions: [StyleExtension], properties: [Property], children: [Style]) {
+  public init(_ selector: SelectorStatementConvertible, query: MediaQueryStatementConvertible? = nil, mixins: [Mixin], extensions: [StyleExtension], properties: [Property], children: [Style]) {
     self.selector = selector.selectorStatement
-    self.queries = queries
+    self.query = query?.mediaQueryStatement
     self.mixins = mixins
     self.extensions = extensions
 
@@ -28,7 +28,7 @@ public struct Style: StyleComponent {
   func prependSelector(selector: SelectorStatementConvertible) -> Style {
     return Style(
       selector.selectorStatement |+ self.selector,
-      queries: self.queries,
+      query: self.query,
       mixins: self.mixins,
       extensions: self.extensions,
       properties: self.properties,

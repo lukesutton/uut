@@ -1,4 +1,6 @@
-public enum MediaQueries {
+public struct MediaQueries {
+  private init() {}
+  
   // Media Type
   public struct All: MediaQuery, MediaQueryStatementConvertible {
     public let stringValue = "all"

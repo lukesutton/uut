@@ -9,3 +9,15 @@ enum MediaQueryComponent {
     }
   }
 }
+
+extension MediaQueryComponent: Hashable {
+  var hashValue: Int {
+    return stringValue.hashValue
+  }
+}
+
+extension MediaQueryComponent: Equatable {}
+
+func ==(lhs: MediaQueryComponent, rhs: MediaQueryComponent) -> Bool {
+  return lhs.hashValue == rhs.hashValue
+}

@@ -9,3 +9,15 @@ public struct MediaQueryStatement {
     return components.map {$0.stringValue}.joinWithSeparator(" ")
   }
 }
+
+extension MediaQueryStatement: Hashable {
+  public var hashValue: Int {
+    return components.reduce(0) {$0 + $1.hashValue}
+  }
+}
+
+extension MediaQueryStatement: Equatable {}
+
+public func ==(lhs: MediaQueryStatement, rhs: MediaQueryStatement) -> Bool {
+  return lhs.components == rhs.components
+}
