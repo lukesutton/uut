@@ -15,27 +15,27 @@ public struct PropertyValues {
   }
 
   public enum Unit {
-    case Unit(Values.Unit)
+    case Value(Measurement)
     case Initial
     case Inherit
 
     var stringValue: String {
       switch self {
-        case let Unit(x): return x.stringValue
+        case let Value(x): return x.stringValue
         default: return String(self).lowercaseString
       }
     }
   }
 
   public enum UnitWithNormal {
-    case Unit(Values.Unit)
+    case Value(Measurement)
     case Normal
     case Initial
     case Inherit
 
     var stringValue: String {
       switch self {
-        case let Unit(x): return x.stringValue
+        case let Value(x): return x.stringValue
         default: return String(self).lowercaseString
       }
     }
@@ -66,7 +66,7 @@ public struct PropertyValues {
     case Medium
     case Thin
     case Thick
-    case Width(Unit)
+    case Width(Measurement)
     case Initial
     case Inherit
 
@@ -115,7 +115,7 @@ public struct PropertyValues {
     case Initial
     case Inherit
     case Inset
-    case Shadow(Values.Unit, Values.Unit, Double?, Double?, Values.Color?)
+    case Shadow(Measurement, Measurement, Double?, Double?, Values.Color?)
 
     public var stringValue: String {
       switch self {

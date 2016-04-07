@@ -39,13 +39,13 @@ extension PropertyValues {
 
   public enum BoxMeasurement: PropertyValue {
     case Auto
-    case Unit(Values.Unit)
+    case Value(Measurement)
     case Initial
     case Inherit
 
     public var stringValue: String {
       switch self {
-        case let Unit(n): return n.stringValue
+        case let Value(n): return n.stringValue
         default: return String(self).lowercaseString
       }
     }
@@ -79,7 +79,7 @@ extension PropertyValues {
 
   public enum VerticalAlign: PropertyValue {
     case Baseline
-    case Unit(Values.Unit)
+    case Value(Measurement)
     case Sub
     case Super
     case Top
@@ -92,7 +92,7 @@ extension PropertyValues {
 
     public var stringValue: String {
       switch self {
-        case let Unit(n): return n.stringValue
+        case let Value(n): return n.stringValue
         case TextTop: return "text-top"
         case TextBottom: return "text-bottom"
         default: return String(self).lowercaseString

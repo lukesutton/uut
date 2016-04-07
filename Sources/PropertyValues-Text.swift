@@ -15,13 +15,13 @@ extension PropertyValues {
 
   public enum LetterSpacing: PropertyValue {
     case Normal
-    case Length(Values.Unit)
+    case Value(Measurement)
     case Initial
     case Inherit
 
     public var stringValue: String {
       switch self {
-        case let Length(n): return n.stringValue
+        case let Value(n): return n.stringValue
         default: return String(self).lowercaseString
       }
     }
@@ -30,14 +30,14 @@ extension PropertyValues {
   public enum LineHeight: PropertyValue {
     case Normal
     case Number(Double)
-    case Length(Values.Unit)
+    case Value(Measurement)
     case Initial
     case Inherit
 
     public var stringValue: String {
       switch self {
         case let Number(n): return String(n)
-        case let Length(n): return n.stringValue
+        case let Value(n): return n.stringValue
         default: return String(self).lowercaseString
       }
     }

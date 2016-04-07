@@ -25,10 +25,10 @@ class CompilerTests: XCTestCase {
     let black = Values.Color(0, 0, 0)
 
     let ext = StyleExtension(
-      Properties.Bottom(.Unit(.Em(0)))
+      Properties.Bottom(.Value(0.em))
     )
 
-    let query = MediaQueries.Width(.Px(600))
+    let query = MediaQueries.Width(600.px)
 
     let styles = [
       Style(

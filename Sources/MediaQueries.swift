@@ -1,6 +1,6 @@
 public struct MediaQueries {
   private init() {}
-  
+
   // Media Type
   public struct All: MediaQuery, MediaQueryStatementConvertible {
     public let stringValue = "all"
@@ -56,10 +56,10 @@ public struct MediaQueries {
 
   public struct Width: MediaQuery, MediaQueryStatementConvertible {
     let label = "width"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -67,10 +67,10 @@ public struct MediaQueries {
 
   public struct MinWidth: MediaQuery, MediaQueryStatementConvertible {
     let label = "min-width"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -78,10 +78,10 @@ public struct MediaQueries {
 
   public struct MaxWidth: MediaQuery, MediaQueryStatementConvertible {
     let label = "max-width"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -89,10 +89,10 @@ public struct MediaQueries {
 
   public struct Height: MediaQuery, MediaQueryStatementConvertible {
     let label = "height"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -100,10 +100,10 @@ public struct MediaQueries {
 
   public struct MinHeight: MediaQuery, MediaQueryStatementConvertible {
     let label = "min-height"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -111,10 +111,10 @@ public struct MediaQueries {
 
   public struct MaxHeight: MediaQuery, MediaQueryStatementConvertible {
     let label = "max-height"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -124,10 +124,10 @@ public struct MediaQueries {
 
   public struct DeviceWidth: MediaQuery, MediaQueryStatementConvertible {
     let label = "device-width"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -135,10 +135,10 @@ public struct MediaQueries {
 
   public struct MinDeviceWidth: MediaQuery, MediaQueryStatementConvertible {
     let label = "min-device-width"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -146,10 +146,10 @@ public struct MediaQueries {
 
   public struct MaxDeviceWidth: MediaQuery, MediaQueryStatementConvertible {
     let label = "max-device-width"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -157,10 +157,10 @@ public struct MediaQueries {
 
   public struct DeviceHeight: MediaQuery, MediaQueryStatementConvertible {
     let label = "device-height"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -168,10 +168,10 @@ public struct MediaQueries {
 
   public struct MinDeviceHeight: MediaQuery, MediaQueryStatementConvertible {
     let label = "min-device-height"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -179,10 +179,10 @@ public struct MediaQueries {
 
   public struct MaxDeviceHeight: MediaQuery, MediaQueryStatementConvertible {
     let label = "max-device-height"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -190,10 +190,10 @@ public struct MediaQueries {
 
   public struct AspectRatio: MediaQuery, MediaQueryStatementConvertible {
     let label = "aspect-ratio"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -201,10 +201,10 @@ public struct MediaQueries {
 
   public struct MinAspectRatio: MediaQuery, MediaQueryStatementConvertible {
     let label = "min-aspect-ratio"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -212,10 +212,10 @@ public struct MediaQueries {
 
   public struct MaxAspectRatio: MediaQuery, MediaQueryStatementConvertible {
     let label = "max-aspect-ratio"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -223,10 +223,10 @@ public struct MediaQueries {
 
   public struct DeviceAspectRatio: MediaQuery, MediaQueryStatementConvertible {
     let label = "device-aspect-ratio"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -234,10 +234,10 @@ public struct MediaQueries {
 
   public struct MinDeviceAspectRatio: MediaQuery, MediaQueryStatementConvertible {
     let label = "min-device-aspect-ratio"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }
@@ -245,10 +245,10 @@ public struct MediaQueries {
 
   public struct MaxDeviceAspectRatio: MediaQuery, MediaQueryStatementConvertible {
     let label = "max-device-aspect-ratio"
-    let value: Values.Unit
+    let value: Measurement
     public let stringValue: String
 
-    public init(_ width: Values.Unit) {
+    public init(_ width: Measurement) {
       self.value = width
       self.stringValue = "(\(self.label): \(width.stringValue))"
     }

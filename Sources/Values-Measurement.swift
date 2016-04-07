@@ -1,11 +1,11 @@
-public protocol Measurement: Hashable, Equatable {
+public protocol Measurement {
   var value: Double { get }
   var stringValue: String  { get }
   init(_ value: Double)
 }
 
 extension Values {
-  public struct Px: Measurement {
+  public struct Px: Measurement, Hashable, Equatable {
     public let value: Double
     public let stringValue: String
 
@@ -15,7 +15,7 @@ extension Values {
     }
   }
 
-  public struct Percent: Measurement {
+  public struct Percent: Measurement, Hashable, Equatable {
     public let value: Double
     public let stringValue: String
 
@@ -25,7 +25,7 @@ extension Values {
     }
   }
 
-  public struct Em: Measurement {
+  public struct Em: Measurement, Hashable, Equatable {
     public let value: Double
     public let stringValue: String
 
@@ -35,7 +35,7 @@ extension Values {
     }
   }
 
-  public struct Rem: Measurement {
+  public struct Rem: Measurement, Hashable, Equatable {
     public let value: Double
     public let stringValue: String
 

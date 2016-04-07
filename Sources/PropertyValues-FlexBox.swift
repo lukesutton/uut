@@ -42,11 +42,11 @@ extension PropertyValues {
       return self.rawValue
     }
   }
-  
+
   public enum Flex: PropertyValue {
     case FlexGrow(Number)
     case FlexShrink(Number)
-    case FlexBasis(Unit)
+    case FlexBasis(Measurement)
     case Auto
     case None
     case Initial
