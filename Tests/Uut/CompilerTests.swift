@@ -32,7 +32,7 @@ class CompilerTests: XCTestCase {
       Style(
         Selectors.Class("what"),
         query: query,
-        Properties.Float(.Left)
+        Properties.Width(.Unit(100.percent))
       ),
 
       Style(
