@@ -22,6 +22,8 @@ class CompilerTests: XCTestCase {
       return remove
     }
 
+    let black = Values.Color(0, 0, 0)
+
     let ext = StyleExtension(
       Properties.Bottom(.Unit(.Em(0)))
     )
@@ -31,8 +33,7 @@ class CompilerTests: XCTestCase {
     let styles = [
       Style(
         Selectors.Class("what"),
-        query: query,
-        Properties.Width(.Unit(100.percent))
+        query: query
       ),
 
       Style(
@@ -43,12 +44,12 @@ class CompilerTests: XCTestCase {
       Style(
         Selectors.Class("articles"),
         extensions: [ext],
-        Properties.BackgroundColor(.Color(.Black)),
+        Properties.BackgroundColor(.Color(black)),
 
         Style(
           Selectors.Class("article"),
           Properties.BorderStyle(.Solid),
-          Properties.BackgroundColor(.Color(.Black))
+          Properties.BackgroundColor(.Color(black))
         )
       )
     ]

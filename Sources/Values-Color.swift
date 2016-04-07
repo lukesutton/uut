@@ -1,5 +1,5 @@
 extension Values {
-  public struct Colour {
+  public struct Color {
     let red: Int
     let green: Int
     let blue: Int
@@ -17,23 +17,23 @@ extension Values {
       self.alpha = alpha
     }
 
-    func set(red: Int? = nil, green: Int? = nil, blue: Int? = nil, alpha: Double? = nil) -> Colour {
-      return Colour(red ?? self.red, green ?? self.green, blue ?? self.blue, alpha ?? self.alpha)
+    func set(red: Int? = nil, green: Int? = nil, blue: Int? = nil, alpha: Double? = nil) -> Color {
+      return Color(red ?? self.red, green ?? self.green, blue ?? self.blue, alpha ?? self.alpha)
     }
 
-    func invert() -> Colour {
+    func invert() -> Color {
       return self
     }
 
-    func lighten(amount: Int) -> Colour {
+    func lighten(amount: Int) -> Color {
       return self
     }
 
-    func darken(amount: Int) -> Colour {
+    func darken(amount: Int) -> Color {
       return self
     }
 
-    func saturate(amount: Int) -> Colour {
+    func saturate(amount: Int) -> Color {
       return self
     }
 
@@ -52,23 +52,27 @@ extension Values {
     var hexStringValue: String {
       return "#" + String(red, radix: 16) + String(green, radix: 16) + String(blue, radix: 16)
     }
+
+    var stringValue: String {
+      return RGBAStringValue
+    }
   }
 }
 
-extension Values.Colour: Hashable {
+extension Values.Color: Hashable {
   public var hashValue: Int {
     return "\(red)\(green)\(blue)\(alpha)".hashValue
   }
 }
 
-extension Values.Colour: Equatable {}
+extension Values.Color: Equatable {}
 
-public func ==(lhs: Values.Colour, rhs: Values.Colour) -> Bool {
+public func ==(lhs: Values.Color, rhs: Values.Color) -> Bool {
   return lhs.hashValue == rhs.hashValue
 }
 
-extension Values.Colour: Comparable {}
+extension Values.Color: Comparable {}
 
-public func <(lhs: Values.Colour, rhs: Values.Colour) -> Bool {
+public func <(lhs: Values.Color, rhs: Values.Color) -> Bool {
   return lhs.RGBATuple < lhs.RGBATuple
 }
