@@ -12,6 +12,10 @@ extension Values {
     public let fallback: FontFamilyFallback?
 
     public init(_ values: FontConvertible..., fallback: FontFamilyFallback? = nil) {
+      self.init(values: values, fallback: fallback)
+    }
+
+    public init(values: [FontConvertible], fallback: FontFamilyFallback? = nil) {
       self.values = values.map {$0.font}
       self.fallback = fallback
     }

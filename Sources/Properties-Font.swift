@@ -32,6 +32,10 @@ extension Properties {
       self.init(.Family(value))
     }
 
+    public init(_ values: FontConvertible..., fallback: Values.FontFamilyFallback? = nil) {
+      self.init(.Family(Values.FontFamily(values: values, fallback: fallback)))
+    }
+
     public var stringValue: String {
       return value.stringValue
     }

@@ -7,11 +7,11 @@ Can you write CSS using pure Swift? Maybe? Let's find out!
 ```swift
 // Extensions ala SASS
 let ext = StyleExtension(
-  Properties.Bottom(.Unit(.Em(0)))
+  Properties.Bottom(0.em)
 )
 
 // Media queries, which are then attached to styles
-let query = MediaQueries.MaxWidth(.Px(600))
+let query = MediaQueries.MaxWidth(600.px)
 
 let styles = [
   // A basic style, but this one has a media query attached to it. It will be
@@ -35,12 +35,19 @@ let styles = [
   Style(
     Selectors.Class("articles"),
     extensions: [ext],
-    Properties.BackgroundColor(.Color(.Black)),
+    Properties.BackgroundColor(Values.Color(0, 0, 0)),
 
     Style(
       Selectors.Class("article"),
       Properties.BorderStyle(.Solid),
-      Properties.BackgroundColor(.Color(.Black))
+      Properties.BackgroundColor(Values.Color(0, 255, 0)),
+
+      Style(
+        Selectors.El("h2"),
+        Properties.FontWeight(.Bold),
+        Properties.FontFamily("Helvetica Neue", "Helvetica", "Arial", fallback: .SansSerif),
+        Color(Values.Color(255, 0, 0))
+      )
     )
   )
 ]
