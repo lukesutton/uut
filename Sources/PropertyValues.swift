@@ -14,6 +14,20 @@ public struct PropertyValues {
     }
   }
 
+  public enum URL: PropertyValue {
+    case None
+    case URL(String)
+    case Initial
+    case Inherit
+
+    public var stringValue: String {
+      switch self {
+        case let .URL(s): return s
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
   public enum Reset: String {
     case Initial = "initial"
     case Inherit = "inherit"
@@ -124,6 +138,20 @@ public struct PropertyValues {
   public enum NumberWithAuto {
     case Number(Int)
     case Auto
+    case Initial
+    case Inherit
+
+    var stringValue: String {
+      switch self {
+        case let .Number(x): return String(x)
+        default: return String(self).lowercaseString
+      }
+    }
+  }
+
+  public enum NumberWithNone {
+    case Number(Int)
+    case None
     case Initial
     case Inherit
 
