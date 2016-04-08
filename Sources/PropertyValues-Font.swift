@@ -6,7 +6,9 @@ extension PropertyValues {
     public var stringValue: String {
       switch self {
         case let Config(style, variant, weight, size, family):
-          return "what"
+          let start = [style?.stringValue, variant?.stringValue, weight?.stringValue].filter {$0 != nil}.map {$0!}
+          let end = [size.stringValue, family.stringValue]
+          return (start + end).joinWithSeparator(" ")
         default:
           return String(self).lowercaseString
       }
