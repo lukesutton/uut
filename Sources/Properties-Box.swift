@@ -1,4 +1,17 @@
 extension Properties {
+  public struct BoxSizing: Property, StyleComponent {
+    public let label = "box-sizing"
+    public let value: PropertyValues.BoxSizing
+
+    public init(_ value: PropertyValues.BoxSizing) {
+      self.value = value
+    }
+
+    public var stringValue: String {
+      return value.stringValue
+    }
+  }
+
   // Position
 
   public struct Bottom: Property, StyleComponent {

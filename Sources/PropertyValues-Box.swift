@@ -1,4 +1,15 @@
 extension PropertyValues {
+  public enum BoxSizing: String, PropertyValue {
+    case BorderBox = "border-box"
+    case ContentBox = "content-box"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
+
   public enum Display: String, PropertyValue {
     case Inline = "inline"
     case Block = "block"
