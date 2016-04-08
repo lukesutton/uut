@@ -1,4 +1,18 @@
 extension PropertyValues {
+  public enum Font: PropertyValue {
+    case Config(FontStyle?, FontVariant?, FontWeight?, FontSize, FontFamily)
+    case Caption
+
+    public var stringValue: String {
+      switch self {
+        case let Config(style, variant, weight, size, family):
+          return "what"
+        default:
+          return String(self).lowercaseString
+      }
+    }
+  }
+
   public enum FontFamily: PropertyValue {
     case Family(Values.FontFamily)
     case Initial

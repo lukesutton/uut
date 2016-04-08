@@ -1,4 +1,25 @@
 extension Properties {
+  public struct Font: Property {
+    public let label = "font"
+    public let value: PropertyValues.Font
+
+    public init(_ value: PropertyValues.Font) {
+      self.value = value
+    }
+
+    public init(style: PropertyValues.FontStyle? = nil, variant: PropertyValues.FontVariant? = nil, weight: PropertyValues.FontWeight? = nil, size: PropertyValues.FontSize, family: PropertyValues.FontFamily) {
+      self.init(.Config(style, variant, weight, size, family))
+    }
+
+    public init(style: PropertyValues.FontStyle? = nil, variant: PropertyValues.FontVariant? = nil, weight: PropertyValues.FontWeight? = nil, size: Measurement, family: PropertyValues.FontFamily) {
+      self.init(.Config(style, variant, weight, .Value(size), family))
+    }
+
+    public var stringValue: String {
+      return value.stringValue
+    }
+  }
+
   public struct FontFamily: Property {
     public let label = "font-family"
     public let value: PropertyValues.FontFamily
