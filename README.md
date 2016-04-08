@@ -57,6 +57,7 @@ let result = compiler.compile(styles)
 * This isn't useful for real work yet
 * It's untested as a library; I've just been noodling about
 * I would be happy to hear any suggestions, so feel free to open a ticket with comments or issues
+* ARGGGGGG, the structs! There is so much repeated implementation because Swift has no concept of a 'mixin'
 
 ## Aims for 1.0
 
@@ -87,7 +88,7 @@ Beyond this initial release, future plans include:
 Selectors can be constructed in a way that's — mostly — type-safe. Also, because the selectors are Swift values, they can be passed around as arguments to functions, stored and composed together .
 
 ```swift
-let s = Selectors.ID("header") | Selectors.Class("nav-entry")
+let s = Selectors.ID("header") |- Selectors.Class("nav-entry")
 print(s.stringValue)
 // #id .nav-entry
 ```
@@ -139,7 +140,7 @@ let foo = Mixin(
 )
 
 let bar = Style(Selectors.Class("herp") |+ Selectors.Class("derp"),
-  foo
+  mixins: [foo]
 )
 
 let compiler = Compiler()
@@ -161,7 +162,7 @@ func foo(color: Values.Color) -> Mixin {
 }
 
 let bar = Style(Selectors.Class("herp") |+ Selectors.Class("derp"),
-  foo
+  mixins: [foo]
 )
 
 let compiler = Compiler()
