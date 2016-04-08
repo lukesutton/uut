@@ -1,5 +1,5 @@
 extension Properties {
-  public struct Font: Property {
+  public struct Font: Property, StyleComponent {
     public let label = "font"
     public let value: PropertyValues.Font
 
@@ -20,7 +20,7 @@ extension Properties {
     }
   }
 
-  public struct FontFamily: Property {
+  public struct FontFamily: Property, StyleComponent {
     public let label = "font-family"
     public let value: PropertyValues.FontFamily
 
@@ -37,7 +37,7 @@ extension Properties {
     }
   }
 
-  public struct FontSize: Property {
+  public struct FontSize: Property, StyleComponent {
     public let label = "font-size"
     public let value: PropertyValues.FontSize
 
@@ -54,7 +54,7 @@ extension Properties {
     }
   }
 
-  public struct FontStyle: Property {
+  public struct FontStyle: Property, StyleComponent {
     public let label = "font-style"
     public let value: PropertyValues.FontStyle
 
@@ -67,7 +67,7 @@ extension Properties {
     }
   }
 
-  public struct FontVariant: Property {
+  public struct FontVariant: Property, StyleComponent {
     public let label = "font-variant"
     public let value: PropertyValues.FontVariant
 
@@ -80,7 +80,7 @@ extension Properties {
     }
   }
 
-  public struct FontWeight: Property {
+  public struct FontWeight: Property, StyleComponent {
     public let label = "font-weight"
     public let value: PropertyValues.FontWeight
 

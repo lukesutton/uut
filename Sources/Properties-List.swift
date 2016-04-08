@@ -1,5 +1,5 @@
 extension Properties {
-  public struct CounterIncrement: Property {
+  public struct CounterIncrement: Property, StyleComponent {
     public let label = "counter-increment"
     public let value: PropertyValues.NumberWithNone
 
@@ -16,7 +16,7 @@ extension Properties {
     }
   }
 
-  public struct CounterReset: Property {
+  public struct CounterReset: Property, StyleComponent {
     public let label = "counter-reset"
     public let value: PropertyValues.CounterReset
 
@@ -37,7 +37,7 @@ extension Properties {
     }
   }
 
-  public struct ListStyle: Property {
+  public struct ListStyle: Property, StyleComponent {
     public let label = "list-style"
     public let value: PropertyValues.ListStyle
 
@@ -54,7 +54,7 @@ extension Properties {
     }
   }
 
-  public struct ListStyleImage: Property {
+  public struct ListStyleImage: Property, StyleComponent {
     public let label = "list-style-image"
     public let value: PropertyValues.URL
 
@@ -71,7 +71,7 @@ extension Properties {
     }
   }
 
-  public struct ListStylePosition: Property {
+  public struct ListStylePosition: Property, StyleComponent {
     public let label = "list-style-position"
     public let value: PropertyValues.ListStylePosition
 
@@ -84,7 +84,7 @@ extension Properties {
     }
   }
 
-  public struct ListStyleType: Property {
+  public struct ListStyleType: Property, StyleComponent {
     public let label = "list-style-type"
     public let value: PropertyValues.ListStyleType
 

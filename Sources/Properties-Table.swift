@@ -1,5 +1,5 @@
 extension Properties {
-  public struct BorderCollapse: Property {
+  public struct BorderCollapse: Property, StyleComponent {
     public let label = "border-collapse"
     public let value: PropertyValues.BorderCollapse
 
@@ -12,7 +12,7 @@ extension Properties {
     }
   }
 
-  public struct BorderSpacing: Property {
+  public struct BorderSpacing: Property, StyleComponent {
     public let label = "border-spacing"
     public let value: PropertyValues.BorderSpacing
 
@@ -33,7 +33,7 @@ extension Properties {
     }
   }
 
-  public struct CaptionSide: Property {
+  public struct CaptionSide: Property, StyleComponent {
     public let label = "caption-side"
     public let value: PropertyValues.CaptionSide
 
@@ -46,7 +46,7 @@ extension Properties {
     }
   }
 
-  public struct EmptyCells: Property {
+  public struct EmptyCells: Property, StyleComponent {
     public let label = "empty-cells"
     public let value: PropertyValues.EmptyCells
 
@@ -59,7 +59,7 @@ extension Properties {
     }
   }
 
-  public struct TableLayout: Property {
+  public struct TableLayout: Property, StyleComponent {
     public let label = "table-layout"
     public let value: PropertyValues.TableLayout
 
