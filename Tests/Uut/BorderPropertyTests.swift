@@ -11,7 +11,7 @@ class BorderPropertyTests: XCTestCase {
   }
 
   func testBorderShortcut() {
-    let prop = P.Border(width: .Thick, style: .Solid, color: .Color(Values.Color(255, 0, 0)))
+    let prop = P.Border(.Thick, .Solid, .Color(Values.Color(255, 0, 0)))
 
     XCTAssertEqual(prop.stringValue, "border: thick solid red;")
   }

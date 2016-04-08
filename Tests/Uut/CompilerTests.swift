@@ -34,7 +34,9 @@ class CompilerTests: XCTestCase {
       Style(
         Selectors.Class("what"),
         query: query,
-        Properties.Width(100.percent)
+        Properties.Width(100.percent),
+        Properties.BackgroundColor(black),
+        Properties.Border(.Value(1.px), .Solid, black)
       ),
 
       Style(
@@ -50,7 +52,7 @@ class CompilerTests: XCTestCase {
         Style(
           Selectors.Class("article"),
           Properties.BorderStyle(.Solid),
-          Properties.BackgroundColor(.Color(black))
+          Properties.BackgroundColor(black)
         )
       )
     ]

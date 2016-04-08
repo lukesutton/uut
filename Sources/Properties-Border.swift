@@ -9,7 +9,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -17,8 +17,16 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
-    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
-      self.init(width: .Value(width), style: style, color: color)
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+      self.init(.Value(width), style, color)
+    }
+
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(.Value(width), style, .Color(color))
+    }
+
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(width, style, .Color(color))
     }
 
     public init(_ value: PropertyValues.Reset) {
@@ -81,7 +89,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -89,8 +97,16 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
-    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
-      self.init(width: .Value(width), style: style, color: color)
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+      self.init(.Value(width), style, color)
+    }
+
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(.Value(width), style, .Color(color))
+    }
+
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(width, style, .Color(color))
     }
 
     public init(_ value: PropertyValues.Reset) {
@@ -153,7 +169,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -161,8 +177,16 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
-    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
-      self.init(width: .Value(width), style: style, color: color)
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+      self.init(.Value(width), style, color)
+    }
+
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(.Value(width), style, .Color(color))
+    }
+
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(width, style, .Color(color))
     }
 
     public init(_ value: PropertyValues.Reset) {
@@ -225,7 +249,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -233,8 +257,16 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
-    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
-      self.init(width: .Value(width), style: style, color: color)
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+      self.init(.Value(width), style, color)
+    }
+
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(.Value(width), style, .Color(color))
+    }
+
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(width, style, .Color(color))
     }
 
     public init(_ value: PropertyValues.Reset) {
@@ -297,7 +329,7 @@ extension Properties {
     public let reset: PropertyValues.Reset?
     public let stringValue: String
 
-    public init(width: PropertyValues.BorderWidth, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
       self.width = width
       self.style = style
       self.color = color
@@ -305,8 +337,16 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
-    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
-      self.init(width: .Value(width), style: style, color: color)
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
+      self.init(.Value(width), style, color)
+    }
+
+    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(.Value(width), style, .Color(color))
+    }
+
+    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
+      self.init(width, style, .Color(color))
     }
 
     public init(_ value: PropertyValues.Reset) {
