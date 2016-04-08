@@ -53,6 +53,10 @@ extension Properties {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Values.Color) {
+      self.init(.Color(value))
+    }
   }
 
   public struct BackgroundImage: Property, StyleComponent {

@@ -37,20 +37,6 @@ extension PropertyValues {
     }
   }
 
-  public enum BoxMeasurement: PropertyValue {
-    case Auto
-    case Value(Measurement)
-    case Initial
-    case Inherit
-
-    public var stringValue: String {
-      switch self {
-        case let Value(n): return n.stringValue
-        default: return String(self).lowercaseString
-      }
-    }
-  }
-
   public enum Overflow: String, PropertyValue {
     case Visible = "visible"
     case Hidden = "hidden"

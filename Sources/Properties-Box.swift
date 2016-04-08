@@ -3,45 +3,61 @@ extension Properties {
 
   public struct Bottom: Property, StyleComponent {
     public let label = "bottom"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct Top: Property, StyleComponent {
     public let label = "top"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct Left: Property, StyleComponent {
     public let label = "left"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct Right: Property, StyleComponent {
     public let label = "right"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
@@ -143,43 +159,55 @@ extension Properties {
 
   public struct Height: Property, StyleComponent {
     public let label = "Height"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct Margin: Property, StyleComponent {
     public let label = "margin"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct MarginBottom: Property, StyleComponent {
     public let label = "margin-bottom"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct MarginLeft: Property, StyleComponent {
     public let label = "margin-left"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
     }
@@ -187,32 +215,40 @@ extension Properties {
 
   public struct MarginRight: Property, StyleComponent {
     public let label = "margin-right"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct MarginTop: Property, StyleComponent {
     public let label = "margin-top"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct MaxHeight: Property, StyleComponent {
     public let label = "max-height"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
     }
@@ -220,34 +256,46 @@ extension Properties {
 
   public struct MaxWidth: Property, StyleComponent {
     public let label = "max-width"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct MinHeight: Property, StyleComponent {
     public let label = "min-height"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct MinWidth: Property, StyleComponent {
     public let label = "min-width"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
@@ -286,56 +334,91 @@ extension Properties {
 
   public struct Padding: Property, StyleComponent {
     public let label = "padding"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct PaddingBottom: Property, StyleComponent {
     public let label = "padding-bottom"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct PaddingLeft: Property, StyleComponent {
     public let label = "padding-left"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct PaddingRight: Property, StyleComponent {
     public let label = "padding-right"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct PaddingTop: Property, StyleComponent {
     public let label = "padding-top"
-    public let value: PropertyValues.BoxMeasurement
+    public let value: PropertyValues.MeasurementWithAuto
     public let stringValue: String
 
-    public init(_ value: PropertyValues.BoxMeasurement) {
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
+  }
+
+  public struct Width: Property, StyleComponent {
+    public let label = "width"
+    public let value: PropertyValues.MeasurementWithAuto
+    public let stringValue: String
+
+    public init(_ value: PropertyValues.MeasurementWithAuto) {
+      self.value = value
+      self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 

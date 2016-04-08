@@ -25,7 +25,7 @@ class CompilerTests: XCTestCase {
     let black = Values.Color(0, 0, 0)
 
     let ext = StyleExtension(
-      Properties.Bottom(.Value(0.em))
+      Properties.Bottom(0.em)
     )
 
     let query = MediaQueries.Width(600.px)
@@ -33,7 +33,8 @@ class CompilerTests: XCTestCase {
     let styles = [
       Style(
         Selectors.Class("what"),
-        query: query
+        query: query,
+        Properties.Width(100.percent)
       ),
 
       Style(
@@ -44,7 +45,7 @@ class CompilerTests: XCTestCase {
       Style(
         Selectors.Class("articles"),
         extensions: [ext],
-        Properties.BackgroundColor(.Color(black)),
+        Properties.BackgroundColor(black),
 
         Style(
           Selectors.Class("article"),

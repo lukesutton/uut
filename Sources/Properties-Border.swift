@@ -17,6 +17,10 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
+    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+      self.init(width: .Value(width), style: style, color: color)
+    }
+
     public init(_ value: PropertyValues.Reset) {
       self.width = nil
       self.style = nil
@@ -34,6 +38,10 @@ extension Properties {
     public init(_ value: PropertyValues.Color) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Values.Color) {
+      self.init(.Color(value))
     }
   }
 
@@ -57,6 +65,10 @@ extension Properties {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
   }
 
   // Border Bottom
@@ -77,6 +89,10 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
+    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+      self.init(width: .Value(width), style: style, color: color)
+    }
+
     public init(_ value: PropertyValues.Reset) {
       self.width = nil
       self.style = nil
@@ -94,6 +110,10 @@ extension Properties {
     public init(_ value: PropertyValues.Color) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Values.Color) {
+      self.init(.Color(value))
     }
   }
 
@@ -117,6 +137,10 @@ extension Properties {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
   }
 
   // Border Left
@@ -137,6 +161,10 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
+    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+      self.init(width: .Value(width), style: style, color: color)
+    }
+
     public init(_ value: PropertyValues.Reset) {
       self.width = nil
       self.style = nil
@@ -154,6 +182,10 @@ extension Properties {
     public init(_ value: PropertyValues.Color) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Values.Color) {
+      self.init(.Color(value))
     }
   }
 
@@ -177,6 +209,10 @@ extension Properties {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
   }
 
   // Border Right
@@ -197,6 +233,10 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
+    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+      self.init(width: .Value(width), style: style, color: color)
+    }
+
     public init(_ value: PropertyValues.Reset) {
       self.width = nil
       self.style = nil
@@ -214,6 +254,10 @@ extension Properties {
     public init(_ value: PropertyValues.Color) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Values.Color) {
+      self.init(.Color(value))
     }
   }
 
@@ -237,6 +281,10 @@ extension Properties {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
   }
 
   // Border Top
@@ -257,6 +305,10 @@ extension Properties {
       self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
     }
 
+    public init(width: Measurement, style: PropertyValues.BorderStyle, color: PropertyValues.Color) {
+      self.init(width: .Value(width), style: style, color: color)
+    }
+
     public init(_ value: PropertyValues.Reset) {
       self.width = nil
       self.style = nil
@@ -274,6 +326,10 @@ extension Properties {
     public init(_ value: PropertyValues.Color) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Values.Color) {
+      self.init(.Color(value))
     }
   }
 
@@ -297,84 +353,117 @@ extension Properties {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
   }
 
   // Border Radius
 
   public struct BorderRadius: Property, StyleComponent {
     public let label = "border-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct BorderTopLeftRadius: Property, StyleComponent {
     public let label = "border-top-left-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct BorderTopRightRadius: Property, StyleComponent {
     public let label = "border-top-right-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
     }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
+    }
+
   }
 
   public struct BorderBottomLeftRadius: Property, StyleComponent {
     public let label = "border-bottom-left-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct BorderBottomRightRadius: Property, StyleComponent {
     public let label = "border-bottom-right-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct BorderLeftRadius: Property, StyleComponent {
     public let label = "border-left-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
   public struct BorderRightRadius: Property, StyleComponent {
     public let label = "border-right-radius"
-    public let value: PropertyValues.Unit
+    public let value: PropertyValues.MeasurementStandard
     public let stringValue: String
 
-    public init(_ value: PropertyValues.Unit) {
+    public init(_ value: PropertyValues.MeasurementStandard) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 }

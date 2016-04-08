@@ -14,33 +14,6 @@ public struct PropertyValues {
     }
   }
 
-  public enum Unit {
-    case Value(Measurement)
-    case Initial
-    case Inherit
-
-    var stringValue: String {
-      switch self {
-        case let Value(x): return x.stringValue
-        default: return String(self).lowercaseString
-      }
-    }
-  }
-
-  public enum UnitWithNormal {
-    case Value(Measurement)
-    case Normal
-    case Initial
-    case Inherit
-
-    var stringValue: String {
-      switch self {
-        case let Value(x): return x.stringValue
-        default: return String(self).lowercaseString
-      }
-    }
-  }
-
   public enum Reset: String {
     case Initial = "initial"
     case Inherit = "inherit"
@@ -66,13 +39,13 @@ public struct PropertyValues {
     case Medium
     case Thin
     case Thick
-    case Width(Measurement)
+    case Value(Measurement)
     case Initial
     case Inherit
 
     var stringValue: String {
       switch self {
-        case let Width(value): return value.stringValue
+        case let Value(value): return value.stringValue
         default: return String(self).lowercaseString
       }
     }

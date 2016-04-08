@@ -89,12 +89,16 @@ extension Properties {
 
   public struct WordSpacing: Property, StyleComponent {
     public let label = "word-spacing"
-    public let value: PropertyValues.UnitWithNormal
+    public let value: PropertyValues.MeasurementWithNormal
     public let stringValue: String
 
-    public init(_ value: PropertyValues.UnitWithNormal) {
+    public init(_ value: PropertyValues.MeasurementWithNormal) {
       self.value = value
       self.stringValue = value.stringValue
+    }
+
+    public init(_ value: Measurement) {
+      self.init(.Value(value))
     }
   }
 
