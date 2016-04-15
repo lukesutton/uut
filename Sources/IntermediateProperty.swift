@@ -21,7 +21,7 @@ public struct IntermediateProperty {
   }
 
   public var canonicalPair: (String, String) {
-    return (self.original.label, self.original.stringValue)
+    return (self.original.label, self.original.value.stringValue)
   }
 
   var allValues: [(String, String)] {

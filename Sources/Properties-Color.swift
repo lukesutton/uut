@@ -1,27 +1,20 @@
-extension Properties {
-  public struct Color: Property, StyleComponent {
-    public let label = "color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
+extension PropertyNames {
+  public static let color = "color"
+  public static let opacity = "opacity"
+}
 
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
+func color(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.color, value)
+}
 
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
+func color(value: Values.Color) -> Property {
+  return Property(PropertyNames.color, PropertyValues.Color.Value(value))
+}
 
-  public struct Opacity: Property, StyleComponent {
-    public let label = "opacity"
-    public let value: PropertyValues.Opacity
-    public let stringValue: String
+func opacity(value: PropertyValues.Opacity) -> Property {
+  return Property(PropertyNames.opacity, value)
+}
 
-    public init(_ value: PropertyValues.Opacity) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func opacity(value: Double) -> Property {
+  return Property(PropertyNames.opacity, PropertyValues.Opacity.Value(value))
 }

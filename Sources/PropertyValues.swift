@@ -1,14 +1,14 @@
 public struct PropertyValues {
   private init() {}
 
-  public enum Color {
-    case Color(Values.Color)
+  public enum Color: PropertyValue {
+    case Value(Values.Color)
     case Initial
     case Inherit
 
-    var stringValue: String {
+    public var stringValue: String {
       switch self {
-        case let Color(x): return x.stringValue
+        case let Value(x): return x.stringValue
         default: return String(self).lowercaseString
       }
     }
@@ -37,67 +37,32 @@ public struct PropertyValues {
     }
   }
 
-  public enum Box: String {
+  public enum Box: String, PropertyValue {
     case BorderBox = "border-box"
     case PaddingBox = "padding-box"
     case ContentBox = "content-box"
     case Initial = "initial"
     case Inherit = "inherit"
 
-    var stringValue: String {
+    public var stringValue: String {
       return rawValue
     }
   }
 
-  public enum BorderWidth {
-    case Medium
-    case Thin
-    case Thick
-    case Value(Measurement)
+  public enum Opacity: PropertyValue {
+    case Value(Double)
     case Initial
     case Inherit
 
-    var stringValue: String {
+    public var stringValue: String {
       switch self {
-        case let Value(value): return value.stringValue
+        case let .Value(value): return String(value)
         default: return String(self).lowercaseString
       }
     }
   }
 
-  public enum BorderStyle: String {
-    case None = "none"
-    case Hidden = "hidden"
-    case Dotted = "dotted"
-    case Dashed = "dashed"
-    case Solid = "solid"
-    case Double = "double"
-    case Groove = "groove"
-    case Ridge = "ridge"
-    case Inset = "inset"
-    case Outset = "outset"
-    case Initial = "initial"
-    case Inherit = "inherit"
-
-    var stringValue: String {
-      return rawValue
-    }
-  }
-
-  public enum Opacity {
-    case Amount(Double)
-    case Initial
-    case Inherit
-
-    var stringValue: String {
-      switch self {
-        case let .Amount(value): return String(value)
-        default: return String(self).lowercaseString
-      }
-    }
-  }
-
-  public enum Shadow {
+  public enum Shadow: PropertyValue {
     case None
     case Initial
     case Inherit
@@ -122,42 +87,54 @@ public struct PropertyValues {
     }
   }
 
-  public enum Number {
-    case Number(Int)
+  public struct ShadowCollection: PropertyValue {
+    public let shadows: [Shadow]
+
+    init(_ shadows: [Shadow]) {
+      self.shadows = shadows
+    }
+
+    public var stringValue: String {
+      return shadows.map {$0.stringValue}.joinWithSeparator(", ")
+    }
+  }
+
+  public enum Number: PropertyValue {
+    case Value(Int)
     case Initial
     case Inherit
 
-    var stringValue: String {
+    public var stringValue: String {
       switch self {
-        case let .Number(x): return String(x)
+        case let .Value(x): return String(x)
         default: return String(self).lowercaseString
       }
     }
   }
 
-  public enum NumberWithAuto {
-    case Number(Int)
+  public enum NumberWithAuto: PropertyValue {
+    case Value(Int)
     case Auto
     case Initial
     case Inherit
 
-    var stringValue: String {
+    public var stringValue: String {
       switch self {
-        case let .Number(x): return String(x)
+        case let .Value(x): return String(x)
         default: return String(self).lowercaseString
       }
     }
   }
 
-  public enum NumberWithNone {
-    case Number(Int)
+  public enum NumberWithNone: PropertyValue {
+    case Value(Int)
     case None
     case Initial
     case Inherit
 
-    var stringValue: String {
+    public var stringValue: String {
       switch self {
-        case let .Number(x): return String(x)
+        case let .Value(x): return String(x)
         default: return String(self).lowercaseString
       }
     }

@@ -1,509 +1,207 @@
-extension Properties {
-  // All borders
-
-  public struct Border: Property, StyleComponent {
-    public let label = "border"
-    public let width: PropertyValues.BorderWidth?
-    public let style: PropertyValues.BorderStyle?
-    public let color: PropertyValues.Color?
-    public let reset: PropertyValues.Reset?
-    public let stringValue: String
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.width = width
-      self.style = style
-      self.color = color
-      self.reset = nil
-      self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.init(.Value(width), style, color)
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(.Value(width), style, .Color(color))
-    }
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(width, style, .Color(color))
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.width = nil
-      self.style = nil
-      self.color = nil
-      self.reset = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderColor: Property, StyleComponent {
-    public let label = "border-color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
-
-  public struct BorderStyle: Property, StyleComponent {
-    public let label = "border-style"
-    public let value: PropertyValues.BorderStyle
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderStyle) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderWidth: Property, StyleComponent {
-    public let label = "border-width"
-    public let value: PropertyValues.BorderWidth
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderWidth) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  // Border Bottom
-
-  public struct BorderBottom: Property, StyleComponent {
-    public let label = "border-bottom"
-    public let width: PropertyValues.BorderWidth?
-    public let style: PropertyValues.BorderStyle?
-    public let color: PropertyValues.Color?
-    public let reset: PropertyValues.Reset?
-    public let stringValue: String
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.width = width
-      self.style = style
-      self.color = color
-      self.reset = nil
-      self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.init(.Value(width), style, color)
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(.Value(width), style, .Color(color))
-    }
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(width, style, .Color(color))
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.width = nil
-      self.style = nil
-      self.color = nil
-      self.reset = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderBottomColor: Property, StyleComponent {
-    public let label = "border-bottom-color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
-
-  public struct BorderBottomStyle: Property, StyleComponent {
-    public let label = "border-bottom-style"
-    public let value: PropertyValues.BorderStyle
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderStyle) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderBottomWidth: Property, StyleComponent {
-    public let label = "border-bottom-width"
-    public let value: PropertyValues.BorderWidth
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderWidth) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  // Border Left
-
-  public struct BorderLeft: Property, StyleComponent {
-    public let label = "border-left"
-    public let width: PropertyValues.BorderWidth?
-    public let style: PropertyValues.BorderStyle?
-    public let color: PropertyValues.Color?
-    public let reset: PropertyValues.Reset?
-    public let stringValue: String
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.width = width
-      self.style = style
-      self.color = color
-      self.reset = nil
-      self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.init(.Value(width), style, color)
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(.Value(width), style, .Color(color))
-    }
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(width, style, .Color(color))
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.width = nil
-      self.style = nil
-      self.color = nil
-      self.reset = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderLeftColor: Property, StyleComponent {
-    public let label = "border-left-color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
-
-  public struct BorderLeftStyle: Property, StyleComponent {
-    public let label = "border-left-style"
-    public let value: PropertyValues.BorderStyle
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderStyle) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderLeftWidth: Property, StyleComponent {
-    public let label = "border-left-width"
-    public let value: PropertyValues.BorderWidth
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderWidth) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  // Border Right
-
-  public struct BorderRight: Property, StyleComponent {
-    public let label = "border-left-right"
-    public let width: PropertyValues.BorderWidth?
-    public let style: PropertyValues.BorderStyle?
-    public let color: PropertyValues.Color?
-    public let reset: PropertyValues.Reset?
-    public let stringValue: String
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.width = width
-      self.style = style
-      self.color = color
-      self.reset = nil
-      self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.init(.Value(width), style, color)
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(.Value(width), style, .Color(color))
-    }
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(width, style, .Color(color))
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.width = nil
-      self.style = nil
-      self.color = nil
-      self.reset = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderRightColor: Property, StyleComponent {
-    public let label = "border-right-color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
-
-  public struct BorderRightStyle: Property, StyleComponent {
-    public let label = "border-right-style"
-    public let value: PropertyValues.BorderStyle
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderStyle) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderRightWidth: Property, StyleComponent {
-    public let label = "border-right-width"
-    public let value: PropertyValues.BorderWidth
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderWidth) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  // Border Top
-
-  public struct BorderTop: Property, StyleComponent {
-    public let label = "border-left-right"
-    public let width: PropertyValues.BorderWidth?
-    public let style: PropertyValues.BorderStyle?
-    public let color: PropertyValues.Color?
-    public let reset: PropertyValues.Reset?
-    public let stringValue: String
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.width = width
-      self.style = style
-      self.color = color
-      self.reset = nil
-      self.stringValue = "\(width.stringValue) \(style.rawValue) \(color.stringValue)"
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) {
-      self.init(.Value(width), style, color)
-    }
-
-    public init(_ width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(.Value(width), style, .Color(color))
-    }
-
-    public init(_ width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) {
-      self.init(width, style, .Color(color))
-    }
-
-    public init(_ value: PropertyValues.Reset) {
-      self.width = nil
-      self.style = nil
-      self.color = nil
-      self.reset = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderTopColor: Property, StyleComponent {
-    public let label = "border-top-color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
-
-  public struct BorderTopStyle: Property, StyleComponent {
-    public let label = "border-top-style"
-    public let value: PropertyValues.BorderStyle
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderStyle) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BorderTopWidth: Property, StyleComponent {
-    public let label = "border-top-width"
-    public let value: PropertyValues.BorderWidth
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.BorderWidth) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  // Border Radius
-
-  public struct BorderRadius: Property, StyleComponent {
-    public let label = "border-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct BorderTopLeftRadius: Property, StyleComponent {
-    public let label = "border-top-left-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct BorderTopRightRadius: Property, StyleComponent {
-    public let label = "border-top-right-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-
-  }
-
-  public struct BorderBottomLeftRadius: Property, StyleComponent {
-    public let label = "border-bottom-left-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct BorderBottomRightRadius: Property, StyleComponent {
-    public let label = "border-bottom-right-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct BorderLeftRadius: Property, StyleComponent {
-    public let label = "border-left-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct BorderRightRadius: Property, StyleComponent {
-    public let label = "border-right-radius"
-    public let value: PropertyValues.MeasurementStandard
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementStandard) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
+extension PropertyNames {
+  public static let border = "border"
+  public static let borderColor = "border-color"
+  public static let borderStyle = "border-style"
+  public static let borderWidth = "border-width"
+  public static let borderBottom = "border-bottom"
+  public static let borderBottomColor = "border-bottom-color"
+  public static let borderBottomStyle = "border-bottom-style"
+  public static let borderBottomWidth = "border-bottom-width"
+  public static let borderLeft = "border-left"
+  public static let borderLeftColor = "border-left-color"
+  public static let borderLeftStyle = "border-left-style"
+  public static let borderLeftWidth = "border-left-width"
+  public static let borderRight = "border-right"
+  public static let borderRightColor = "border-right-color"
+  public static let borderRightStyle = "border-right-style"
+  public static let borderRightWidth = "border-right-width"
+  public static let borderTop = "border-top"
+  public static let borderTopColor = "border-top-color"
+  public static let borderTopStyle = "border-top-style"
+  public static let borderTopWidth = "border-top-width"
+  public static let borderRadius = "border-radius"
+  public static let borderRightRadius = "border-right-radius"
+  public static let borderLeftRadius = "border-left-radius"
+  public static let borderTopLeftRadius = "border-top-left-radius"
+  public static let borderTopRightRadius = "border-top-right-radius"
+  public static let borderBottomLeftRadius = "border-bottom-left-radius"
+  public static let borderBottomRightRadius = "border-bottom-right-radius"
+}
+
+// Border
+
+public func border(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.border, PropertyValues.Border(width, style, color))
+}
+
+public func border(value: PropertyValues.Reset) -> Property {
+  return Property(PropertyNames.border, PropertyValues.Border(value))
+}
+
+public func borderColor(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderColor, value)
+}
+
+public func borderColor(value: Values.Color) -> Property {
+  return Property(PropertyNames.borderColor, PropertyValues.Color.Value(value))
+}
+
+public func borderStyle(value: PropertyValues.BorderStyle) -> Property {
+  return Property(PropertyNames.borderStyle, value)
+}
+
+public func borderWidth(value: PropertyValues.BorderWidth) -> Property {
+  return Property(PropertyNames.borderWidth, value)
+}
+
+public func borderWidth(value: Measurement) -> Property {
+  return Property(PropertyNames.borderColor, PropertyValues.BorderWidth.Value(value))
+}
+
+// Border left
+
+public func borderLeft(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderLeft, PropertyValues.Border(width, style, color))
+}
+
+public func borderLeftLeft(value: PropertyValues.Reset) -> Property {
+  return Property(PropertyNames.borderLeft, PropertyValues.Border(value))
+}
+
+public func borderLeftColor(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderLeftColor, value)
+}
+
+public func borderLeftColor(value: Values.Color) -> Property {
+  return Property(PropertyNames.borderLeftColor, PropertyValues.Color.Value(value))
+}
+
+public func borderLeftStyle(value: PropertyValues.BorderStyle) -> Property {
+  return Property(PropertyNames.borderLeftStyle, value)
+}
+
+public func borderLeftWidth(value: PropertyValues.BorderWidth) -> Property {
+  return Property(PropertyNames.borderLeftWidth, value)
+}
+
+public func borderLeftWidth(value: Measurement) -> Property {
+  return Property(PropertyNames.borderLeftColor, PropertyValues.BorderWidth.Value(value))
+}
+
+// Border Right
+
+public func borderRight(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderRight, PropertyValues.Border(width, style, color))
+}
+
+public func borderRight(value: PropertyValues.Reset) -> Property {
+  return Property(PropertyNames.borderRight, PropertyValues.Border(value))
+}
+
+public func borderRightColor(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderRightColor, value)
+}
+
+public func borderRightColor(value: Values.Color) -> Property {
+  return Property(PropertyNames.borderRightColor, PropertyValues.Color.Value(value))
+}
+
+public func borderRightStyle(value: PropertyValues.BorderStyle) -> Property {
+  return Property(PropertyNames.borderRightStyle, value)
+}
+
+public func borderRightWidth(value: PropertyValues.BorderWidth) -> Property {
+  return Property(PropertyNames.borderRightWidth, value)
+}
+
+public func borderRightWidth(value: Measurement) -> Property {
+  return Property(PropertyNames.borderRightColor, PropertyValues.BorderWidth.Value(value))
+}
+
+// Border bottom
+
+public func borderBottom(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderBottom, PropertyValues.Border(width, style, color))
+}
+
+public func borderBottom(value: PropertyValues.Reset) -> Property {
+  return Property(PropertyNames.borderBottom, PropertyValues.Border(value))
+}
+
+public func borderBottomColor(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderBottomColor, value)
+}
+
+public func borderBottomColor(value: Values.Color) -> Property {
+  return Property(PropertyNames.borderBottomColor, PropertyValues.Color.Value(value))
+}
+
+public func borderBottomStyle(value: PropertyValues.BorderStyle) -> Property {
+  return Property(PropertyNames.borderBottomStyle, value)
+}
+
+public func borderBottomWidth(value: PropertyValues.BorderWidth) -> Property {
+  return Property(PropertyNames.borderBottomWidth, value)
+}
+
+public func borderBottomWidth(value: Measurement) -> Property {
+  return Property(PropertyNames.borderBottomColor, PropertyValues.BorderWidth.Value(value))
+}
+
+// Border radius
+
+public func borderRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderRadius, value)
+}
+
+public func borderRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderRadius, PropertyValues.MeasurementStandard.Value(value))
+}
+
+public func borderLeftRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderLeftRadius, value)
+}
+
+public func borderLeftRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderLeftRadius, PropertyValues.MeasurementStandard.Value(value))
+}
+
+public func borderRightRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderRightRadius, value)
+}
+
+public func borderRightRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderRightRadius, PropertyValues.MeasurementStandard.Value(value))
+}
+
+public func borderTopLeftRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderTopLeftRadius, value)
+}
+
+public func borderTopLeftRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderTopLeftRadius, PropertyValues.MeasurementStandard.Value(value))
+}
+
+public func borderTopRightRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderTopRightRadius, value)
+}
+
+public func borderTopRightRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderTopRightRadius, PropertyValues.MeasurementStandard.Value(value))
+}
+
+public func borderBottomLeftRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderBottomLeftRadius, value)
+}
+
+public func borderBottomLeftRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderBottomLeftRadius, PropertyValues.MeasurementStandard.Value(value))
+}
+
+public func borderBottomRightRadius(value: PropertyValues.MeasurementStandard) -> Property {
+  return Property(PropertyNames.borderBottomRightRadius, value)
+}
+
+public func borderBottomRightRadius(value: Measurement) -> Property {
+  return Property(PropertyNames.borderBottomRightRadius, PropertyValues.MeasurementStandard.Value(value))
 }

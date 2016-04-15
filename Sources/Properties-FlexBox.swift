@@ -1,133 +1,78 @@
-extension Properties {
-  public struct AlignContent: Property, StyleComponent {
-    public let label = "align-content"
-    public let value: PropertyValues.AlignContent
-    public let stringValue: String
+extension PropertyNames {
+  public static let alignContent = "align-content"
+  public static let alignItems = "align-items"
+  public static let alignSelf = "align-self"
+  public static let flex = "flex"
+  public static let flexBasis = "flex-basis"
+  public static let flexDirection = "flex-direction"
+  public static let flexFlow = "flex-flow"
+  public static let flexGrow = "flex-grow"
+  public static let flexShrink = "flex-shrink"
+  public static let flexWrap = "flex-wrap"
+  public static let justifyContent = "justify-content"
+  public static let order = "order"
+}
 
-    public init(_ value: PropertyValues.AlignContent) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func alignContent(value: PropertyValues.AlignContent) -> Property {
+  return Property(PropertyNames.alignContent, value)
+}
 
-  public struct AlignItems: Property, StyleComponent {
-    public let label = "align-items"
-    public let value: PropertyValues.AlignItems
-    public let stringValue: String
+public func alignItems(value: PropertyValues.AlignItems) -> Property {
+  return Property(PropertyNames.alignItems, value)
+}
 
-    public init(_ value: PropertyValues.AlignItems) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func alignSelf(value: PropertyValues.AlignSelf) -> Property {
+  return Property(PropertyNames.alignSelf, value)
+}
 
-  public struct AlignSelf: Property, StyleComponent {
-    public let label = "align-self"
-    public let value: PropertyValues.AlignSelf
-    public let stringValue: String
+public func flex(value: PropertyValues.Flex) -> Property {
+  return Property(PropertyNames.flex, value)
+}
 
-    public init(_ value: PropertyValues.AlignSelf) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func flexBasis(value: PropertyValues.NumberWithAuto) -> Property {
+  return Property(PropertyNames.flexBasis, value)
+}
 
-  public struct Flex: Property, StyleComponent {
-    public let label = "flex"
-    public let value: PropertyValues.Flex
-    public let stringValue: String
+public func flexBasis(value: Int) -> Property {
+  return Property(PropertyNames.flexBasis, PropertyValues.NumberWithAuto.Value(value))
+}
 
-    public init(_ value: PropertyValues.Flex) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func flexDirection(value: PropertyValues.FlexDirection) -> Property {
+  return Property(PropertyNames.flexDirection, value)
+}
 
-  public struct FlexBasis: Property, StyleComponent {
-    public let label = "flex-basis"
-    public let value: PropertyValues.NumberWithAuto
-    public let stringValue: String
+public func flexFlow(value: PropertyValues.Number) -> Property {
+  return Property(PropertyNames.flexFlow, value)
+}
 
-    public init(_ value: PropertyValues.NumberWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func flexGrow(value: PropertyValues.Number) -> Property {
+  return Property(PropertyNames.flexGrow, value)
+}
 
-  public struct FlexDirection: Property, StyleComponent {
-    public let label = "flex-direction"
-    public let value: PropertyValues.FlexDirection
-    public let stringValue: String
+public func flexGrow(value: Int) -> Property {
+  return Property(PropertyNames.flexGrow, PropertyValues.Number.Value(value))
+}
 
-    public init(_ value: PropertyValues.FlexDirection) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func flexShrink(value: PropertyValues.Number) -> Property {
+  return Property(PropertyNames.flexShrink, value)
+}
 
-  public struct FlexFlow: Property, StyleComponent {
-    public let label = "flex-flow"
-    public let value: PropertyValues.FlexFlow
-    public let stringValue: String
+public func flexShrink(value: Int) -> Property {
+  return Property(PropertyNames.flexShrink, PropertyValues.Number.Value(value))
+}
 
-    public init(_ value: PropertyValues.FlexFlow) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func flexWrap(value: PropertyValues.FlexWrap) -> Property {
+  return Property(PropertyNames.flexWrap, value)
+}
 
-  public struct FlexGrow: Property, StyleComponent {
-    public let label = "flex-grow"
-    public let value: PropertyValues.Number
-    public let stringValue: String
+public func justifyContent(value: PropertyValues.JustifyContent) -> Property {
+  return Property(PropertyNames.justifyContent, value)
+}
 
-    public init(_ value: PropertyValues.Number) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func order(value: PropertyValues.Number) -> Property {
+  return Property(PropertyNames.order, value)
+}
 
-  public struct FlexShrink: Property, StyleComponent {
-    public let label = "flex-shrink"
-    public let value: PropertyValues.Number
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Number) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct FlexWrap: Property, StyleComponent {
-    public let label = "flex-wrap"
-    public let value: PropertyValues.FlexWrap
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.FlexWrap) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct JustifyContent: Property, StyleComponent {
-    public let label = "justify-content"
-    public let value: PropertyValues.JustifyContent
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.JustifyContent) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct Order: Property, StyleComponent {
-    public let label = "order"
-    public let value: PropertyValues.Number
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Number) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+public func order(value: Int) -> Property {
+  return Property(PropertyNames.order, PropertyValues.Number.Value(value))
 }

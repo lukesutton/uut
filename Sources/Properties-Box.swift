@@ -1,470 +1,247 @@
-extension Properties {
-  public struct BoxSizing: Property, StyleComponent {
-    public let label = "box-sizing"
-    public let value: PropertyValues.BoxSizing
-
-    public init(_ value: PropertyValues.BoxSizing) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  // Position
-
-  public struct Bottom: Property, StyleComponent {
-    public let label = "bottom"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Top: Property, StyleComponent {
-    public let label = "top"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Left: Property, StyleComponent {
-    public let label = "left"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Right: Property, StyleComponent {
-    public let label = "right"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Position: Property, StyleComponent {
-    public enum PositionValue {
-      case Static
-      case Absolute
-      case Fixed
-      case Relative
-      case Initial
-      case Inherit
-
-      var stringValue: String {
-        return String(self).lowercaseString
-      }
-    }
-
-    public let label = "position"
-    public let value: PositionValue
-    public let stringValue: String
-
-    public init(_ value: PositionValue) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  // Other
-
-  public struct Clear: Property, StyleComponent {
-    public enum ClearValue {
-      case None
-      case Left
-      case Right
-      case Both
-      case Initial
-      case Inherit
-
-      var stringValue: String {
-        return String(self).lowercaseString
-      }
-    }
-
-    public let label = "clear"
-    public let value: ClearValue
-    public let stringValue: String
-
-    public init(_ value: ClearValue) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct Clip: Property, StyleComponent {
-    public enum ClipValue {
-      case None
-      case Left
-      case Right
-      case Both
-      case Initial
-      case Inherit
-
-      var stringValue: String {
-        return String(self).lowercaseString
-      }
-    }
-
-    public let label = "clear"
-    public let value: ClipValue
-    public let stringValue: String
-
-    public init(_ value: ClipValue) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct Display: Property, StyleComponent {
-    public let label = "display"
-    public let value: PropertyValues.Display
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Display) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct Float: Property, StyleComponent {
-    public let label = "float"
-    public let value: PropertyValues.Float
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Float) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct Height: Property, StyleComponent {
-    public let label = "Height"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Margin: Property, StyleComponent {
-    public let label = "margin"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct MarginBottom: Property, StyleComponent {
-    public let label = "margin-bottom"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct MarginLeft: Property, StyleComponent {
-    public let label = "margin-left"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct MarginRight: Property, StyleComponent {
-    public let label = "margin-right"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct MarginTop: Property, StyleComponent {
-    public let label = "margin-top"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct MaxHeight: Property, StyleComponent {
-    public let label = "max-height"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct MaxWidth: Property, StyleComponent {
-    public let label = "max-width"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct MinHeight: Property, StyleComponent {
-    public let label = "min-height"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct MinWidth: Property, StyleComponent {
-    public let label = "min-width"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Overflow: Property, StyleComponent {
-    public let label = "overflow"
-    public let value: PropertyValues.Overflow
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Overflow) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct OverflowX: Property, StyleComponent {
-    public let label = "overflow-x"
-    public let value: PropertyValues.Overflow
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Overflow) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct OverflowY: Property, StyleComponent {
-    public let label = "overflow-y"
-    public let value: PropertyValues.Overflow
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Overflow) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct Padding: Property, StyleComponent {
-    public let label = "padding"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct PaddingBottom: Property, StyleComponent {
-    public let label = "padding-bottom"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct PaddingLeft: Property, StyleComponent {
-    public let label = "padding-left"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct PaddingRight: Property, StyleComponent {
-    public let label = "padding-right"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct PaddingTop: Property, StyleComponent {
-    public let label = "padding-top"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Width: Property, StyleComponent {
-    public let label = "width"
-    public let value: PropertyValues.MeasurementWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct Visibility: Property, StyleComponent {
-    public let label = "padding-top"
-    public let value: PropertyValues.Visibility
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Visibility) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct VerticalAlign: Property, StyleComponent {
-    public let label = "vertical-align"
-    public let value: PropertyValues.VerticalAlign
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.VerticalAlign) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct ZIndex: Property, StyleComponent {
-    public let label = "z-index"
-    public let value: PropertyValues.NumberWithAuto
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.NumberWithAuto) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+extension PropertyNames {
+  static let boxSizing = "box-sizing"
+  static let boxShadow = "box-shadow"
+  static let bottom = "bottom"
+  static let top = "top"
+  static let left = "left"
+  static let right = "right"
+  static let position = "position"
+  static let clear = "clear"
+  static let clip = "clip"
+  static let display = "display"
+  static let float = "float"
+  static let height = "height"
+  static let margin = "margin"
+  static let marginBottom = "margin-bottom"
+  static let marginLeft = "margin-left"
+  static let marginRight = "margin-right"
+  static let marginTop = "margin-top"
+  static let maxHeight = "max-height"
+  static let maxWidth = "max-width"
+  static let minHeight = "min-height"
+  static let minWidth = "min-width"
+  static let overflow = "overflow"
+  static let overflowX = "overflow-x"
+  static let overflowY = "overflow-y"
+  static let padding = "padding"
+  static let paddingLeft = "padding-left"
+  static let paddingRight = "padding-right"
+  static let paddingTop = "padding-top"
+  static let paddingBottom = "padding-bottom"
+  static let width = "width"
+  static let visibility = "visibility"
+  static let verticalAlign = "vertical-align"
+  static let zIndex = "z-index"
+}
+
+public func boxSizing(value: PropertyValues.BoxSizing) -> Property {
+  return Property(PropertyNames.boxSizing, value)
+}
+
+public func boxShadow(values: PropertyValues.Shadow...) -> Property {
+  return Property(PropertyNames.boxShadow, PropertyValues.ShadowCollection(values))
+}
+
+public func bottom(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.bottom, value)
+}
+
+public func bottom(value: Measurement) -> Property {
+  return Property(PropertyNames.bottom, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func top(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.top, value)
+}
+
+public func top(value: Measurement) -> Property {
+  return Property(PropertyNames.top, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func left(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.left, value)
+}
+
+public func left(value: Measurement) -> Property {
+  return Property(PropertyNames.left, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func right(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.right, value)
+}
+
+public func right(value: Measurement) -> Property {
+  return Property(PropertyNames.right, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func position(value: PropertyValues.Position) -> Property {
+  return Property(PropertyNames.position, value)
+}
+
+public func clear(value: PropertyValues.Clear) -> Property {
+  return Property(PropertyNames.clear, value)
+}
+
+public func clip(value: PropertyValues.Clip) -> Property {
+  return Property(PropertyNames.clip, value)
+}
+
+public func display(value: PropertyValues.Display) -> Property {
+  return Property(PropertyNames.display, value)
+}
+
+public func float(value: PropertyValues.Float) -> Property {
+  return Property(PropertyNames.float, value)
+}
+
+public func height(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.height, value)
+}
+
+public func height(value: Measurement) -> Property {
+  return Property(PropertyNames.height, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func margin(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.margin, value)
+}
+
+public func margin(value: Measurement) -> Property {
+  return Property(PropertyNames.margin, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func marginLeft(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.marginLeft, value)
+}
+
+public func marginLeft(value: Measurement) -> Property {
+  return Property(PropertyNames.marginLeft, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func marginRight(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.marginRight, value)
+}
+
+public func marginRight(value: Measurement) -> Property {
+  return Property(PropertyNames.marginRight, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func marginTop(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.marginTop, value)
+}
+
+public func marginTop(value: Measurement) -> Property {
+  return Property(PropertyNames.marginTop, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func marginBottom(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.marginBottom, value)
+}
+
+public func marginBottom(value: Measurement) -> Property {
+  return Property(PropertyNames.marginBottom, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func maxHeight(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.maxHeight, value)
+}
+
+public func maxHeight(value: Measurement) -> Property {
+  return Property(PropertyNames.maxHeight, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func maxWidth(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.maxWidth, value)
+}
+
+public func maxWidth(value: Measurement) -> Property {
+  return Property(PropertyNames.maxWidth, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func minHeight(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.minHeight, value)
+}
+
+public func minHeight(value: Measurement) -> Property {
+  return Property(PropertyNames.minHeight, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func minWidth(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.minWidth, value)
+}
+
+public func minWidth(value: Measurement) -> Property {
+  return Property(PropertyNames.minWidth, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func overflow(value: PropertyValues.Overflow) -> Property {
+  return Property(PropertyNames.overflow, value)
+}
+
+public func overflowX(value: PropertyValues.Overflow) -> Property {
+  return Property(PropertyNames.overflowX, value)
+}
+
+public func overflowY(value: PropertyValues.Overflow) -> Property {
+  return Property(PropertyNames.overflowY, value)
+}
+
+public func padding(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.padding, value)
+}
+
+public func padding(value: Measurement) -> Property {
+  return Property(PropertyNames.padding, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func paddingLeft(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.paddingLeft, value)
+}
+
+public func paddingLeft(value: Measurement) -> Property {
+  return Property(PropertyNames.paddingLeft, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func paddingRight(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.paddingRight, value)
+}
+
+public func paddingRight(value: Measurement) -> Property {
+  return Property(PropertyNames.paddingRight, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func paddingTop(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.paddingTop, value)
+}
+
+public func paddingTop(value: Measurement) -> Property {
+  return Property(PropertyNames.paddingTop, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func paddingBottom(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.paddingBottom, value)
+}
+
+public func paddingBottom(value: Measurement) -> Property {
+  return Property(PropertyNames.paddingBottom, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func width(value: PropertyValues.MeasurementWithAuto) -> Property {
+  return Property(PropertyNames.width, value)
+}
+
+public func width(value: Measurement) -> Property {
+  return Property(PropertyNames.width, PropertyValues.MeasurementWithAuto.Value(value))
+}
+
+public func verticalAlign(value: PropertyValues.VerticalAlign) -> Property {
+  return Property(PropertyNames.verticalAlign, value)
+}
+
+public func zIndex(value: PropertyValues.NumberWithAuto) -> Property {
+  return Property(PropertyNames.zIndex, value)
+}
+
+public func zIndex(value: Int) -> Property {
+  return Property(PropertyNames.zIndex, PropertyValues.NumberWithAuto.Value(value))
 }

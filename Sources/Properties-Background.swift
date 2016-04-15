@@ -1,202 +1,55 @@
-extension Properties {
-  public struct BackgroundAttachment: Property, StyleComponent {
-    public enum Attachment: String {
-      case Scroll = "scroll"
-      case Fixed = "fixed"
-      case Local = "local"
-      case Initial = "initial"
-      case Inherit = "inherit"
-    }
+extension PropertyNames {
+  public static let backgroundAttachment = "backgroundAttachment"
+  public static let backgroundBlendMode = "background-blend-mode"
+  public static let backgroundColor = "background-color"
+  public static let backgroundImage = "background-image"
+  public static let backgroundPosition = "background-position"
+  public static let backgroundRepeat = "background-repeat"
+  public static let backgroundClip = "background-clip"
+  public static let backgroundOrigin = "background-origin"
+  public static let backgroundSize = "background-size"
+}
 
-    public let label = "background-attachment"
-    public let value: Attachment
-    public let stringValue: String
+func backgroundAttachment(value: PropertyValues.BackgroundAttachment) -> Property {
+  return Property(PropertyNames.backgroundAttachment, value)
+}
 
-    public init(_ value: Attachment) {
-      self.value = value
-      self.stringValue = value.rawValue
-    }
-  }
+func backgroundBlendMode(value: PropertyValues.BackgroundBlendMode) -> Property {
+  return Property(PropertyNames.backgroundBlendMode, value)
+}
 
-  public struct BackgroundBlendMode: Property, StyleComponent {
-    public enum Mode: String {
-      case Normal = "normal"
-      case Multiply = "multiply"
-      case Screen = "screen"
-      case Overlay = "overlay"
-      case Darken = "darken"
-      case Lighten = "lighten"
-      case ColorDodge = "color-dodge"
-      case Saturation = "saturation"
-      case Color = "color"
-      case Luminosity = "luminosity"
-      case Initial = "initial"
-      case Inherit = "inherit"
-    }
+func backgroundColor(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.backgroundColor, value)
+}
 
-    public let label = "background-blend-mode"
-    public let value: Mode
-    public let stringValue: String
+func backgroundColor(value: Values.Color) -> Property {
+  return Property(PropertyNames.backgroundColor, PropertyValues.Color.Value(value))
+}
 
-    public init(_ value: Mode) {
-      self.value = value
-      self.stringValue = value.rawValue
-    }
-  }
+func backgroundImage(value: PropertyValues.URL) -> Property {
+  return Property(PropertyNames.backgroundImage, value)
+}
 
-  public struct BackgroundColor: Property, StyleComponent {
-    public let label = "background-color"
-    public let value: PropertyValues.Color
-    public let stringValue: String
+func backgroundImage(value: String) -> Property {
+  return Property(PropertyNames.backgroundImage, PropertyValues.URL.URL(value))
+}
 
-    public init(_ value: PropertyValues.Color) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
+func backgroundPosition(value: PropertyValues.BackgroundPosition) -> Property {
+  return Property(PropertyNames.backgroundPosition, value)
+}
 
-    public init(_ value: Values.Color) {
-      self.init(.Color(value))
-    }
-  }
+func backgroundRepeat(value: PropertyValues.BackgroundRepeat) -> Property {
+  return Property(PropertyNames.backgroundRepeat, value)
+}
 
-  public struct BackgroundImage: Property, StyleComponent {
-    public enum Background {
-      case URL(String)
-      case None
-      case Initial
-      case Inherit
+func backgroundClip(value: PropertyValues.Box) -> Property {
+  return Property(PropertyNames.backgroundClip, value)
+}
 
-      var stringValue: String {
-        switch self {
-          case let URL(value): return "url(\"\(value)\")"
-          default: return String(self).lowercaseString
-        }
-      }
-    }
+func backgroundOrigin(value: PropertyValues.Box) -> Property {
+  return Property(PropertyNames.backgroundOrigin, value)
+}
 
-    public let label = "background-image"
-    public let value: Background
-    public let stringValue: String
-
-    public init(_ value: Background) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BackgroundPosition: Property, StyleComponent {
-    public enum Position {
-      case LeftTop
-      case LeftCenter
-      case LeftBottom
-      case RightTop
-      case RightCenter
-      case RightBottom
-      case CenterTop
-      case CenterCenter
-      case CenterBottom
-      case Percentage(Double, Double)
-      case Exact(String, String)
-      case Initial
-      case Inherit
-
-      var stringValue: String {
-        switch self {
-          case LeftTop: return "left top"
-          case LeftCenter: return "left center"
-          case LeftBottom: return "left bottom"
-          case RightTop: return "right top"
-          case RightCenter: return "right center"
-          case RightBottom: return "right bottom"
-          case CenterTop: return "center top"
-          case CenterCenter: return "center center"
-          case CenterBottom: return "center bottom"
-          case let Percentage(x, y): return "\(x)% \(y)%"
-          case let Exact(x, y): return "\(x) \(y)"
-          case Initial: return "initial"
-          case Inherit: return "inherit"
-        }
-      }
-    }
-
-    public let label = "background-position"
-    public let value: Position
-    public let stringValue: String
-
-    public init(_ value: Position) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BackgroundRepeat: Property, StyleComponent {
-    public enum Repeat: String {
-      case Repeat = "repeat"
-      case RepeatX = "repeat-x"
-      case RepeatY = "repeat-y"
-      case NoRepeat = "no-repeat"
-      case Initial = "initial"
-      case Inherit = "inherit"
-    }
-
-    public let label = "background-repeat"
-    public let value: Repeat
-    public let stringValue: String
-
-    public init(_ value: Repeat) {
-      self.value = value
-      self.stringValue = value.rawValue
-    }
-  }
-
-  public struct BackgroundClip: Property, StyleComponent {
-    public let label = "background-clip"
-    public let value: PropertyValues.Box
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Box) {
-      self.value = value
-      self.stringValue = value.rawValue
-    }
-  }
-
-  public struct BackgroundOrigin: Property, StyleComponent {
-    public let label = "background-origin"
-    public let value: PropertyValues.Box
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.Box) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct BackgroundSize: Property, StyleComponent {
-    public enum Size {
-      case Auto
-      case Length(String, String)
-      case Percentage(Double, Double)
-      case Cover
-      case Contain
-      case Initial
-      case Inherit
-
-      var stringValue: String {
-        switch self {
-          case let Length(x, y): return "\(x) \(y))"
-          case let Percentage(x, y): return "\(x)% \(y)%)"
-          default: return String(self).lowercaseString
-        }
-      }
-    }
-
-    public let label = "background-size"
-    public let value: Size
-    public let stringValue: String
-
-    public init(_ value: Size) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func backgroundSize(value: PropertyValues.BackgroundSize) -> Property {
+  return Property(PropertyNames.backgroundSize, value)
 }

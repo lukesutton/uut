@@ -1,74 +1,35 @@
-extension Properties {
-  public struct BorderCollapse: Property, StyleComponent {
-    public let label = "border-collapse"
-    public let value: PropertyValues.BorderCollapse
+extension PropertyNames {
+  public static let borderCollapse = "border-collapse"
+  public static let borderSpacing = "border-spacing"
+  public static let captionSide = "caption-side"
+  public static let emptyCells = "empty-cells"
+  public static let tableLayout = "empty-cells"
+}
 
-    public init(_ value: PropertyValues.BorderCollapse) {
-      self.value = value
-    }
+public func borderCollapse(value: PropertyValues.BorderCollapse) -> Property {
+  return Property(PropertyNames.borderCollapse, value)
+}
 
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func borderSpacing(value: PropertyValues.BorderSpacing) -> Property {
+  return Property(PropertyNames.borderSpacing, value)
+}
 
-  public struct BorderSpacing: Property, StyleComponent {
-    public let label = "border-spacing"
-    public let value: PropertyValues.BorderSpacing
+public func borderSpacing(x: Measurement, _ y: Measurement) -> Property {
+  return Property(PropertyNames.borderSpacing, PropertyValues.BorderSpacing.Each(x, y))
+}
 
-    public init(_ value: PropertyValues.BorderSpacing) {
-      self.value = value
-    }
+public func borderSpacing(x: Measurement) -> Property {
+  return Property(PropertyNames.borderSpacing, PropertyValues.BorderSpacing.Both(x))
+}
 
-    public init(_ x: Measurement, _ y: Measurement) {
-      self.init(.Each(x, y))
-    }
+public func captionSide(value: PropertyValues.CaptionSide) -> Property {
+  return Property(PropertyNames.captionSide, value)
+}
 
-    public init(_ x: Measurement) {
-      self.init(.Both(x))
-    }
+public func emptyCells(value: PropertyValues.EmptyCells) -> Property {
+  return Property(PropertyNames.emptyCells, value)
+}
 
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct CaptionSide: Property, StyleComponent {
-    public let label = "caption-side"
-    public let value: PropertyValues.CaptionSide
-
-    public init(_ value: PropertyValues.CaptionSide) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct EmptyCells: Property, StyleComponent {
-    public let label = "empty-cells"
-    public let value: PropertyValues.EmptyCells
-
-    public init(_ value: PropertyValues.EmptyCells) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct TableLayout: Property, StyleComponent {
-    public let label = "table-layout"
-    public let value: PropertyValues.TableLayout
-
-    public init(_ value: PropertyValues.TableLayout) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func tableLayout(value: PropertyValues.TableLayout) -> Property {
+  return Property(PropertyNames.tableLayout, value)
 }

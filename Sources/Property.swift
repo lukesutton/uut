@@ -1,8 +1,9 @@
-public protocol Property {
-  var label: String { get }
-  var stringValue: String { get }
-}
+public struct Property {
+  public let label: String
+  public let value: PropertyValue
 
-func ==(rhs: Property, lhs: Property) -> Bool {
-  return rhs.label == rhs.label && rhs.stringValue == lhs.stringValue
+  init(_ label: String, _ value: PropertyValue) {
+    self.label = label
+    self.value = value
+  }
 }

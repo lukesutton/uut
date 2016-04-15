@@ -10,6 +10,45 @@ extension PropertyValues {
     }
   }
 
+  public enum Position: String, PropertyValue {
+    case Static = "static"
+    case Absolute = "absolute"
+    case Fixed = "fixed"
+    case Relative = "relative"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
+
+  public enum Clear: String, PropertyValue {
+    case None = "none"
+    case Left = "left"
+    case Right = "right"
+    case Both = "both"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
+
+  public enum Clip: String, PropertyValue {
+    case None = "none"
+    case Left = "left"
+    case Right = "right"
+    case Both = "both"
+    case Initial = "initial"
+    case Inherit = "inherit"
+
+    public var stringValue: String {
+      return rawValue
+    }
+  }
+
   public enum Display: String, PropertyValue {
     case Inline = "inline"
     case Block = "block"

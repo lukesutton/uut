@@ -1,137 +1,78 @@
-extension Properties {
-  public struct HangingPunctuation: Property, StyleComponent {
-    public let label = "hanging-punctuation"
-    public let value: PropertyValues.HangingPunctuation
-    public let stringValue: String
+extension PropertyNames {
+  public static let hangingPunctuation = "hanging-punctuation"
+  public static let letterSpacing = "letter-spacing"
+  public static let lineHeight = "line-height"
+  public static let textAlign = "text-align"
+  public static let textIndent = "text-indent"
+  public static let textTransform = "text-transform"
+  public static let whiteSpace = "white-space"
+  public static let wordBreak = "word-break"
+  public static let wordSpacing = "word-spacing"
+  public static let wordWrap = "word-wrap"
+  public static let textDecoration = "text-decoration"
+  public static let textShadown = "text-shadow"
+}
 
-    public init(_ value: PropertyValues.HangingPunctuation) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func hangingPunctuation(value: PropertyValues.HangingPunctuation) -> Property {
+  return Property(PropertyNames.hangingPunctuation, value)
+}
 
-  public struct LetterSpacing: Property, StyleComponent {
-    public let label = "letter-spacing"
-    public let value: PropertyValues.LetterSpacing
-    public let stringValue: String
+func letterSpacing(value: PropertyValues.LetterSpacing) -> Property {
+  return Property(PropertyNames.letterSpacing, value)
+}
 
-    public init(_ value: PropertyValues.LetterSpacing) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func letterSpacing(value: Measurement) -> Property {
+  return Property(PropertyNames.letterSpacing, PropertyValues.LetterSpacing.Value(value))
+}
 
-  public struct LineHeight: Property, StyleComponent {
-    public let label = "line-height"
-    public let value: PropertyValues.LineHeight
-    public let stringValue: String
+func lineHeight(value: PropertyValues.LineHeight) -> Property {
+  return Property(PropertyNames.lineHeight, value)
+}
 
-    public init(_ value: PropertyValues.LineHeight) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func lineHeight(value: Measurement) -> Property {
+  return Property(PropertyNames.lineHeight, PropertyValues.LineHeight.Value(value))
+}
 
-  public struct TextAlign: Property, StyleComponent {
-    public let label = "text-align"
-    public let value: PropertyValues.TextAlign
-    public let stringValue: String
+func lineHeight(value: Double) -> Property {
+  return Property(PropertyNames.lineHeight, PropertyValues.LineHeight.Number(value))
+}
 
-    public init(_ value: PropertyValues.TextAlign) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func textAlign(value: PropertyValues.TextAlign) -> Property {
+  return Property(PropertyNames.textAlign, value)
+}
 
-  public struct TextIndent: Property, StyleComponent {
-    public let label = "text-indent"
-    public let value: PropertyValues.Number
-    public let stringValue: String
+func textIndent(value: PropertyValues.Number) -> Property {
+  return Property(PropertyNames.textAlign, value)
+}
 
-    public init(_ value: PropertyValues.Number) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func textIndent(value: Int) -> Property {
+  return Property(PropertyNames.textAlign, PropertyValues.Number.Value(value))
+}
 
-  public struct TextTransform: Property, StyleComponent {
-    public let label = "text-transform"
-    public let value: PropertyValues.TextTransform
-    public let stringValue: String
+func textTransform(value: PropertyValues.TextTransform) -> Property {
+  return Property(PropertyNames.textTransform, value)
+}
 
-    public init(_ value: PropertyValues.TextTransform) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func whiteSpace(value: PropertyValues.WhiteSpace) -> Property {
+  return Property(PropertyNames.whiteSpace, value)
+}
 
-  public struct WhiteSpace: Property, StyleComponent {
-    public let label = "white-space"
-    public let value: PropertyValues.WhiteSpace
-    public let stringValue: String
+func wordSpacing(value: PropertyValues.MeasurementWithNormal) -> Property {
+  return Property(PropertyNames.wordSpacing, value)
+}
 
-    public init(_ value: PropertyValues.WhiteSpace) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func wordSpacing(value: Measurement) -> Property {
+  return Property(PropertyNames.wordSpacing, PropertyValues.MeasurementWithNormal.Value(value))
+}
 
-  public struct WordBreak: Property, StyleComponent {
-    public let label = "word-break"
-    public let value: PropertyValues.WordBreak
-    public let stringValue: String
+func wordWrap(value: PropertyValues.WordWrap) -> Property {
+  return Property(PropertyNames.wordWrap, value)
+}
 
-    public init(_ value: PropertyValues.WordBreak) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
+func textDecoration(value: PropertyValues.TextDecoration) -> Property {
+  return Property(PropertyNames.textDecoration, value)
+}
 
-  public struct WordSpacing: Property, StyleComponent {
-    public let label = "word-spacing"
-    public let value: PropertyValues.MeasurementWithNormal
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.MeasurementWithNormal) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-  }
-
-  public struct WordWrap: Property, StyleComponent {
-    public let label = "word-wrap"
-    public let value: PropertyValues.WordWrap
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.WordWrap) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct TextDecoration: Property, StyleComponent {
-    public let label = "text-decoration"
-    public let value: PropertyValues.TextDecoration
-    public let stringValue: String
-
-    public init(_ value: PropertyValues.TextDecoration) {
-      self.value = value
-      self.stringValue = value.stringValue
-    }
-  }
-
-  public struct TextShadow: Property, StyleComponent {
-    public let label = "text-shadow"
-    public let values: [PropertyValues.Shadow]
-    public let stringValue: String
-
-    public init(_ values: PropertyValues.Shadow...) {
-      self.values = values
-      self.stringValue = values.map {$0.stringValue}.joinWithSeparator(", ")
-    }
-  }
+public func textShadown(values: PropertyValues.Shadow...) -> Property {
+  return Property(PropertyNames.textShadown, PropertyValues.ShadowCollection(values))
 }

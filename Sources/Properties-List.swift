@@ -1,99 +1,52 @@
-extension Properties {
-  public struct CounterIncrement: Property, StyleComponent {
-    public let label = "counter-increment"
-    public let value: PropertyValues.NumberWithNone
+extension PropertyNames {
+  public static let counterIncrement = "counter-increment"
+  public static let counterReset = "counter-reset"
+  public static let listStyle = "list-style"
+  public static let listStyleImage = "list-style-image"
+  public static let listStylePosition = "list-style-position"
+  public static let listStyleType = "list-style-type"
+}
 
-    public init(_ value: PropertyValues.NumberWithNone) {
-      self.value = value
-    }
+public func counterIncrement(value: PropertyValues.NumberWithNone) -> Property {
+  return Property(PropertyNames.counterIncrement, value)
+}
 
-    public init(_ value: Int) {
-      self.init(.Number(value))
-    }
+public func counterIncrement(value: Int) -> Property {
+  return Property(PropertyNames.counterIncrement, PropertyValues.NumberWithNone.Value(value))
+}
 
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func counterReset(value: PropertyValues.CounterReset) -> Property {
+  return Property(PropertyNames.counterReset, value)
+}
 
-  public struct CounterReset: Property, StyleComponent {
-    public let label = "counter-reset"
-    public let value: PropertyValues.CounterReset
+public func counterReset(value: Int) -> Property {
+  return Property(PropertyNames.counterIncrement, PropertyValues.CounterReset.Number(value))
+}
 
-    public init(_ value: PropertyValues.CounterReset) {
-      self.value = value
-    }
+public func counterReset(value: String) -> Property {
+  return Property(PropertyNames.counterIncrement, PropertyValues.CounterReset.Name(value))
+}
 
-    public init(_ value: Int) {
-      self.init(.Number(value))
-    }
+public func listStyle(value: PropertyValues.ListStyle) -> Property {
+  return Property(PropertyNames.listStyle, value)
+}
 
-    public init(_ value: String) {
-      self.init(.Name(value))
-    }
+public func listStyle(style: PropertyValues.ListStyleType = .Disc, position: PropertyValues.ListStylePosition = .Outside, image: PropertyValues.URL = .None) -> Property {
+  return Property(PropertyNames.listStyle, PropertyValues.ListStyle.Config(style, position, image))
+}
 
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func listStyleImage(value: PropertyValues.URL) -> Property {
+  return Property(PropertyNames.listStyleImage, value)
+}
 
-  public struct ListStyle: Property, StyleComponent {
-    public let label = "list-style"
-    public let value: PropertyValues.ListStyle
+public func listStyleImage(value: String) -> Property {
+  return Property(PropertyNames.listStyleImage, PropertyValues.URL.URL(value))
+}
 
-    public init(_ value: PropertyValues.ListStyle) {
-      self.value = value
-    }
+public func listStylePosition(value: PropertyValues.ListStylePosition) -> Property {
+  return Property(PropertyNames.listStylePosition, value)
+}
 
-    public init(style: PropertyValues.ListStyleType = .Disc, position: PropertyValues.ListStylePosition = .Outside, image: PropertyValues.URL = .None) {
-      self.init(.Config(style, position, image))
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct ListStyleImage: Property, StyleComponent {
-    public let label = "list-style-image"
-    public let value: PropertyValues.URL
-
-    public init(_ value: PropertyValues.URL) {
-      self.value = value
-    }
-
-    public init(_ value: String) {
-      self.init(.URL(value))
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct ListStylePosition: Property, StyleComponent {
-    public let label = "list-style-position"
-    public let value: PropertyValues.ListStylePosition
-
-    public init(_ value: PropertyValues.ListStylePosition) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct ListStyleType: Property, StyleComponent {
-    public let label = "list-style-type"
-    public let value: PropertyValues.ListStyleType
-
-    public init(_ value: PropertyValues.ListStyleType) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func listStyleType(value: PropertyValues.ListStyleType) -> Property {
+  return Property(PropertyNames.listStyleType, value)
 }

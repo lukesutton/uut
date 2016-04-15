@@ -1,99 +1,36 @@
-extension Properties {
-  public struct Font: Property, StyleComponent {
-    public let label = "font"
-    public let value: PropertyValues.Font
+extension PropertyNames {
+  public static let font = "font"
+  public static let fontFamily = "font-family"
+  public static let fontSize = "font-size"
+  public static let fontStyle = "font-style"
+  public static let fontVariant = "font-variant"
+  public static let fontWeight = "font-weight"
+}
 
-    public init(_ value: PropertyValues.Font) {
-      self.value = value
-    }
+public func font(value: PropertyValues.Font) -> Property {
+  return Property(PropertyNames.font, value)
+}
 
-    public init(style: PropertyValues.FontStyle? = nil, variant: PropertyValues.FontVariant? = nil, weight: PropertyValues.FontWeight? = nil, size: PropertyValues.FontSize, family: PropertyValues.FontFamily) {
-      self.init(.Config(style, variant, weight, size, family))
-    }
+public func fontFamily(value: PropertyValues.FontFamily) -> Property {
+  return Property(PropertyNames.fontFamily, value)
+}
 
-    public init(style: PropertyValues.FontStyle? = nil, variant: PropertyValues.FontVariant? = nil, weight: PropertyValues.FontWeight? = nil, size: Measurement, family: PropertyValues.FontFamily) {
-      self.init(.Config(style, variant, weight, .Value(size), family))
-    }
+public func fontSize(value: PropertyValues.FontSize) -> Property {
+  return Property(PropertyNames.fontSize, value)
+}
 
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func fontSize(value: Measurement) -> Property {
+  return Property(PropertyNames.fontSize, PropertyValues.FontSize.Value(value))
+}
 
-  public struct FontFamily: Property, StyleComponent {
-    public let label = "font-family"
-    public let value: PropertyValues.FontFamily
+public func fontStyle(value: PropertyValues.FontStyle) -> Property {
+  return Property(PropertyNames.fontStyle, value)
+}
 
-    public init(_ value: PropertyValues.FontFamily) {
-      self.value = value
-    }
+public func fontVariant(value: PropertyValues.FontVariant) -> Property {
+  return Property(PropertyNames.fontVariant, value)
+}
 
-    public init(_ value: Values.FontFamily) {
-      self.init(.Family(value))
-    }
-
-    public init(_ values: FontConvertible..., fallback: Values.FontFamilyFallback? = nil) {
-      self.init(.Family(Values.FontFamily(values: values, fallback: fallback)))
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct FontSize: Property, StyleComponent {
-    public let label = "font-size"
-    public let value: PropertyValues.FontSize
-
-    public init(_ value: PropertyValues.FontSize) {
-      self.value = value
-    }
-
-    public init(_ value: Measurement) {
-      self.init(.Value(value))
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct FontStyle: Property, StyleComponent {
-    public let label = "font-style"
-    public let value: PropertyValues.FontStyle
-
-    public init(_ value: PropertyValues.FontStyle) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct FontVariant: Property, StyleComponent {
-    public let label = "font-variant"
-    public let value: PropertyValues.FontVariant
-
-    public init(_ value: PropertyValues.FontVariant) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
-
-  public struct FontWeight: Property, StyleComponent {
-    public let label = "font-weight"
-    public let value: PropertyValues.FontWeight
-
-    public init(_ value: PropertyValues.FontWeight) {
-      self.value = value
-    }
-
-    public var stringValue: String {
-      return value.stringValue
-    }
-  }
+public func fontWeight(value: PropertyValues.FontWeight) -> Property {
+  return Property(PropertyNames.fontWeight, value)
 }
