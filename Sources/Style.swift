@@ -38,6 +38,18 @@ public func style(selector: SelectorStatementConvertible, _ components: StyleCom
   )
 }
 
+public func style(query: MediaQueryStatementConvertible, _ selector: SelectorStatementConvertible, _ components: StyleComponent...) -> Style {
+  let extracted = extractComponents(components)
+  return Style(
+    selector: selector.selectorStatement,
+    query: query.mediaQueryStatement,
+    properties: extracted.properties,
+    children: extracted.children,
+    mixins: extracted.mixins,
+    extensions: extracted.extensions
+  )
+}
+
 internal func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property], mixins: [StyleMixin], extensions: [StyleExtension]) {
   var properties = [Property]()
   var children = [Style]()
