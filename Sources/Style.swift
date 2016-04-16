@@ -3,7 +3,7 @@ public struct Style: StyleComponent {
   let query: MediaQueryStatement?
   let properties: [Property]
   let children: [Style]
-  let mixins: [Mixin]
+  let mixins: [StyleMixin]
   let extensions: [StyleExtension]
 
   func prependSelector(selector: SelectorStatementConvertible) -> Style {
@@ -22,7 +22,7 @@ public func extends(extensions: StyleExtension...) -> StyleComponent {
   return ExtensionCollection(extensions: extensions)
 }
 
-public func mixesIn(mixins: Mixin...) -> StyleComponent  {
+public func mixesIn(mixins: StyleMixin...) -> StyleComponent  {
   return MixinCollection(mixins: mixins)
 }
 
@@ -38,10 +38,10 @@ public func style(selector: SelectorStatementConvertible, _ components: StyleCom
   )
 }
 
-internal func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property], mixins: [Mixin], extensions: [StyleExtension]) {
+internal func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property], mixins: [StyleMixin], extensions: [StyleExtension]) {
   var properties = [Property]()
   var children = [Style]()
-  var mixins = [Mixin]()
+  var mixins = [StyleMixin]()
   var extensions = [StyleExtension]()
 
   for component in components {

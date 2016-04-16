@@ -1,15 +1,15 @@
-public struct Mixin: StyleComponent {
+public struct StyleMixin: StyleComponent {
   let properties: [Property]
   let children: [Style]
 }
 
 public struct MixinCollection: StyleComponent {
-  let mixins: [Mixin]
+  let mixins: [StyleMixin]
 }
 
-public func styleMixin(components: MixinComponent...) -> Mixin {
+public func styleMixin(components: MixinComponent...) -> StyleMixin {
   let extracted = extractComponents(components)
-  return Mixin(properties: extracted.properties, children: extracted.children)
+  return StyleMixin(properties: extracted.properties, children: extracted.children)
 }
 
 public protocol MixinComponent {}
