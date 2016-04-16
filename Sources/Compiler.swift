@@ -98,9 +98,12 @@ public struct Compiler {
       }
 
       return Style(
-        selector,
+        selector: selector,
+        query: nil,
         properties: ext.properties,
-        children: ext.children
+        children: ext.children,
+        mixins: [],
+        extensions: []
       )
     }
   }

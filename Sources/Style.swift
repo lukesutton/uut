@@ -1,45 +1,48 @@
 public struct Style: StyleComponent {
-  let query: MediaQueryStatement?
   let selector: SelectorStatement
+  let query: MediaQueryStatement?
   let properties: [Property]
   let children: [Style]
   let mixins: [Mixin]
   let extensions: [StyleExtension]
 
-  public init(_ selector: SelectorStatementConvertible, query: MediaQueryStatementConvertible? = nil, mixins: [Mixin] = [], extensions: [StyleExtension] =  [], _ components: StyleComponent...) {
-    let components = extractComponents(components)
-    self.init(selector, query: query, mixins: mixins, extensions: extensions, properties: components.properties, children: components.children)
-  }
-
-  public init(_ selector: SelectorStatementConvertible, properties: [Property], children: [Style]) {
-    self.init(selector, query: nil, mixins: [], extensions: [], properties: properties, children: children)
-  }
-
-  public init(_ selector: SelectorStatementConvertible, query: MediaQueryStatementConvertible? = nil, mixins: [Mixin], extensions: [StyleExtension], properties: [Property], children: [Style]) {
-    self.selector = selector.selectorStatement
-    self.query = query?.mediaQueryStatement
-    self.mixins = mixins
-    self.extensions = extensions
-
-    self.children = children
-    self.properties = properties
-  }
-
   func prependSelector(selector: SelectorStatementConvertible) -> Style {
     return Style(
-      selector.selectorStatement |+ self.selector,
+      selector: selector.selectorStatement |+ self.selector,
       query: self.query,
-      mixins: self.mixins,
-      extensions: self.extensions,
       properties: self.properties,
-      children: self.children
+      children: self.children,
+      mixins: self.mixins,
+      extensions: self.extensions
     )
   }
 }
 
-internal func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property]) {
+public func extends(extensions: StyleExtension...) -> StyleComponent {
+  return ExtensionCollection(extensions: extensions)
+}
+
+public func mixesIn(mixins: Mixin...) -> StyleComponent  {
+  return MixinCollection(mixins: mixins)
+}
+
+public func style(selector: SelectorStatementConvertible, _ components: StyleComponent...) -> Style {
+  let extracted = extractComponents(components)
+  return Style(
+    selector: selector.selectorStatement,
+    query: nil,
+    properties: extracted.properties,
+    children: extracted.children,
+    mixins: extracted.mixins,
+    extensions: extracted.extensions
+  )
+}
+
+internal func extractComponents(components: [StyleComponent]) -> (children: [Style], properties: [Property], mixins: [Mixin], extensions: [StyleExtension]) {
   var properties = [Property]()
   var children = [Style]()
+  var mixins = [Mixin]()
+  var extensions = [StyleExtension]()
 
   for component in components {
     switch component {
@@ -47,6 +50,10 @@ internal func extractComponents(components: [StyleComponent]) -> (children: [Sty
         properties.append(property)
       case let style as Style:
         children.append(style)
+      case let collection as MixinCollection:
+        mixins.appendContentsOf(collection.mixins)
+      case let collection as ExtensionCollection:
+        extensions.appendContentsOf(collection.extensions)
       default:
         // A no-op, since cases must be exhaustive, but we only handle the three
         // known conforming types.
@@ -54,5 +61,5 @@ internal func extractComponents(components: [StyleComponent]) -> (children: [Sty
     }
   }
 
-  return (children: children, properties: properties)
+  return (children: children, properties: properties, mixins: mixins, extensions: extensions)
 }

@@ -3,18 +3,18 @@ extension PropertyNames {
   public static let opacity = "opacity"
 }
 
-func color(value: PropertyValues.Color) -> Property {
+public func color(value: PropertyValues.Color) -> Property {
   return Property(PropertyNames.color, value)
 }
 
-func color(value: Values.Color) -> Property {
+public func color(value: Values.Color) -> Property {
   return Property(PropertyNames.color, PropertyValues.Color.Value(value))
 }
 
-func opacity(value: PropertyValues.Opacity) -> Property {
+public func opacity(value: PropertyValues.Opacity) -> Property {
   return Property(PropertyNames.opacity, value)
 }
 
-func opacity(value: Double) -> Property {
+public func opacity(value: Double) -> Property {
   return Property(PropertyNames.opacity, PropertyValues.Opacity.Value(value))
 }

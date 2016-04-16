@@ -1,4 +1,4 @@
-public struct Property {
+public struct Property: StyleComponent {
   public let label: String
   public let value: PropertyValue
 
