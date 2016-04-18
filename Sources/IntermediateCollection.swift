@@ -100,12 +100,12 @@ public struct IntermediateCollection {
     if let selector = query.selector {
       switch query.selectorMode {
         case .Match:
-          return style.selector.selectors == selector.selectors
+          return style.selector.components == selector.components
         case .Prefix:
-          return style.selector.selectors.startsWith(selector.selectors)
+          return style.selector.components.startsWith(selector.components)
         case .Suffix:
           // It seems there is no .endsWith(_:) method, so we do this nastiness
-          return style.selector.selectors.reverse().startsWith(selector.selectors.reverse())
+          return style.selector.components.reverse().startsWith(selector.components.reverse())
         case .None:
           return false
       }

@@ -1,325 +1,225 @@
+// Selector statement
+
+public protocol SelectorStatementConvertible {
+  var selectorStatement: SelectorStatement { get }
+}
+
+extension SelectorStatement: SelectorStatementConvertible {
+  public var selectorStatement: SelectorStatement {
+    return self
+  }
+}
+
+extension SelectorComponent: SelectorStatementConvertible {
+  public var selectorStatement: SelectorStatement {
+    return SelectorStatement(components: [self])
+  }
+}
+
+public struct SelectorStatement {
+  let components: [SelectorComponent]
+
+  func append(statement: SelectorStatementConvertible) -> SelectorStatement {
+    return SelectorStatement(components: self.components + statement.selectorStatement.components)
+  }
+
+  func append(before: SelectorComponent, _ statement: SelectorStatementConvertible) -> SelectorStatement {
+    return SelectorStatement(components: self.components + [before] + statement.selectorStatement.components)
+  }
+
+  public var stringValue: String {
+    return components.map {$0.stringValue}.joinWithSeparator(" ")
+  }
+}
+
+public struct SelectorNames {
+  private init() {}
+
+  // Selectors
+  static let classname = "classname"
+  static let id = "id"
+  static let all = "all"
+  static let hasAttr = "hasAttr"
+  static let attrEquals = "attrEquals"
+  static let attrContains = "attrContains"
+  static let attrStartsWith = "attrStartsWith"
+  static let attrEndsWith = "attrEndsWith"
+  static let element = "element"
+
+  // Psuedo Selectors
+  static let active = "active"
+  static let after = "after"
+  static let before = "before"
+  static let checked = "checked"
+  static let disabled = "disabled"
+  static let empty = "empty"
+  static let enabled = "enabled"
+  static let firstChild = "firstChild"
+  static let firstLetter = "firstLetter"
+  static let firstLine = "firstLine"
+  static let firstOfType = "firstOfType"
+  static let focus = "focus"
+  static let hover = "hover"
+  static let inRange = "inRange"
+  static let lang = "lang"
+  static let lastChild = "lastChild"
+  static let lastOfType = "lastOfType"
+  static let link = "link"
+  static let nthChild = "nthChild"
+  static let nthLastChild = "nthLastChild"
+  static let nthLastOfType = "nthLastOfType"
+  static let nthOfType = "nthOfType"
+  static let not = "not"
+  static let onlyOfType = "onlyOfType"
+  static let onlyChild = "onlyChild"
+  static let optional = "optional"
+  static let outOfRange = "outOfRange"
+  static let readOnly = "readOnly"
+  static let readWrite = "readWrite"
+  static let required = "required"
+  static let root = "root"
+  static let selection = "selection"
+
+  // Operators
+  static let child = "child"
+  static let precedingSibling = "precedingSibling"
+  static let followingSibling = "followingSibling"
+  static let and = "and"
+}
+
+public enum SelectorComponent: Equatable {
+  case Selector(name: String, value: String, associated: [SelectorComponent])
+  case PsuedoSelector(name: String, value: String, associated: [SelectorComponent])
+  case Operator(name: String, value: String)
+
+  var stringValue: String {
+    switch self {
+      case let Selector(_, value, associated):
+        return value + associated.map {$0.stringValue}.joinWithSeparator("")
+      case let PsuedoSelector(_, value, associated):
+        return value + associated.map {$0.stringValue}.joinWithSeparator("")
+      case let Operator(_, value):
+        return value
+    }
+  }
+}
+
+public func ==(lhs: SelectorComponent, rhs: SelectorComponent) -> Bool {
+  switch (lhs, rhs) {
+    case (.Selector, .Selector): return lhs.stringValue == rhs.stringValue
+    case (.PsuedoSelector, .PsuedoSelector): return lhs.stringValue == rhs.stringValue
+    case (.Operator, .Operator): return lhs.stringValue == rhs.stringValue
+    default: return false
+  }
+}
+
+// Selectors
 public struct Selectors {
   private init() {}
 
-  public struct Class: Selector, SelectorStatementConvertible {
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ value: String, _ associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = ".\(value)"
-    }
+  public static func classname(value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.classname, value: ".\(value)", associated: associated)
   }
 
-  public struct ID: Selector, SelectorStatementConvertible {
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ value: String, _ associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "#\(value)"
-    }
+  public static func id(value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.id, value: "#\(value)", associated: associated)
   }
 
-  public struct All: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = "*"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func hasAttr(value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.hasAttr, value: "[\(value)]", associated: associated)
   }
 
-  public struct HasAttr: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(value)]"
-    }
+  public static func attrEquals(label: String, _ value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.attrEquals, value: "[\(label)=\"\(value)\"]", associated: associated)
   }
 
-  public struct AttrEquals: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(label)=\"\(value)\"]"
-    }
+  public static func attrContains(label: String, _ value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.attrContains, value: "[\(label)*=\"\(value)\"]", associated: associated)
   }
 
-  public struct AttrContains: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(label)*=\"\(value)\"]"
-    }
+  public static func attrStartsWith(label: String, _ value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.attrStartsWith, value: "[\(label)^=\"\(value)\"]", associated: associated)
   }
 
-  public struct AttrListContains: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(label)*=\"\(value)\"]"
-    }
+  public static func attrEndsWith(label: String, _ value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.attrEndsWith, value: "[\(label)$=\"\(value)\"]", associated: associated)
   }
 
-  public struct AttrStartsWith: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(label)^=\"\(value)\"]"
-    }
+  public static func element(value: String, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.element, value: value, associated: associated)
   }
 
-  public struct AttrHyphenatedValueContains: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
+  public let all = SelectorComponent.Selector(name: SelectorNames.all, value: "*", associated: [])
 
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(label)|=\"\(value)\"]"
-    }
+  public static func all(associated: SelectorComponent...) -> SelectorComponent {
+    return .Selector(name: SelectorNames.all, value: "*", associated: associated)
   }
 
-  public struct AttrEndsWith: Selector, SelectorStatementConvertible {
-    public let label: String
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ label: String, _ value: String, _ associated: Selector...) {
-      self.label = label
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = "[\(label)$=\"\(value)\"]"
-    }
+  public static func active(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.active, value: ":active", associated: associated)
   }
 
-  public struct El: Selector, SelectorStatementConvertible {
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(_ value: String, _ associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = value
-    }
+  public static func after(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.after, value: ":after", associated: associated)
   }
 
-  public struct Active: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":active"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func before(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.before, value: ":before", associated: associated)
   }
 
-  public struct After: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = "::active"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func checked(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.checked, value: ":checked", associated: associated)
+  }
+  public static func diabled(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.disabled, value: ":disabled", associated: associated)
   }
 
-  public struct Before: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = "::before"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func empty(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.empty, value: ":empty", associated: associated)
   }
 
-  public struct Checked: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":checked"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func firstChild(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.firstChild, value: ":first-child", associated: associated)
   }
 
-  public struct Disabled: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":disabled"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func firstLetter(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.firstLetter, value: "::first-letter", associated: associated)
   }
 
-  public struct Empty: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":empty"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func firstLine(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.firstLine, value: "::first-line", associated: associated)
   }
 
-  public struct Enabled: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":enabled"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func firstOfType(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.firstOfType, value: ":first-of-type", associated: associated)
   }
 
-  public struct FirstChild: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":first-child"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func focus(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.focus, value: ":focus", associated: associated)
   }
 
-  public struct FirstLetter: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = "::first-letter"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func hover(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.hover, value: ":hover", associated: associated)
   }
 
-  public struct FirstLine: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = "::empty"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func inRange(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.hover, value: ":in-range", associated: associated)
   }
 
-  public struct FirstOfType: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":first-of-type"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func lang(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.lang, value: ":lang", associated: associated)
   }
 
-  public struct Focus: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":focus"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func lastChild(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.lastChild, value: ":last-child", associated: associated)
   }
 
-  public struct Hover: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":hover"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func lastOfType(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.lastOfType, value: ":last-of-type", associated: associated)
   }
 
-  public struct InRange: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":in-range"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
-  }
-
-  public struct Lang: Selector, SelectorStatementConvertible {
-    public let value: String
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(value: String, associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = ":lang(\(value)"
-    }
-  }
-
-  public struct LastChild: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":last-child"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
-  }
-
-  public struct LastOfType: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":last-of-type"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
-  }
-
-  public struct Link: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":link"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
-  }
-
-  public struct Not: Selector, SelectorStatementConvertible {
-    public let value: SelectorStatement
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(value: SelectorStatementConvertible, associated: Selector...) {
-      let statement = value.selectorStatement
-      self.value = statement
-      self.associated = associated
-      self.prefixStringValue = ":not(\(statement.stringValue)"
-    }
+  public static func not(selector: SelectorStatementConvertible, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.not, value: ":not(\(selector.selectorStatement.stringValue)", associated: associated)
   }
 
   public enum NthValue {
@@ -344,156 +244,90 @@ public struct Selectors {
     }
   }
 
-  public struct NthChild: Selector, SelectorStatementConvertible {
-    public let value: NthValue
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(value: NthValue, associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = ":nth-child(\(value.stringValue)"
-    }
-  }
-  public struct NthLastChild: Selector, SelectorStatementConvertible {
-    public let value: NthValue
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(value: NthValue, associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = ":nth-last-child(\(value.stringValue)"
-    }
-  }
-  public struct NthLastOfType: Selector, SelectorStatementConvertible {
-    public let value: NthValue
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(value: NthValue, associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = ":nth-last-of-type(\(value.stringValue)"
-    }
-  }
-  public struct NthOfType: Selector, SelectorStatementConvertible {
-    public let value: NthValue
-    public let prefixStringValue: String
-    public let associated: [Selector]
-
-    public init(value: NthValue, associated: Selector...) {
-      self.value = value
-      self.associated = associated
-      self.prefixStringValue = ":nth-of-type(\(value.stringValue)"
-    }
+  public static func nthChild(value: NthValue, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.nthChild, value: ":nth-child(\(value.stringValue)", associated: associated)
   }
 
-  public struct OnlyOfType: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":only-of-type"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func nthLastChild(value: NthValue, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.nthLastChild, value: ":nth-last-child(\(value.stringValue)", associated: associated)
   }
 
-  public struct OnlyChild: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":only-child"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func nthLastOfType(value: NthValue, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.nthLastOfType, value: ":nth-last-of-type(\(value.stringValue)", associated: associated)
   }
 
-  public struct Optional: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":optional"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func nthOfType(value: NthValue, _ associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.nthOfType, value: ":nth-of-type(\(value.stringValue)", associated: associated)
   }
 
-  public struct OutOfRange: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":out-of-range"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func onlyChild(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.onlyChild, value: ":only-child", associated: associated)
   }
 
-  public struct ReadOnly: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":read-only"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func optional(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.optional, value: ":optional", associated: associated)
   }
 
-  public struct ReadWrite: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":read-write"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func outOfRange(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.outOfRange, value: ":out-of-range", associated: associated)
   }
 
-  public struct Required: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":required"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func readOnly(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.readOnly, value: ":read-only", associated: associated)
   }
 
-  public struct Root: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":root"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func readWrite(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.readWrite, value: ":read-write", associated: associated)
   }
 
-  public struct Selection: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = "::selection"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func required(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.readWrite, value: ":required", associated: associated)
   }
 
-  public struct Target: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":target"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func root(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.root, value: ":root", associated: associated)
   }
 
-  public struct Valid: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":valid"
-    public let associated: [Selector]
-
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
+  public static func selection(associated: SelectorComponent...) -> SelectorComponent {
+    return .PsuedoSelector(name: SelectorNames.selection, value: "::selection", associated: associated)
   }
+}
 
-  public struct Visited: Selector, SelectorStatementConvertible {
-    public let prefixStringValue = ":visited"
-    public let associated: [Selector]
+// Selector Operators
 
-    public init(associated: Selector...) {
-      self.associated = associated
-    }
-  }
+internal let child = SelectorComponent.Operator(name: SelectorNames.child, value: ">")
+internal let precedingSibling = SelectorComponent.Operator(name: SelectorNames.precedingSibling, value: "+")
+internal let followingSibling = SelectorComponent.Operator(name: SelectorNames.followingSibling, value: "~")
+internal let and = SelectorComponent.Operator(name: SelectorNames.and, value: ",")
+
+// Operators
+
+infix operator |- {associativity left precedence 100}
+
+public func |-(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  return lhs.selectorStatement.append(rhs)
+}
+
+infix operator |+ {associativity left precedence 99}
+
+public func |+(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  return lhs.selectorStatement.append(precedingSibling, rhs)
+}
+
+infix operator |~ {associativity left precedence 98}
+
+public func |~(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  return lhs.selectorStatement.append(followingSibling, rhs)
+}
+
+infix operator |> {associativity left precedence 97}
+
+public func |>(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  return lhs.selectorStatement.append(child, rhs)
+}
+
+infix operator |& {associativity left precedence 96}
+
+public func |&(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  return lhs.selectorStatement.append(and, rhs)
 }

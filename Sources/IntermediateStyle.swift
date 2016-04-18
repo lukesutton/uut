@@ -19,11 +19,11 @@ public struct IntermediateStyle {
   }
 
   public func prefixSelector(selector: SelectorStatementConvertible) -> IntermediateStyle {
-    return IntermediateStyle(selector: selector.selectorStatement.concat(self.selector), properties: self.properties, query: self.query)
+    return IntermediateStyle(selector: selector.selectorStatement.append(self.selector), properties: self.properties, query: self.query)
   }
 
   public func suffixSelector(selector: SelectorStatementConvertible) -> IntermediateStyle {
-    return IntermediateStyle(selector: self.selector.concat(selector.selectorStatement), properties: self.properties, query: self.query)
+    return IntermediateStyle(selector: self.selector.append(selector.selectorStatement), properties: self.properties, query: self.query)
   }
 
   public func replaceSelector(selector: SelectorStatementConvertible) -> IntermediateStyle {

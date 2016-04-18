@@ -1,5 +1,6 @@
 import Uut
 import XCTest
+typealias s = Selectors
 
 class CompilerTests: XCTestCase {
   func testProperties() {
@@ -16,7 +17,7 @@ class CompilerTests: XCTestCase {
     )
 
     let styles = [
-      style(Selectors.Class("what"),
+      style(s.classname("what"),
         bottom(1.em),
         mixesIn(exampleMixin),
         extends(testExtension)

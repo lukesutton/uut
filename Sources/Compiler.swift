@@ -88,8 +88,8 @@ public struct Compiler {
     }
 
     return grouped.map {ext, styles in
-      let selector = styles.reduce(SelectorStatement([])) { memo, style in
-        if memo.selectors.isEmpty {
+      let selector = styles.reduce(SelectorStatement(components: [])) { memo, style in
+        if memo.components.isEmpty {
           return style.selector
         }
         else {
