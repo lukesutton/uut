@@ -6,47 +6,41 @@ Can you write CSS using pure Swift? Maybe? Let's find out!
 
 ```swift
 // Extensions ala SASS
-let ext = StyleExtension(
-  Properties.Bottom(0.em)
+let ext = styleExtension(
+  bottom(0.em)
 )
 
 // Media queries, which are then attached to styles
-let query = MediaQueries.MaxWidth(600.px)
+let query = MediaQueries.maxWidth(600.px)
 
 let styles = [
   // A basic style, but this one has a media query attached to it. It will be
   // grouped with other styles that attach the same query.
-  Style(
-    Selectors.Class("what"),
-    query: query,
-    Properties.Float(.Left)
+  style(query, Selectors.classname("what"),
+    float(.Left)
   ),
 
   // A simple style that just uses an extension. It's selector will be hoisted
   // up and rendered out with the extension properties.
-  Style(
-    Selectors.Class("what"),
-    extensions: [ext]
+  style(Selectors.classname("what"),
+    extends(ext)
   ),
 
   // A more complete example.
   // - Use an extension
   // - A child style; which will have the selector .articles .article
-  Style(
-    Selectors.Class("articles"),
-    extensions: [ext],
-    Properties.BackgroundColor(Values.Color(0, 0, 0)),
+  style(Selectors.classname("articles"),
+    extends(ext),
+    backgroundColor(Values.Color(0, 0, 0)),
 
-    Style(
-      Selectors.Class("article"),
-      Properties.BorderStyle(.Solid),
-      Properties.BackgroundColor(Values.Color(0, 255, 0)),
+    style(Selectors.classname("article"),
+      borderStyle(.Solid),
+      backgroundColor(Values.Color(0, 255, 0)),
 
-      Style(
-        Selectors.El("h2"),
-        Properties.FontWeight(.Bold),
-        Properties.FontFamily("Helvetica Neue", "Helvetica", "Arial", fallback: .SansSerif),
-        Color(Values.Color(255, 0, 0))
+      style(Selectors.el("h2"),
+        fontWeight(.Bold),
+        fontFamily("Helvetica Neue", "Helvetica", "Arial", fallback: .SansSerif),
+        color(Values.Color(255, 0, 0))
       )
     )
   )
@@ -95,7 +89,7 @@ Beyond this initial release, future plans include:
 Selectors can be constructed in a way that's — mostly — type-safe. Also, because the selectors are Swift values, they can be passed around as arguments to functions, stored and composed together .
 
 ```swift
-let s = Selectors.ID("header") |- Selectors.Class("nav-entry")
+let s = Selectors.id("header") |- Selectors.classname("nav-entry")
 print(s.stringValue)
 // #id .nav-entry
 ```
@@ -103,7 +97,7 @@ print(s.stringValue)
 Or maybe you want to use some psuedo-selectors.
 
 ```swift
-let s = Selectors.Class("nav-entry", Selectors.FirstChild(), Selectors.Hover())
+let s = Selectors.classname("nav-entry", Selectors.firstChild(), Selectors.hover())
 print(s.stringValue)
 // .nav-entry:first-child:hover
 ```
@@ -111,7 +105,7 @@ print(s.stringValue)
 Or go nuts with something really complicated with operators and all the other exciting things in CSS selectors.
 
 ```swift
-let s = Selectors.ID("dialog", Selectors.Class("warning")) |> Selectors.El(.Div, Selectors.AttrContains("data-id", "foo"))
+let s = Selectors.id("dialog", Selectors.classname("warning")) |> Selectors.el("div", Selectors.attrContains("data-id", "foo"))
 print(s.stringValue)
 // #dialog.warning > div[data-id~="foo"]
 ```
@@ -121,9 +115,9 @@ print(s.stringValue)
 Style blocks are also Swift values. The selector and properties are constructed using structs and enums. Here is a simple example.
 
 ```swift
-let header = Style(Selectors.ID("header"),
-  Properties.BackgroundImage(.URL("/images/header-background.png"))
-  Properties.Width(.Unit(.Percent(100)))
+let header = style(Selectors.id("header"),
+  backgroundImage("/images/header-background.png"),
+  width(100.percent)
 )
 
 let compiler = Compiler()
@@ -142,12 +136,12 @@ print(compiler.compile(header))
 Style blocks can also be composed of mixins, which are analogous to what you see in LESS or SASS. Here is constructing and using a simple mixin.
 
 ```swift
-let foo = Mixin(
-  Properties.BackgroundColor(.Color(.Red))
+let foo = mixin(
+  backgroundColor(.Red)
 )
 
-let bar = Style(Selectors.Class("herp") |+ Selectors.Class("derp"),
-  mixins: [foo]
+let bar = style(Selectors.classname("herp") |+ Selectors.classname("derp"),
+  mixesIn(foo)
 )
 
 let compiler = Compiler()
@@ -165,11 +159,11 @@ Mixins are just values, but if you needed to parameterize them for some reason, 
 
 ```swift
 func foo(color: Values.Color) -> Mixin {
-  return Mixin(PropertiesBackgroundColor(color))
+  return mixin(backgroundColor(color))
 }
 
 let bar = Style(Selectors.Class("herp") |+ Selectors.Class("derp"),
-  mixins: [foo]
+  mixesIn(foo(Values.Color(0, 0, 0)))
 )
 
 let compiler = Compiler()
@@ -177,7 +171,7 @@ print(compiler.compile(bar))
 
 /*
 .herp + .derp {
-  background-color: red
+  background-color: rgba(0, 0, 0, 1)
 }
 */
 ```
@@ -187,9 +181,9 @@ print(compiler.compile(bar))
 This is not a feature per se, but something nice that falls out of constructing styles with Swift values. It's very simple to parameterize whole style blocks.
 
 ```swift
-func foo(name: String, width: Values.Unit) -> Block {
-  return Style(Selectors.Class(name),
-    Properties.Width(width)
+func foo(name: String, width: Measurement) -> Block {
+  return style(Selectors.classname(name),
+    width(width)
   )
 }
 ```
