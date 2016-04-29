@@ -6,6 +6,10 @@ public struct IntermediateStyle {
   public let properties: [IntermediateProperty]
   public let query: MediaQueryStatement?
 
+  public init(style: Style) {
+    self.init(selector: style.selector, properties: style.properties, query: style.query)
+  }
+
   public init(selector: SelectorStatement, properties: [Property], query: MediaQueryStatement? = nil) {
     self.selector = selector
     self.properties = properties.map {IntermediateProperty(original: $0)}

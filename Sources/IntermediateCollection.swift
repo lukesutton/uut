@@ -4,8 +4,20 @@ public struct IntermediateCollection {
 
   let styles: [IntermediateStyle]
 
+  public init(_ styles: [Style]) {
+    self.styles = styles.map {IntermediateStyle(style: $0)}
+  }
+
   public init(_ styles: [IntermediateStyle]) {
     self.styles = styles
+  }
+
+  public var count: Int {
+    return styles.count
+  }
+
+  public subscript(index: Int) -> IntermediateStyle? {
+    return styles[index]
   }
 
   public func addStyle(style: Style, after query: StylesQuery? = nil) -> IntermediateCollection {
@@ -88,7 +100,7 @@ public struct IntermediateCollection {
 
   private func matchesProperty(style: IntermediateStyle, withQuery query: StylesQuery) -> Bool {
     if let property = query.property {
-      let matches = style.properties.filter {$0.original.dynamicType == property}
+      let matches = style.properties.filter {$0.original.label == property}
       return !matches.isEmpty
     }
     else {

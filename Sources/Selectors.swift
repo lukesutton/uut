@@ -41,6 +41,12 @@ public struct SelectorStatement {
   }
 }
 
+extension SelectorStatement: Equatable {}
+
+public func ==(lhs: SelectorStatement, rhs: SelectorStatement) -> Bool {
+  return lhs.components == rhs.components
+}
+
 public struct SelectorNames {
   private init() {}
 

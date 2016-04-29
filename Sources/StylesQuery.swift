@@ -13,7 +13,7 @@ public struct StylesQuery {
     case None
   }
 
-  let property: Property.Type?
+  let property: String?
   let selector: SelectorStatement?
   let selectorMode: SelectorMode
   let mode: Mode
@@ -25,7 +25,7 @@ public struct StylesQuery {
     self.mode = .All
   }
 
-  private init(property: Property.Type?, selector: SelectorStatementConvertible?, mode: SelectorMode) {
+  private init(property: String?, selector: SelectorStatementConvertible?, mode: SelectorMode) {
     self.property = property
     self.selector = selector?.selectorStatement
     self.selectorMode = mode
@@ -48,7 +48,7 @@ public struct StylesQuery {
     return StylesQuery()
   }
 
-  public static func hasProperty(property: Property.Type) -> StylesQuery {
+  public static func hasProperty(property: String) -> StylesQuery {
     return StylesQuery().hasProperty(property)
   }
 
@@ -64,7 +64,7 @@ public struct StylesQuery {
     return StylesQuery().hasSelector(suffix: selector)
   }
 
-  public func hasProperty(property: Property.Type) -> StylesQuery {
+  public func hasProperty(property: String) -> StylesQuery {
     return StylesQuery(property: property, selector: self.selector, mode: self.selectorMode)
   }
 
