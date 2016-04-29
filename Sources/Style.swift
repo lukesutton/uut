@@ -7,11 +7,6 @@ public struct Style: StyleComponent {
   let extensions: [StyleExtension]
 
   func prependSelector(selector: SelectorStatementConvertible) -> Style {
-    // get a statement.
-    // Check if it has , in it. Split at each.
-    // Generate new selector using those as prefixes
-    // done
-
     let statement = selector.selectorStatement
     let parts = statement.components.split {$0.name == SelectorNames.and}
     let statements = parts.map {SelectorStatement(components: Array($0))}
