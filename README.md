@@ -1,4 +1,6 @@
-# Uut
+![](logo.svg)
+
+# Uut - A Swift Domain Specific Language for CSS
 
 Can you write CSS using pure Swift? Yes you can. Uut is a domain specific language implemented as a pure Swift library. Import it into your project, specify your styles and compile to CSS strings.
 
