@@ -1,4 +1,4 @@
-![](logo.svg)
+![](https://cdn.rawgit.com/lukesutton/uut/master/logo.svg)
 
 # Uut - A Swift Domain Specific Language for CSS
 
