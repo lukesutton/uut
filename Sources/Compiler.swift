@@ -15,7 +15,7 @@ public struct Compiler {
     self.post = post
   }
 
-  func compile(style: Style) -> String {
+  public func compile(style: Style) -> String {
     return compile([style])
   }
 

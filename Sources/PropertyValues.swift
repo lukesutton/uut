@@ -5,6 +5,11 @@ public struct PropertyValues {
     case Value(Values.Color)
     case Initial
     case Inherit
+    case Black
+    case White
+    case Red
+    case Blue
+    case Green
 
     public var stringValue: String {
       switch self {

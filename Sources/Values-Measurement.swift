@@ -11,7 +11,7 @@ extension Values {
 
     public init(_ value: Double) {
       self.value = value
-      self.stringValue = "\(value)px"
+      self.stringValue = formatDouble(value) + "px"
     }
   }
 
@@ -21,7 +21,7 @@ extension Values {
 
     public init(_ value: Double) {
       self.value = value
-      self.stringValue = "\(value)%"
+      self.stringValue = formatDouble(value) + "%"
     }
   }
 
@@ -31,7 +31,7 @@ extension Values {
 
     public init(_ value: Double) {
       self.value = value
-      self.stringValue = "\(value)em"
+      self.stringValue = formatDouble(value) + "em"
     }
   }
 
@@ -41,8 +41,17 @@ extension Values {
 
     public init(_ value: Double) {
       self.value = value
-      self.stringValue = "\(value)rem"
+      self.stringValue = formatDouble(value) + "rem"
     }
+  }
+}
+
+private func formatDouble(value: Double) -> String {
+  if value % 1 == 0 {
+    return String(Int(value))
+  }
+  else {
+    return String(value)
   }
 }
 

@@ -34,6 +34,18 @@ public func border(width: PropertyValues.BorderWidth, _ style: PropertyValues.Bo
   return Property(PropertyNames.border, PropertyValues.Border(width, style, color))
 }
 
+public func border(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.border, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, color))
+}
+
+public func border(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.border, PropertyValues.Border(width, style, PropertyValues.Color.Value(color)))
+}
+
+public func border(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.border, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, PropertyValues.Color.Value(color)))
+}
+
 public func border(value: PropertyValues.Reset) -> Property {
   return Property(PropertyNames.border, PropertyValues.Border(value))
 }
@@ -64,7 +76,19 @@ public func borderLeft(width: PropertyValues.BorderWidth, _ style: PropertyValue
   return Property(PropertyNames.borderLeft, PropertyValues.Border(width, style, color))
 }
 
-public func borderLeftLeft(value: PropertyValues.Reset) -> Property {
+public func borderLeft(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderLeft, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, color))
+}
+
+public func borderLeft(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderLeft, PropertyValues.Border(width, style, PropertyValues.Color.Value(color)))
+}
+
+public func borderLeft(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderLeft, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, PropertyValues.Color.Value(color)))
+}
+
+public func borderLeft(value: PropertyValues.Reset) -> Property {
   return Property(PropertyNames.borderLeft, PropertyValues.Border(value))
 }
 
@@ -94,6 +118,18 @@ public func borderRight(width: PropertyValues.BorderWidth, _ style: PropertyValu
   return Property(PropertyNames.borderRight, PropertyValues.Border(width, style, color))
 }
 
+public func borderRight(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderRight, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, color))
+}
+
+public func borderRight(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderRight, PropertyValues.Border(width, style, PropertyValues.Color.Value(color)))
+}
+
+public func borderRight(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderRight, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, PropertyValues.Color.Value(color)))
+}
+
 public func borderRight(value: PropertyValues.Reset) -> Property {
   return Property(PropertyNames.borderRight, PropertyValues.Border(value))
 }
@@ -118,10 +154,64 @@ public func borderRightWidth(value: Measurement) -> Property {
   return Property(PropertyNames.borderRightColor, PropertyValues.BorderWidth.Value(value))
 }
 
+// Border top
+
+public func borderTop(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderTop, PropertyValues.Border(width, style, color))
+}
+
+public func borderTop(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderTop, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, color))
+}
+
+public func borderTop(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderTop, PropertyValues.Border(width, style, PropertyValues.Color.Value(color)))
+}
+
+public func borderTop(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderTop, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, PropertyValues.Color.Value(color)))
+}
+
+public func borderTop(value: PropertyValues.Reset) -> Property {
+  return Property(PropertyNames.borderTop, PropertyValues.Border(value))
+}
+
+public func borderTopColor(value: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderTopColor, value)
+}
+
+public func borderTopColor(value: Values.Color) -> Property {
+  return Property(PropertyNames.borderTopColor, PropertyValues.Color.Value(value))
+}
+
+public func borderTopStyle(value: PropertyValues.BorderStyle) -> Property {
+  return Property(PropertyNames.borderTopStyle, value)
+}
+
+public func borderTopWidth(value: PropertyValues.BorderWidth) -> Property {
+  return Property(PropertyNames.borderTopWidth, value)
+}
+
+public func borderTopColor(value: Measurement) -> Property {
+  return Property(PropertyNames.borderTopColor, PropertyValues.BorderWidth.Value(value))
+}
+
 // Border bottom
 
 public func borderBottom(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
   return Property(PropertyNames.borderBottom, PropertyValues.Border(width, style, color))
+}
+
+public func borderBottom(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: PropertyValues.Color) -> Property {
+  return Property(PropertyNames.borderBottom, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, color))
+}
+
+public func borderBottom(width: PropertyValues.BorderWidth, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderBottom, PropertyValues.Border(width, style, PropertyValues.Color.Value(color)))
+}
+
+public func borderBottom(width: Measurement, _ style: PropertyValues.BorderStyle, _ color: Values.Color) -> Property {
+  return Property(PropertyNames.borderBottom, PropertyValues.Border(PropertyValues.BorderWidth.Value(width), style, PropertyValues.Color.Value(color)))
 }
 
 public func borderBottom(value: PropertyValues.Reset) -> Property {

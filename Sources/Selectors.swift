@@ -155,56 +155,85 @@ public struct Selectors {
     return .Selector(name: SelectorNames.all, value: "*", associated: associated)
   }
 
+  public static let all = SelectorComponent.PsuedoSelector(name: SelectorNames.all, value: "*", associated: [])
+
   public static func active(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.active, value: ":active", associated: associated)
   }
+
+  public static let active = SelectorComponent.PsuedoSelector(name: SelectorNames.active, value: ":active", associated: [])
 
   public static func after(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.after, value: ":after", associated: associated)
   }
 
+  public static let after = SelectorComponent.PsuedoSelector(name: SelectorNames.after, value: ":after", associated: [])
+
   public static func before(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.before, value: ":before", associated: associated)
   }
 
+  public static let before = SelectorComponent.PsuedoSelector(name: SelectorNames.before, value: ":before", associated: [])
+
   public static func checked(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.checked, value: ":checked", associated: associated)
   }
+
+  public static let checked = SelectorComponent.PsuedoSelector(name: SelectorNames.checked, value: ":checked", associated: [])
+
   public static func diabled(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.disabled, value: ":disabled", associated: associated)
   }
+
+  public static let disabled = SelectorComponent.PsuedoSelector(name: SelectorNames.disabled, value: ":disabled", associated: [])
 
   public static func empty(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.empty, value: ":empty", associated: associated)
   }
 
+  public static let empty = SelectorComponent.PsuedoSelector(name: SelectorNames.empty, value: ":empty", associated: [])
+
   public static func firstChild(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.firstChild, value: ":first-child", associated: associated)
   }
+
+  public static let firstChild = SelectorComponent.PsuedoSelector(name: SelectorNames.firstChild, value: ":first-child", associated: [])
 
   public static func firstLetter(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.firstLetter, value: "::first-letter", associated: associated)
   }
 
+  public static let firstLetter = SelectorComponent.PsuedoSelector(name: SelectorNames.firstLetter, value: "::first-letter", associated: [])
+
   public static func firstLine(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.firstLine, value: "::first-line", associated: associated)
   }
+
+  public static let firstLine = SelectorComponent.PsuedoSelector(name: SelectorNames.firstLine, value: "::first-line", associated: [])
 
   public static func firstOfType(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.firstOfType, value: ":first-of-type", associated: associated)
   }
 
+  public static let firstOfType = SelectorComponent.PsuedoSelector(name: SelectorNames.firstOfType, value: ":first-of-type", associated: [])
+
   public static func focus(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.focus, value: ":focus", associated: associated)
   }
+
+  public static let focus = SelectorComponent.PsuedoSelector(name: SelectorNames.focus, value: ":focus", associated: [])
 
   public static func hover(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.hover, value: ":hover", associated: associated)
   }
 
+  public static let hover = SelectorComponent.PsuedoSelector(name: SelectorNames.hover, value: ":hover", associated: [])
+
   public static func inRange(associated: SelectorComponent...) -> SelectorComponent {
-    return .PsuedoSelector(name: SelectorNames.hover, value: ":in-range", associated: associated)
+    return .PsuedoSelector(name: SelectorNames.inRange, value: ":in-range", associated: associated)
   }
+
+  public static let inRange = SelectorComponent.PsuedoSelector(name: SelectorNames.inRange, value: ":in-range", associated: [])
 
   public static func lang(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.lang, value: ":lang", associated: associated)
@@ -214,9 +243,13 @@ public struct Selectors {
     return .PsuedoSelector(name: SelectorNames.lastChild, value: ":last-child", associated: associated)
   }
 
+  public static let lastChild = SelectorComponent.PsuedoSelector(name: SelectorNames.lastChild, value: ":last-child", associated: [])
+
   public static func lastOfType(associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.lastOfType, value: ":last-of-type", associated: associated)
   }
+
+  public static let lastOfType = SelectorComponent.PsuedoSelector(name: SelectorNames.lastOfType, value: ":last-of-type", associated: [])
 
   public static func not(selector: SelectorStatementConvertible, _ associated: SelectorComponent...) -> SelectorComponent {
     return .PsuedoSelector(name: SelectorNames.not, value: ":not(\(selector.selectorStatement.stringValue)", associated: associated)
