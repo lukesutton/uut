@@ -29,7 +29,7 @@ public struct Compiler {
     let extensionStyles = self.extractExtensions(initialStyles)
 
     // Generate intermediate styles, then pass them through middleware
-    let simpleStyles = IntermediateCollection(flatten(initialStyles + extensionStyles))
+    let simpleStyles = IntermediateCollection(flatten(extensionStyles + initialStyles))
     let intermediateSyles = self.intermediate.reduce(simpleStyles) {$1($0)}
 
     // Split results into styles with and without media queries, then compile them
@@ -108,12 +108,13 @@ public struct Compiler {
     }
   }
 
-  private func flatten(styles: [Style], output: [IntermediateStyle] = []) -> [IntermediateStyle] {
-    return styles.reduce(output) {memo, style in
+  private func flatten(styles: [Style]) -> [IntermediateStyle] {
+    return styles.reduce([]) { memo, style in
       let props = style.mixins.flatMap {$0.properties} + style.properties
       let simple = IntermediateStyle(selector: style.selector, properties: props, query: style.query)
-      let children = (style.mixins.flatMap {$0.children} + style.children).map {$0.prependSelector(style.selector)}
-      return [simple] + flatten(children, output: memo)
+      let mixinChildren = style.mixins.flatMap {$0.children.map {$0.prependSelector(style.selector)}}
+      let children = style.children.map {$0.prependSelector(style.selector)}
+      return memo + [simple] + flatten(mixinChildren + children)
     }
   }
 }
