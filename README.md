@@ -1,6 +1,6 @@
 # Uut
 
-Can you write CSS using pure Swift? Maybe? Let's find out!
+Can you write CSS using pure Swift? Yes you can. Uut is a domain specific language implemented as a pure Swift library. Import it into your project, specify your styles and compile to CSS strings.
 
 ## A Bit of a Taste
 
@@ -51,14 +51,29 @@ let styles = [
 let compiler = Compiler()
 let result = compiler.compile(styles)
 ```
+## Philosophy
 
-## Please Note
+I've used a few different CSS super-sets, preprocessors or compile-to-CSS languages. They are a fantastic idea. I now feel that writing plain CSS is painful for any moderately complicated project. However, I do have some issues with the current approaches. There is either an impedance mismatch between CSS and the processing language or a library expands to encompass an ad-hoc scripting language e.g. SASS-script.
 
-* I don't know what I'm doing
-* This isn't useful for real work yet
-* It's untested as a library; I've just been noodling about
-* I would be happy to hear any suggestions, so feel free to open a ticket with comments or issues
-* ARGGGGGG, the structs! There is so much repeated implementation because Swift has no concept of a 'mixin'
+This problem can be stated a different way; these libraries don't expose the full power of a programming language. So, the goal of Uut is to embed a dialect of CSS inside of Swift.
+
+### Advantages
+
+Aside from being an interesting experiment, I was attracted to this project because of some advantages I perceived.
+
+* Has a measure of type-safety e.g. property values can be defined as enums, preventing errors
+* Simple implementation; no parsers, no interpreters for a custom scripting language etc.
+* You can use all of Swift's constructs in order to generate an manipulate styles
+* Writing transformations is _trivial_, since the CSS is represented as a collection of structs
+
+### Disadvantages
+
+This library does of course have some serious disadvantages, which may be more or less serious depending on your needs.
+
+* You need to know Swift
+* Difficult to embed in anything that isn't a Swift project
+
+Even with these caveats, I still thing this approach is worthwhile.
 
 ## Aims for 1.0
 
@@ -67,7 +82,7 @@ For the initial release of this library, the aim is to have to following feature
 * [ ] CSS1, CSS2 and the most common CSS3 properties
 * [ ] Widely supported selectors
 * [ ] Widely supported media queries
-* [ ] Basic tooling for compiling, with pre/post-prosessing and writing to disk
+* [ ] Basic tooling for compiling, with pre/post-processing and writing to disk
 * [ ] A complete test suite
 * [ ] API documentation
 * [ ] Guides on getting started and advanced usage, including example projects
