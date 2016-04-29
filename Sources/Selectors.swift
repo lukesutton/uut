@@ -2,17 +2,26 @@
 
 public protocol SelectorStatementConvertible {
   var selectorStatement: SelectorStatement { get }
+  var isEmpty: Bool { get }
 }
 
 extension SelectorStatement: SelectorStatementConvertible {
   public var selectorStatement: SelectorStatement {
     return self
   }
+
+  public var isEmpty: Bool {
+    return components.isEmpty
+  }
 }
 
 extension SelectorComponent: SelectorStatementConvertible {
   public var selectorStatement: SelectorStatement {
     return SelectorStatement(components: [self])
+  }
+
+  public var isEmpty: Bool {
+    return false
   }
 }
 
@@ -91,6 +100,14 @@ public enum SelectorComponent: Equatable {
   case Selector(name: String, value: String, associated: [SelectorComponent])
   case PsuedoSelector(name: String, value: String, associated: [SelectorComponent])
   case Operator(name: String, value: String)
+
+  public var name: String {
+    switch self {
+      case let Selector(n, _, _): return n
+      case let PsuedoSelector(n, _, _): return n
+      case let Operator(n, _): return n
+    }
+  }
 
   var stringValue: String {
     switch self {
@@ -338,29 +355,39 @@ internal let and = SelectorComponent.Operator(name: SelectorNames.and, value: ",
 infix operator |- {associativity left precedence 100}
 
 public func |-(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  guard !lhs.isEmpty else { return rhs.selectorStatement }
+  guard !rhs.isEmpty else { return lhs.selectorStatement }
   return lhs.selectorStatement.append(rhs)
 }
 
 infix operator |+ {associativity left precedence 99}
 
 public func |+(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  guard !lhs.isEmpty else { return rhs.selectorStatement }
+  guard !rhs.isEmpty else { return lhs.selectorStatement }
   return lhs.selectorStatement.append(precedingSibling, rhs)
 }
 
 infix operator |~ {associativity left precedence 98}
 
 public func |~(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  guard !lhs.isEmpty else { return rhs.selectorStatement }
+  guard !rhs.isEmpty else { return lhs.selectorStatement }
   return lhs.selectorStatement.append(followingSibling, rhs)
 }
 
 infix operator |> {associativity left precedence 97}
 
 public func |>(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  guard !lhs.isEmpty else { return rhs.selectorStatement }
+  guard !rhs.isEmpty else { return lhs.selectorStatement }
   return lhs.selectorStatement.append(child, rhs)
 }
 
 infix operator |& {associativity left precedence 96}
 
 public func |&(lhs: SelectorStatementConvertible, rhs: SelectorStatementConvertible) -> SelectorStatement {
+  guard !lhs.isEmpty else { return rhs.selectorStatement }
+  guard !rhs.isEmpty else { return lhs.selectorStatement }
   return lhs.selectorStatement.append(and, rhs)
 }
