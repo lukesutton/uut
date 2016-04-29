@@ -8,7 +8,7 @@ public struct Style: StyleComponent {
 
   func prependSelector(selector: SelectorStatementConvertible) -> Style {
     return Style(
-      selector: selector.selectorStatement |+ self.selector,
+      selector: selector.selectorStatement |- self.selector,
       query: self.query,
       properties: self.properties,
       children: self.children,
