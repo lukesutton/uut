@@ -1,8 +1,7 @@
 extension Value {
   public enum BackgroundSize: PropertyValue {
+    case absolute(Measurement, Measurement)
     case auto
-    case width(Measurement)
-    case widthAndHeight(Measurement, Measurement)
     case cover
     case contain
     case initial
@@ -10,8 +9,7 @@ extension Value {
 
     public var stringValue: String {
       switch self {
-      case let .width(m): return "\(m.stringValue) auto"
-      case let .widthAndHeight(w, h): return "\(w.stringValue) \(h.stringValue)"
+      case let .absolute(x, y): return "\(x.stringValue) \(y.stringValue)"
       default: return String(describing: self)
       }
     }
