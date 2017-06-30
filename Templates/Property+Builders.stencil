@@ -1,0 +1,27 @@
+{% for type in types.structs %}
+  {% if type.name == "PropertyDefinition" %}
+extension Property {
+    {% for var in type.staticVariables %}
+      {% if var|annotated:"SimpleBuilder" %}
+
+  /**
+    Generates a `Property` based on `PropertyDefinition.{{var.name}}`.
+  **/
+  public static func {{var.name}}(_ value: {{var.annotations.SimpleBuilder}}) -> Property {
+    return Property(definition: .{{var.name}}, value: value)
+  }
+
+      {% endif %}
+      {% if var|annotated:"WrapperBuilder" %}
+  /**
+    Generates a `Property` based on `PropertyDefinition.{{var.name}}`.
+  **/
+  public static func {{var.name}}({{var.annotations.WrapperBuilderArgs}}) -> Property {
+    let value = {{var.annotations.WrapperBuilder}}({{var.annotations.WrapperArgs}})
+    return Property(definition: .{{var.name}}, value: value)
+  }
+      {% endif %}
+    {% endfor %}
+}
+  {% endif %}
+{% endfor %}
