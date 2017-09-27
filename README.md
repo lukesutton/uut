@@ -141,7 +141,7 @@ let compiler = Compiler()
 print(compiler.compile(header))
 
 /*
-#header {
+# header {
   background-image: url("/images/header-background.png");
   width: 100%;
 }
